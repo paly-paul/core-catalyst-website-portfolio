@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CoreCatalyst - Skills Intelligence for the Skills-Powered Enterprise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #1a1f36;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ===== CSS TOKENS ===== */
+:root {
+  --blue: #3b5bdb;
+  --indigo: #4c6ef5;
+  --violet: #7950f2;
+  --green: #40c057;
+  --red: #fa5252;
+  --yellow: #fab005;
+  --cyan: #22b8cf;
+  --bg: #f2f4fb;
+  --surface: #ffffff;
+  --border: #e4e9f4;
+  --text: #1a1f36;
+  --muted: #8792b2;
+  --subtle: #c4cbe8;
+  --radius-card: 16px;
+  --radius-btn: 10px;
+  --shadow-card: 0 2px 20px rgba(59,91,219,.08);
+  --shadow-hover: 0 8px 32px rgba(59,91,219,.14);
+  --grad-primary: linear-gradient(135deg, #3b5bdb 0%, #7950f2 100%);
+  --grad-hero: linear-gradient(145deg, #eef2ff 0%, #f5f3ff 45%, #faf5ff 100%);
+}
+
+/* ===== NAVIGATION ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s, box-shadow .2s;
+}
+.nav.solid {
+  border-bottom-color: var(--border);
+  box-shadow: 0 2px 16px rgba(59,91,219,.07);
+}
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.nav-logo-mark {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  background: var(--grad-primary);
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-mark svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2.5; }
+.nav-logo span.dot-ai { color: var(--muted); font-weight: 400; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+.nav-links a {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #5c6587;
+  transition: background .15s, color .15s;
+}
+.nav-links a:hover { background: var(--bg); color: var(--blue); }
+.nav-links a.active { color: var(--blue); background: #eef1ff; }
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+.btn-ghost-sm {
+  padding: 8px 18px;
+  border-radius: var(--radius-btn);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.btn-ghost-sm:hover { background: var(--bg); border-color: var(--indigo); color: var(--blue); }
+.btn-primary {
+  padding: 9px 22px;
+  border-radius: var(--radius-btn);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--grad-primary);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(76,110,245,.30);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(76,110,245,.42); }
+
+/* ===== HERO ===== */
+.hero {
+  padding-top: 100px;
+  padding-bottom: 0;
+  background: var(--grad-hero);
+  position: relative;
+  overflow: hidden;
+}
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  opacity: .35;
+}
+.hero-blob-1 {
+  width: 640px; height: 640px;
+  background: radial-gradient(circle, #c7d2fe 0%, transparent 70%);
+  top: -200px; right: -120px;
+}
+.hero-blob-2 {
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, #ddd6fe 0%, transparent 70%);
+  bottom: -100px; left: -80px;
+}
+.hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 72px 24px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px 5px 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--violet);
+  margin-bottom: 24px;
+}
+.hero-eyebrow-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--violet);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(.8); }
+}
+.hero-h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(36px, 4.5vw, 58px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  color: var(--text);
+  margin-bottom: 22px;
+}
+.hero-h1 .line-accent {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 17px;
+  font-weight: 400;
+  color: #5c6587;
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 36px;
+}
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.btn-primary-lg {
+  padding: 13px 28px;
+  border-radius: 11px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--grad-primary);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(76,110,245,.35);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-primary-lg:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(76,110,245,.45); }
+.btn-text-lg {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap .15s;
+}
+.btn-text-lg:hover { gap: 10px; }
+.hero-note {
+  margin-top: 20px;
+  font-size: 12.5px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero-note svg { width: 13px; height: 13px; stroke: var(--green); fill: none; stroke-width: 2.5; }
+
+/* ===== HERO WIDGET ===== */
+.hero-widget-wrap {
+  position: relative;
+}
+.hero-widget {
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 48px rgba(59,91,219,.12);
+  overflow: hidden;
+}
+.widget-header {
+  padding: 14px 18px;
+  background: #f8f9ff;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.widget-dots { display: flex; gap: 6px; }
+.widget-dots span {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.widget-dots span:nth-child(1) { background: #ff5f57; }
+.widget-dots span:nth-child(2) { background: #febc2e; }
+.widget-dots span:nth-child(3) { background: #28c840; }
+.widget-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-left: 4px;
+}
+.widget-body { padding: 20px 18px 22px; }
+.widget-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.skill-conflict {
+  background: #fffbf0;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.skill-conflict-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.skill-conflict-row:last-child { margin-bottom: 0; }
+.skill-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.skill-sources {
+  display: flex;
+  gap: 6px;
+}
+.source-chip {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.source-chip.cv { background: #eef1ff; color: var(--blue); }
+.source-chip.lms { background: #f5f3ff; color: var(--violet); }
+.source-chip.mgr { background: #e6f9ed; color: var(--green); }
+.conflict-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 10px;
+  background: #fff9e6;
+  color: #c05400;
+}
+.widget-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 14px 0;
+}
+.reconciliation-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.reconciliation-label svg { width: 12px; height: 12px; stroke: var(--blue); fill: none; stroke-width: 2.5; }
+.skill-resolved {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.skill-resolved:last-child { margin-bottom: 0; }
+.skill-resolved-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.skill-resolved-level {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.widget-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+.w-btn {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all .15s;
+  text-align: center;
+}
+.w-btn-accept {
+  background: var(--blue);
+  color: #fff;
+}
+.w-btn-accept:hover { background: #2f4ac7; transform: translateY(-1px); }
+.w-btn-review {
+  background: #f2f4fb;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.w-btn-review:hover { background: #eef1ff; color: var(--blue); }
+.widget-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+.widget-stat {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 10px 10px 8px;
+  text-align: center;
+}
+.widget-stat-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+.widget-stat-lbl {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: 3px;
+}
+/* Floating badge on widget */
+.widget-float-badge {
+  position: absolute;
+  bottom: -18px;
+  left: -24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 16px;
+  box-shadow: 0 6px 20px rgba(59,91,219,.10);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+.widget-float-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: #e6f9ed;
+  display: flex; align-items: center; justify-content: center;
+}
+.widget-float-icon svg { width: 18px; height: 18px; stroke: var(--green); fill: none; stroke-width: 2; }
+.widget-float-text strong {
+  display: block;
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.widget-float-text span {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+/* ===== HERO BOTTOM STRIP ===== */
+.hero-bottom {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 60px 24px 48px;
+}
+.hero-bottom-divider {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.hero-bottom-divider span {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.hero-bottom-divider .line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.logo-bar {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  overflow: hidden;
+}
+.logo-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: .45;
+  transition: opacity .2s;
+}
+.logo-item:hover { opacity: .75; }
+.logo-icon {
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  background: var(--border);
+}
+.logo-text {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ===== SECTION COMMON ===== */
+section { padding: 96px 0; }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+.section-eyebrow svg { width: 13px; height: 13px; stroke: var(--blue); fill: none; stroke-width: 2.5; }
+.section-h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+.section-sub {
+  font-size: 17px;
+  color: #5c6587;
+  line-height: 1.7;
+  max-width: 560px;
+}
+.section-sub.center { text-align: center; margin-left: auto; margin-right: auto; }
+.center { text-align: center; }
+.center .section-eyebrow { margin-left: auto; margin-right: auto; }
+
+/* ===== PROBLEM SECTION ===== */
+.problem-section { background: #ffffff; }
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+  margin-top: 60px;
+}
+.problem-left { }
+.problem-card-stack { display: flex; flex-direction: column; gap: 14px; }
+.problem-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 22px 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: var(--shadow-card);
+  transition: transform .2s, box-shadow .2s;
+}
+.problem-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.prob-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.prob-icon svg { width: 20px; height: 20px; stroke-width: 2; fill: none; }
+.prob-icon.red { background: #fff0f0; }
+.prob-icon.red svg { stroke: var(--red); }
+.prob-icon.yellow { background: #fff9e6; }
+.prob-icon.yellow svg { stroke: var(--yellow); }
+.prob-icon.violet { background: #f5f3ff; }
+.prob-icon.violet svg { stroke: var(--violet); }
+.prob-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+.prob-desc {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.problem-right { padding-top: 8px; }
+.problem-stat-card {
+  background: var(--grad-hero);
+  border-radius: 20px;
+  padding: 36px 32px;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.problem-big-stat {
+  font-family: 'Sora', sans-serif;
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.problem-big-stat span { background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.problem-stat-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #5c6587;
+  max-width: 240px;
+  line-height: 1.5;
+}
+.problem-mini-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.problem-mini-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 20px 16px;
+  box-shadow: var(--shadow-card);
+}
+.problem-mini-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.problem-mini-num.blue { color: var(--blue); }
+.problem-mini-num.violet { color: var(--violet); }
+.problem-mini-lbl {
+  font-size: 12.5px;
+  color: var(--muted);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ===== HOW IT WORKS ===== */
+.how-section {
+  background: #f8f9ff;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.how-header { margin-bottom: 56px; }
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  position: relative;
+}
+.step-connector {
+  position: absolute;
+  top: 32px;
+  left: calc(10% + 18px);
+  right: calc(10% + 18px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--violet));
+  z-index: 0;
+  border-radius: 1px;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 12px;
+  position: relative;
+  z-index: 1;
+}
+.step-num {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--muted);
+  margin-bottom: 18px;
+  position: relative;
+  transition: all .3s;
+}
+.step:hover .step-num {
+  background: var(--grad-primary);
+  border-color: transparent;
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(76,110,245,.30);
+}
+.step-icon-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+}
+.step:hover .step-icon-wrap { opacity: 1; }
+.step-num-text { transition: opacity .15s; }
+.step:hover .step-num-text { opacity: 0; }
+.step-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.step-desc {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ===== FEATURES ===== */
+.features-section { background: #ffffff; }
+.features-top { margin-bottom: 56px; }
+.features-bento {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+.feat-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 30px 28px;
+  box-shadow: var(--shadow-card);
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+  overflow: hidden;
+}
+.feat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.feat-card.wide { grid-column: span 2; }
+.feat-card.tall { display: flex; flex-direction: column; justify-content: space-between; }
+.feat-card-accent {
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  opacity: .06;
+}
+.feat-card-accent.blue { background: var(--blue); }
+.feat-card-accent.violet { background: var(--violet); }
+.feat-card-accent.green { background: var(--green); }
+.feat-card-accent.cyan { background: var(--cyan); }
+.feat-icon {
+  width: 46px; height: 46px;
+  border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.feat-icon svg { width: 22px; height: 22px; stroke-width: 1.8; fill: none; }
+.feat-icon.blue { background: #eef1ff; }
+.feat-icon.blue svg { stroke: var(--blue); }
+.feat-icon.violet { background: #f5f3ff; }
+.feat-icon.violet svg { stroke: var(--violet); }
+.feat-icon.green { background: #e6f9ed; }
+.feat-icon.green svg { stroke: var(--green); }
+.feat-icon.cyan { background: #e3f9fc; }
+.feat-icon.cyan svg { stroke: var(--cyan); }
+.feat-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.feat-desc {
+  font-size: 14px;
+  color: #5c6587;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.feat-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.feat-chip {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+/* Wide card visual */
+.wide-card-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+  margin-top: 16px;
+}
+.data-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.data-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.data-row-label { font-size: 12.5px; font-weight: 600; color: var(--text); }
+.data-row-source {
+  margin-left: auto;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 10px;
+}
+.data-row-source.cv { background: #eef1ff; color: var(--blue); }
+.data-row-source.lms { background: #f5f3ff; color: var(--violet); }
+.data-row-source.mgr { background: #e6f9ed; color: var(--green); }
+.arrow-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--border);
+}
+.resolution-panel {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 14px;
+  padding: 18px 16px;
+}
+.resolution-panel-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+.resolution-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.resolution-row:last-child { border-bottom: none; }
+.resolution-row span:first-child { font-size: 13px; font-weight: 600; color: var(--text); }
+.resolution-level {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 10px;
+  background: #e6f9ed;
+  color: var(--green);
+}
+
+/* ===== STATS SECTION ===== */
+.stats-section {
+  background: #fff;
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stats-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+.stat-item {
+  text-align: center;
+  padding: 0 20px;
+  border-right: 1px solid var(--border);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ===== PERSONAS / USE CASES ===== */
+.personas-section { background: #ffffff; }
+.personas-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  margin-top: 56px;
+  align-items: start;
+}
+.personas-nav { display: flex; flex-direction: column; gap: 10px; }
+.persona-tab {
+  padding: 16px 20px;
+  border-radius: 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.persona-tab:hover { background: var(--bg); }
+.persona-tab.active {
+  background: #eef1ff;
+  border-color: #c5d3f7;
+}
+.persona-tab-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background .2s;
+}
+.persona-tab-icon svg { width: 18px; height: 18px; stroke-width: 2; fill: none; stroke: var(--muted); }
+.persona-tab.active .persona-tab-icon { background: var(--blue); }
+.persona-tab.active .persona-tab-icon svg { stroke: #fff; }
+.persona-tab-info { flex: 1; }
+.persona-tab-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.persona-tab-role { font-size: 12px; color: var(--muted); font-weight: 500; }
+.persona-tab.active .persona-tab-name { color: var(--blue); }
+.persona-content-area {
+  background: var(--bg);
+  border-radius: 20px;
+  padding: 36px 36px 32px;
+  border: 1px solid var(--border);
+  min-height: 420px;
+}
+.persona-content { display: none; }
+.persona-content.active { display: block; }
+.persona-content-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eef1ff;
+  border: 1px solid #c5d3f7;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+.persona-h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+.persona-desc {
+  font-size: 15px;
+  color: #5c6587;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.persona-outcomes { display: flex; flex-direction: column; gap: 10px; }
+.outcome-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+}
+.outcome-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: #eef1ff;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.outcome-icon svg { width: 15px; height: 15px; stroke: var(--blue); stroke-width: 2.5; fill: none; }
+.outcome-text { font-size: 13.5px; font-weight: 500; color: var(--text); line-height: 1.5; }
+
+/* ===== TESTIMONIAL ===== */
+.testimonial-section { background: var(--grad-hero); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.testimonial-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.testimonial-left { }
+.testimonial-quote {
+  font-family: 'Sora', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 28px;
+}
+.testimonial-quote::before {
+  content: '"';
+  font-size: 60px;
+  color: var(--blue);
+  opacity: .2;
+  font-family: Georgia, serif;
+  display: block;
+  line-height: .8;
+  margin-bottom: 8px;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.author-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.author-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.author-title { font-size: 13px; color: var(--muted); }
+.testimonial-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.outcome-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px 20px;
+  box-shadow: var(--shadow-card);
+}
+.outcome-card-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.outcome-card-num.green { color: var(--green); }
+.outcome-card-num.blue { color: var(--blue); }
+.outcome-card-num.violet { color: var(--violet); }
+.outcome-card-lbl { font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+
+/* ===== CTA ===== */
+.cta-section {
+  background: #fff;
+  padding: 96px 0;
+}
+.cta-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+.cta-inner .section-h2 { font-size: clamp(32px, 4vw, 52px); }
+.cta-inner .section-sub { margin: 0 auto 40px; }
+.cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.btn-primary-lg-dark {
+  padding: 15px 36px;
+  border-radius: 12px;
+  font-size: 15.5px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--grad-primary);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(76,110,245,.35);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-primary-lg-dark:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(76,110,245,.45); }
+.btn-outline-lg {
+  padding: 14px 36px;
+  border-radius: 12px;
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--text);
+  background: #fff;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all .15s;
+}
+.btn-outline-lg:hover { border-color: var(--indigo); color: var(--blue); background: #eef1ff; }
+.cta-trust-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+.cta-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.cta-trust-item svg { width: 14px; height: 14px; stroke: var(--green); fill: none; stroke-width: 2.5; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #f8f9ff;
+  border-top: 1px solid var(--border);
+  padding: 56px 0 32px;
+}
+.footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand { }
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Sora', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.footer-tagline {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 280px;
+}
+.footer-col-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.footer-col a {
+  display: block;
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  transition: color .15s;
+}
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-copy {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.footer-links { display: flex; gap: 20px; }
+.footer-links a {
+  font-size: 12.5px;
+  color: var(--muted);
+  transition: color .15s;
+}
+.footer-links a:hover { color: var(--blue); }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: .08s; }
+.reveal-delay-2 { transition-delay: .16s; }
+.reveal-delay-3 { transition-delay: .24s; }
+.reveal-delay-4 { transition-delay: .32s; }
+
+/* ===== COMPARISON TABLE ===== */
+.compare-section {
+  background: #f8f9ff;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 48px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  background: #fff;
+}
+.compare-table th, .compare-table td {
+  padding: 16px 24px;
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.compare-table th {
+  background: var(--bg);
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+.compare-table th.highlight {
+  background: #eef1ff;
+  color: var(--blue);
+}
+.compare-table td:nth-child(3) { background: #f8f9ff; }
+.compare-table td:nth-child(2) {
+  background: #fafbff;
+  font-weight: 500;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:hover td { background: #f5f7ff; }
+.check-yes { color: var(--green); font-size: 15px; }
+.check-no { color: var(--subtle); font-size: 15px; }
+.check-partial { color: var(--yellow); font-size: 15px; }
+.cat-row td {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: #f8f9ff !important;
+  padding: 10px 24px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1000px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .widget-float-badge { display: none; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: repeat(3, 1fr); }
+  .step-connector { display: none; }
+  .features-bento { grid-template-columns: 1fr 1fr; }
+  .feat-card.wide { grid-column: span 1; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .testimonial-inner { grid-template-columns: 1fr; }
+  .personas-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 680px) {
+  .nav-links { display: none; }
+  .hero-inner { padding: 48px 24px 0; }
+  .hero-h1 { font-size: 34px; }
+  .features-bento { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .compare-section { display: none; }
+  .footer-top { grid-template-columns: 1fr; }
+  .cta-buttons { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      CoreCatalyst<span class="dot-ai">.ai</span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="active">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">How It Works</a>
+      <a href="#">Pricing</a>
+      <a href="#">Resources</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#" class="btn-ghost-sm">Sign in</a>
+      <a href="#" class="btn-primary">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        Skills Intelligence Platform - B2B
+      </div>
+      <h1 class="hero-h1">
+        Every employee's<br>
+        skills, <span class="line-accent">finally in sync</span><br>
+        across your org.
+      </h1>
+      <p class="hero-sub">CoreCatalyst reconciles skills data from CVs, LMS, managers, and job history into a single, trusted skills profile - so your workforce runs on what people can actually do, not what their job title says.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary-lg">See it in action</a>
+        <a href="#" class="btn-text-lg">
+          How it works
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="hero-note">
+        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        No IT setup required - connects to your HRIS in under a day
+      </div>
+    </div>
+    <div class="hero-widget-wrap">
+      <div class="hero-widget">
+        <div class="widget-header">
+          <div class="widget-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="widget-title">Skills Reconciliation Engine</span>
+        </div>
+        <div class="widget-body">
+          <div class="widget-label">Conflicts detected - 3 skills</div>
+          <div class="skill-conflict">
+            <div class="skill-conflict-row">
+              <span class="skill-name">Python</span>
+              <div class="skill-sources">
+                <span class="source-chip cv">CV: Expert</span>
+                <span class="source-chip lms">LMS: Intermediate</span>
+                <span class="source-chip mgr">Mgr: Advanced</span>
+              </div>
+              <span class="conflict-badge">Conflict</span>
+            </div>
+            <div class="skill-conflict-row">
+              <span class="skill-name">Data Analysis</span>
+              <div class="skill-sources">
+                <span class="source-chip cv">CV: Advanced</span>
+                <span class="source-chip mgr">Mgr: Intermediate</span>
+              </div>
+              <span class="conflict-badge">Conflict</span>
+            </div>
+            <div class="skill-conflict-row">
+              <span class="skill-name">Leadership</span>
+              <div class="skill-sources">
+                <span class="source-chip lms">LMS: Certified</span>
+                <span class="source-chip mgr">Mgr: Developing</span>
+              </div>
+              <span class="conflict-badge">Conflict</span>
+            </div>
+          </div>
+          <div class="widget-divider"></div>
+          <div class="reconciliation-label">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            AI reconciled - suggested levels
+          </div>
+          <div class="skill-resolved">
+            <span class="skill-resolved-name">Python</span>
+            <span class="skill-resolved-level">
+              <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              Advanced (confirmed by 2 of 3 sources)
+            </span>
+          </div>
+          <div class="skill-resolved">
+            <span class="skill-resolved-name">Data Analysis</span>
+            <span class="skill-resolved-level">
+              <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              Advanced (recency-weighted)
+            </span>
+          </div>
+          <div class="skill-resolved">
+            <span class="skill-resolved-name">Leadership</span>
+            <span class="skill-resolved-level" style="color:var(--yellow)">
+              <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2.5"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+              Escalated for manager review
+            </span>
+          </div>
+          <div class="widget-actions">
+            <button class="w-btn w-btn-accept" onclick="acceptAll(this)">Accept all suggestions</button>
+            <button class="w-btn w-btn-review">Review conflicts (1)</button>
+          </div>
+          <div class="widget-stat-row">
+            <div class="widget-stat">
+              <div class="widget-stat-num">94%</div>
+              <div class="widget-stat-lbl">Auto-resolved</div>
+            </div>
+            <div class="widget-stat">
+              <div class="widget-stat-num">1.2s</div>
+              <div class="widget-stat-lbl">Avg. process time</div>
+            </div>
+            <div class="widget-stat">
+              <div class="widget-stat-num">6%</div>
+              <div class="widget-stat-lbl">Human review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="widget-float-badge">
+        <div class="widget-float-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="widget-float-text">
+          <strong>2,847 skills reconciled today</strong>
+          <span>Across 312 employees - 94% automated</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-bottom-divider">
+      <div class="line"></div>
+      <span>Trusted by people teams at</span>
+      <div class="line"></div>
+    </div>
+    <div class="logo-bar">
+      <div class="logo-item">
+        <div class="logo-icon"></div>
+        <span class="logo-text">Meridian Corp</span>
+      </div>
+      <div class="logo-item">
+        <div class="logo-icon"></div>
+        <span class="logo-text">Vantage Group</span>
+      </div>
+      <div class="logo-item">
+        <div class="logo-icon"></div>
+        <span class="logo-text">Orion Health</span>
+      </div>
+      <div class="logo-item">
+        <div class="logo-icon"></div>
+        <span class="logo-text">Nexus Financial</span>
+      </div>
+      <div class="logo-item">
+        <div class="logo-icon"></div>
+        <span class="logo-text">Atlas Retail</span>
+      </div>
+      <div class="logo-item">
+        <div class="logo-icon"></div>
+        <span class="logo-text">Clearstone</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROBLEM SECTION ===== -->
+<section class="problem-section reveal">
+  <div class="container">
+    <div class="problem-grid">
+      <div class="problem-left">
+        <div class="section-eyebrow">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          The Workforce Readiness Gap
+        </div>
+        <h2 class="section-h2">The skills crisis is real.<br>And it's getting worse.</h2>
+        <p class="section-sub" style="margin-bottom: 36px;">The skills required to perform are moving faster than people are being equipped for. Meanwhile, the talent data you rely on is fragmented, outdated, and sitting in three different systems that don't talk to each other.</p>
+        <div class="problem-card-stack">
+          <div class="problem-card reveal reveal-delay-1">
+            <div class="prob-icon red">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            </div>
+            <div>
+              <div class="prob-title">Fragmented skills data</div>
+              <div class="prob-desc">CV skills, LMS completions, manager assessments, and project history live in separate systems - none reconciled into a single truth.</div>
+            </div>
+          </div>
+          <div class="problem-card reveal reveal-delay-2">
+            <div class="prob-icon yellow">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <div class="prob-title">Invisible workforce potential</div>
+              <div class="prob-desc">Leaders can't see who has the skills to fill critical roles, so they hire externally - for roles their own people could do with light upskilling.</div>
+            </div>
+          </div>
+          <div class="problem-card reveal reveal-delay-3">
+            <div class="prob-icon violet">
+              <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <div>
+              <div class="prob-title">Strategic decisions without data</div>
+              <div class="prob-desc">C-suite and CHROs make talent decisions without real workforce intelligence - relying on headcount models that ignore actual skills and capacity.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="problem-right reveal reveal-delay-2">
+        <div class="problem-stat-card">
+          <div class="problem-big-stat"><span>$8.5T</span></div>
+          <div class="problem-stat-label">in unrealized revenue lost annually to workforce skills gaps globally</div>
+        </div>
+        <div class="problem-mini-stats">
+          <div class="problem-mini-card">
+            <div class="problem-mini-num blue">74%</div>
+            <div class="problem-mini-lbl">of CHROs lack confidence in their workforce skills data</div>
+          </div>
+          <div class="problem-mini-card">
+            <div class="problem-mini-num violet">3.4x</div>
+            <div class="problem-mini-lbl">faster attrition at orgs with poor internal mobility visibility</div>
+          </div>
+          <div class="problem-mini-card">
+            <div class="problem-mini-num blue">68%</div>
+            <div class="problem-mini-lbl">of employees say their employer doesn't know their real skills</div>
+          </div>
+          <div class="problem-mini-card">
+            <div class="problem-mini-num violet">2.1x</div>
+            <div class="problem-mini-lbl">more likely to engage when employees see a clear skill path</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how-section">
+  <div class="container">
+    <div class="how-header reveal">
+      <div class="section-eyebrow">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        How CoreCatalyst works
+      </div>
+      <h2 class="section-h2">From scattered data to<br>verified skills truth</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-connector"></div>
+      <div class="step reveal">
+        <div class="step-num">
+          <span class="step-num-text">1</span>
+        </div>
+        <div class="step-title">Connect your sources</div>
+        <div class="step-desc">Link HRIS, LMS, ATS, and performance systems via 200+ integrations - no engineering required.</div>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">
+          <span class="step-num-text">2</span>
+        </div>
+        <div class="step-title">Ingest and normalise</div>
+        <div class="step-desc">All skills data is pulled, cleaned, and mapped to a unified 45,000-skill taxonomy in 35 languages.</div>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">
+          <span class="step-num-text">3</span>
+        </div>
+        <div class="step-title">AI reconciliation</div>
+        <div class="step-desc">Conflicts are resolved using recency weighting, source trust scores, and manager context - 94% automatically.</div>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">
+          <span class="step-num-text">4</span>
+        </div>
+        <div class="step-title">Human adjudication</div>
+        <div class="step-desc">The 6% that needs judgment goes to managers in a clean review queue - no training required, 2 minutes per person.</div>
+      </div>
+      <div class="step reveal reveal-delay-4">
+        <div class="step-num">
+          <span class="step-num-text">5</span>
+        </div>
+        <div class="step-title">Living skills profiles</div>
+        <div class="step-desc">Profiles update continuously. Downstream systems (ATS, LMS, talent marketplace) always get the current picture.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features-section">
+  <div class="container">
+    <div class="features-top reveal">
+      <div class="section-eyebrow">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+        Platform capabilities
+      </div>
+      <h2 class="section-h2">Everything a skills-powered<br>org actually needs</h2>
+    </div>
+    <div class="features-bento">
+      <!-- Wide card - Reconciliation Engine -->
+      <div class="feat-card wide reveal">
+        <div class="feat-card-accent blue"></div>
+        <div class="feat-icon blue">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="feat-title">Multi-source reconciliation engine</h3>
+        <p class="feat-desc">When your CV says Expert, LMS says Intermediate, and your manager says Advanced - CoreCatalyst doesn't pick one blindly. It weighs recency, evidence quality, and source trust to surface the most accurate level, automatically.</p>
+        <div class="wide-card-inner">
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Raw inputs</div>
+            <div class="data-flow">
+              <div class="data-row">
+                <svg width="14" height="14" fill="none" stroke="var(--blue)" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                <span class="data-row-label">SQL: Expert</span>
+                <span class="data-row-source cv">CV</span>
+              </div>
+              <div class="data-row">
+                <svg width="14" height="14" fill="none" stroke="var(--violet)" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                <span class="data-row-label">SQL: Intermediate</span>
+                <span class="data-row-source lms">LMS</span>
+              </div>
+              <div class="data-row">
+                <svg width="14" height="14" fill="none" stroke="var(--green)" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                <span class="data-row-label">SQL: Advanced</span>
+                <span class="data-row-source mgr">Manager</span>
+              </div>
+            </div>
+          </div>
+          <div class="arrow-right">
+            <svg width="32" height="32" fill="none" stroke="var(--border)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Reconciled truth</div>
+            <div class="resolution-panel">
+              <div class="resolution-panel-title">AI resolved - high confidence</div>
+              <div class="resolution-row">
+                <span>SQL</span>
+                <span class="resolution-level">Advanced</span>
+              </div>
+              <div class="resolution-row">
+                <span>Confidence</span>
+                <span style="font-size:12px;font-weight:600;color:var(--blue);">88%</span>
+              </div>
+              <div class="resolution-row">
+                <span>Basis</span>
+                <span style="font-size:11.5px;color:var(--muted);">Mgr + LMS (recent)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Skill Graph -->
+      <div class="feat-card tall reveal reveal-delay-1">
+        <div class="feat-card-accent violet"></div>
+        <div>
+          <div class="feat-icon violet">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 000 11.4M17.7 17.7a8 8 0 000-11.4M3.5 3.5a14 14 0 000 17M20.5 20.5a14 14 0 000-17"/></svg>
+          </div>
+          <h3 class="feat-title">45K-node skills graph</h3>
+          <p class="feat-desc">Every skill is mapped to its adjacent skills, required progressions, and market demand signals - in 35 languages. Not just a list. An interconnected intelligence layer.</p>
+        </div>
+        <div class="feat-chips">
+          <span class="feat-chip">Skill adjacency</span>
+          <span class="feat-chip">Market demand</span>
+          <span class="feat-chip">Career pathways</span>
+        </div>
+      </div>
+      <!-- Workforce Intel -->
+      <div class="feat-card reveal">
+        <div class="feat-card-accent green"></div>
+        <div class="feat-icon green">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3 class="feat-title">Workforce intelligence dashboards</h3>
+        <p class="feat-desc">Board-ready views of your org's current skills coverage, gap clusters, and critical role readiness - sliced by team, level, or location.</p>
+        <div class="feat-chips">
+          <span class="feat-chip">Gap analysis</span>
+          <span class="feat-chip">Risk scoring</span>
+          <span class="feat-chip">Trend tracking</span>
+        </div>
+      </div>
+      <!-- Internal Mobility -->
+      <div class="feat-card reveal reveal-delay-1">
+        <div class="feat-card-accent cyan"></div>
+        <div class="feat-icon cyan">
+          <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+        </div>
+        <h3 class="feat-title">Internal mobility matching</h3>
+        <p class="feat-desc">Surface your best-fit internal candidates for every open role, project, or stretch assignment - ranked by verified skill match, not just title proximity.</p>
+        <div class="feat-chips">
+          <span class="feat-chip">Role matching</span>
+          <span class="feat-chip">Gig matching</span>
+        </div>
+      </div>
+      <!-- Open Platform -->
+      <div class="feat-card reveal reveal-delay-2">
+        <div class="feat-card-accent blue"></div>
+        <div class="feat-icon blue">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <h3 class="feat-title">Open by design</h3>
+        <p class="feat-desc">200+ pre-built connectors for HRIS, LMS, ATS, and productivity tools. Or build your own via REST API. Skills data flows to where decisions happen.</p>
+        <div class="feat-chips">
+          <span class="feat-chip">REST API</span>
+          <span class="feat-chip">Webhooks</span>
+          <span class="feat-chip">HRIS write-back</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-num" data-target="94">0%</div>
+        <div class="stat-label">of skill conflicts resolved without human review</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-num" data-target="45">0K</div>
+        <div class="stat-label">skills in the CoreCatalyst taxonomy across 35 languages</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-num" data-target="3">0x</div>
+        <div class="stat-label">faster internal mobility matching vs. manual HR processes</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-num" data-target="1">1 day</div>
+        <div class="stat-label">average time from contract to live skills data in your stack</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PERSONA TABS ===== -->
+<section class="personas-section">
+  <div class="container">
+    <div class="reveal center">
+      <div class="section-eyebrow" style="display:inline-flex">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        Built for every stakeholder
+      </div>
+      <h2 class="section-h2">One platform, three different<br>lenses on your workforce</h2>
+      <p class="section-sub center">CoreCatalyst surfaces the right intelligence for the right person - from the CHRO's board deck to a manager's weekly one-on-one.</p>
+    </div>
+    <div class="personas-grid reveal">
+      <div class="personas-nav">
+        <div class="persona-tab active" onclick="switchPersona('chro', this)">
+          <div class="persona-tab-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div class="persona-tab-info">
+            <div class="persona-tab-name">CHRO &amp; People Leaders</div>
+            <div class="persona-tab-role">Workforce strategy</div>
+          </div>
+        </div>
+        <div class="persona-tab" onclick="switchPersona('manager', this)">
+          <div class="persona-tab-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="persona-tab-info">
+            <div class="persona-tab-name">People Managers</div>
+            <div class="persona-tab-role">Team development</div>
+          </div>
+        </div>
+        <div class="persona-tab" onclick="switchPersona('hrops', this)">
+          <div class="persona-tab-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M12 2v2M12 20v2M2 12H4M20 12h2"/></svg>
+          </div>
+          <div class="persona-tab-info">
+            <div class="persona-tab-name">HR Operations</div>
+            <div class="persona-tab-role">Data &amp; integrations</div>
+          </div>
+        </div>
+      </div>
+      <div class="persona-content-area">
+        <!-- CHRO -->
+        <div class="persona-content active" id="persona-chro">
+          <span class="persona-content-tag">CHRO &amp; People Leaders</span>
+          <h3 class="persona-h3">Make strategic talent decisions with actual workforce data.</h3>
+          <p class="persona-desc">Stop guessing whether you have the skills to execute your 3-year strategy. CoreCatalyst shows you exactly where your critical gaps are, what it costs to fill them internally vs. externally, and which teams are at risk if a key person leaves.</p>
+          <div class="persona-outcomes">
+            <div class="outcome-row">
+              <div class="outcome-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+              <span class="outcome-text">Board-ready skills gap dashboards updated in real time - not locked in a quarterly HR report</span>
+            </div>
+            <div class="outcome-row">
+              <div class="outcome-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+              <span class="outcome-text">Build-buy-borrow analysis for every critical role - backed by verified internal skills data</span>
+            </div>
+            <div class="outcome-row">
+              <div class="outcome-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+              <span class="outcome-text">Succession planning powered by actual skill profiles, not job title proximity</span>
+            </div>
+          </div>
+        </div>
+        <!-- Manager -->
+        <div class="persona-content" id="persona-manager">
+          <span class="persona-content-tag">People Managers</span>
+          <h3 class="persona-h3">Develop your team with precision, not gut feel.</h3>
+          <p class="persona-desc">CoreCatalyst gives managers a clear picture of each team member's verified skills, what they're building toward, and the specific gaps between today and their next role - so every 1:1 conversation is backed by data.</p>
+          <div class="persona-outcomes">
+            <div class="outcome-row">
+              <div class="outcome-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <span class="outcome-text">Review and adjudicate AI-suggested skill levels in 2 minutes per person - no system training needed</span>
+            </div>
+            <div class="outcome-row">
+              <div class="outcome-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+              <span class="outcome-text">Personalised growth plans generated automatically based on each person's verified skills and career goals</span>
+            </div>
+            <div class="outcome-row">
+              <div class="outcome-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+              <span class="outcome-text">Spot internal candidates for projects and stretch assignments before posting externally</span>
+            </div>
+          </div>
+        </div>
+        <!-- HR Ops -->
+        <div class="persona-content" id="persona-hrops">
+          <span class="persona-content-tag">HR Operations</span>
+          <h3 class="persona-h3">One clean skills record - flowing everywhere it needs to.</h3>
+          <p class="persona-desc">CoreCatalyst is the single source of truth your whole HR stack has been missing. Connect once, and every downstream system gets verified, current skills data - with full audit trails and HRIS write-back.</p>
+          <div class="persona-outcomes">
+            <div class="outcome-row">
+              <div class="outcome-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+              <span class="outcome-text">200+ pre-built connectors for Workday, SAP, Oracle, Cornerstone, and every major LMS and ATS</span>
+            </div>
+            <div class="outcome-row">
+              <div class="outcome-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></div>
+              <span class="outcome-text">Full audit trail on every skill change - who set it, which source, when, and why - ready for compliance review</span>
+            </div>
+            <div class="outcome-row">
+              <div class="outcome-icon"><svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
+              <span class="outcome-text">HRIS write-back means your system of record always reflects the latest reconciled skills - zero manual re-entry</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON TABLE ===== -->
+<section class="compare-section">
+  <div class="container">
+    <div class="reveal center">
+      <div class="section-eyebrow" style="display:inline-flex">
+        <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        How we compare
+      </div>
+      <h2 class="section-h2">Skills reconciliation is the gap<br>no one else fills</h2>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:38%">Capability</th>
+            <th class="highlight" style="width:21%">CoreCatalyst</th>
+            <th style="width:20%">LMS Platforms</th>
+            <th style="width:21%">Talent Marketplaces</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cat-row"><td colspan="4">Skills Data</td></tr>
+          <tr>
+            <td>Multi-source skills reconciliation</td>
+            <td><span class="check-yes">✓</span> AI-automated, 94% hands-off</td>
+            <td><span class="check-no">-</span> Not available</td>
+            <td><span class="check-partial">~</span> Self-reported only</td>
+          </tr>
+          <tr>
+            <td>Verified skills profiles (multi-source)</td>
+            <td><span class="check-yes">✓</span> CV + LMS + Manager + Job data</td>
+            <td><span class="check-partial">~</span> LMS completions only</td>
+            <td><span class="check-partial">~</span> Profile + endorsements</td>
+          </tr>
+          <tr>
+            <td>Real-time skills taxonomy (45K+ skills)</td>
+            <td><span class="check-yes">✓</span> With market demand signals</td>
+            <td><span class="check-partial">~</span> Static catalog</td>
+            <td><span class="check-partial">~</span> Limited taxonomy</td>
+          </tr>
+          <tr class="cat-row"><td colspan="4">Workforce Intelligence</td></tr>
+          <tr>
+            <td>Board-level workforce gap dashboards</td>
+            <td><span class="check-yes">✓</span> Real-time, role-specific</td>
+            <td><span class="check-no">-</span> Learning reports only</td>
+            <td><span class="check-partial">~</span> Marketplace activity</td>
+          </tr>
+          <tr>
+            <td>Critical role readiness scoring</td>
+            <td><span class="check-yes">✓</span> Automated + manager input</td>
+            <td><span class="check-no">-</span> Not available</td>
+            <td><span class="check-partial">~</span> Basic match scoring</td>
+          </tr>
+          <tr class="cat-row"><td colspan="4">Integration &amp; Platform</td></tr>
+          <tr>
+            <td>HRIS write-back (live sync)</td>
+            <td><span class="check-yes">✓</span> Workday, SAP, Oracle +</td>
+            <td><span class="check-partial">~</span> Varies by vendor</td>
+            <td><span class="check-no">-</span> Typically outbound only</td>
+          </tr>
+          <tr>
+            <td>Time to first skills data</td>
+            <td><span class="check-yes">1 day</span></td>
+            <td>4-12 weeks (implementation)</td>
+            <td>2-6 weeks</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIAL ===== -->
+<section class="testimonial-section">
+  <div class="container">
+    <div class="testimonial-inner">
+      <div class="testimonial-left reveal">
+        <div class="section-eyebrow">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Customer story
+        </div>
+        <p class="testimonial-quote">We had three systems telling us three different things about our engineers' Python skills. CoreCatalyst resolved it in hours. For the first time, our skills data actually matches what our teams can do.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MR</div>
+          <div>
+            <div class="author-name">Meredith Roark</div>
+            <div class="author-title">VP People &amp; Talent, Vantage Group (8,400 employees)</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-right reveal reveal-delay-1">
+        <div class="outcome-card">
+          <div class="outcome-card-num green">61%</div>
+          <div class="outcome-card-lbl">reduction in external hiring costs in the first 6 months</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-num blue">3 days</div>
+          <div class="outcome-card-lbl">from kickoff to live skills data across 8,400 employees</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-num violet">94%</div>
+          <div class="outcome-card-lbl">of skill conflicts resolved without any HR team involvement</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-num green">2.1x</div>
+          <div class="outcome-card-lbl">increase in internal mobility placements within 1 year</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div class="section-eyebrow" style="display:inline-flex; margin-left:auto; margin-right:auto;">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Get started
+      </div>
+      <h2 class="section-h2">Your workforce is more capable<br>than your data shows.</h2>
+      <p class="section-sub">Stop making talent decisions in the dark. CoreCatalyst gives you a verified, living picture of what your people can do - and where to take them next.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn-primary-lg-dark">Request a demo</a>
+        <a href="#" class="btn-outline-lg">Explore the platform</a>
+      </div>
+      <div class="cta-trust-row">
+        <span class="cta-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          No commitment required
+        </span>
+        <span class="cta-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          Live with real data in 1 day
+        </span>
+        <span class="cta-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          SOC 2 Type II certified
+        </span>
+        <span class="cta-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          GDPR compliant
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="nav-logo-mark" style="width:30px;height:30px;border-radius:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          CoreCatalyst<span style="color:var(--muted);font-weight:400;">.ai</span>
+        </div>
+        <p class="footer-tagline">The skills intelligence platform for enterprises building a skills-powered workforce. From scattered data to verified truth - in a day.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Platform</div>
+        <a href="#">Reconciliation Engine</a>
+        <a href="#">Skills Graph</a>
+        <a href="#">Workforce Intelligence</a>
+        <a href="#">Internal Mobility</a>
+        <a href="#">Integrations</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Solutions</div>
+        <a href="#">For CHROs</a>
+        <a href="#">For Managers</a>
+        <a href="#">For HR Ops</a>
+        <a href="#">Enterprise</a>
+        <a href="#">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Security</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">- 2026 CoreCatalyst. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Security</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) {
+    nav.classList.add('solid');
+  } else {
+    nav.classList.remove('solid');
+  }
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+
+// Persona tabs
+function switchPersona(id, btn) {
+  document.querySelectorAll('.persona-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.persona-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('persona-' + id).classList.add('active');
+}
+
+// Hero widget accept
+function acceptAll(btn) {
+  btn.textContent = 'All suggestions accepted';
+  btn.style.background = 'var(--green)';
+  btn.disabled = true;
+  const stats = document.querySelectorAll('.widget-stat-num');
+  if (stats[0]) { stats[0].textContent = '100%'; }
+}
+
+// Stat counter animation
+function animateCounters() {
+  document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.textContent.replace(/[0-9]/g, '').replace('%','').replace('x','').replace('K','');
+    const isPercent = el.textContent.includes('%');
+    const isX = el.textContent.includes('x');
+    const isK = el.textContent.includes('K');
+    let start = 0;
+    const duration = 1400;
+    const step = (ts) => {
+      if (!step.start) step.start = ts;
+      const progress = Math.min((ts - step.start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(start + (target - start) * ease);
+      el.textContent = current + (isPercent ? '%' : isX ? 'x' : isK ? 'K' : suffix);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}
+
+// Trigger counters when stats section visible
+const statsSection = document.querySelector('.stats-section');
+let counted = false;
+const statsIO = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !counted) {
+    counted = true;
+    animateCounters();
+  }
+}, { threshold: 0.3 });
+if (statsSection) statsIO.observe(statsSection);
+
+// Init hero as visible
+document.querySelectorAll('.hero .reveal, .hero-inner .reveal').forEach(el => {
+  el.classList.add('visible');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CoreCatalyst for CHROs - Board-Ready Workforce Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #1a1f36;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ===== CSS TOKENS ===== */
+:root {
+  --blue: #3b5bdb;
+  --indigo: #4c6ef5;
+  --violet: #7950f2;
+  --green: #40c057;
+  --red: #fa5252;
+  --yellow: #fab005;
+  --cyan: #22b8cf;
+  --bg: #f2f4fb;
+  --surface: #ffffff;
+  --border: #e4e9f4;
+  --text: #1a1f36;
+  --muted: #8792b2;
+  --subtle: #c4cbe8;
+  --radius-card: 16px;
+  --radius-btn: 10px;
+  --shadow-card: 0 2px 20px rgba(59,91,219,.08);
+  --shadow-hover: 0 8px 32px rgba(59,91,219,.14);
+  --grad-primary: linear-gradient(135deg, #3b5bdb 0%, #7950f2 100%);
+  --grad-hero: linear-gradient(145deg, #eef2ff 0%, #f5f3ff 45%, #faf5ff 100%);
+}
+
+/* ===== NAVIGATION ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s, box-shadow .2s;
+}
+.nav.solid {
+  border-bottom-color: var(--border);
+  box-shadow: 0 1px 12px rgba(59,91,219,.06);
+}
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-logo {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--blue);
+  letter-spacing: -.4px;
+  margin-right: auto;
+}
+.nav-logo span { color: var(--violet); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: color .15s, background .15s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--bg); }
+.nav-cta {
+  background: var(--grad-primary);
+  color: #fff !important;
+  padding: 8px 18px !important;
+  border-radius: var(--radius-btn) !important;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { opacity: .92; background: var(--bg) !important; }
+
+/* ===== PERSONA LABEL ===== */
+.persona-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+  border: 1px solid #c5d0fa;
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 20px;
+}
+.persona-label .dot {
+  width: 6px; height: 6px;
+  background: var(--violet);
+  border-radius: 50%;
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  background: var(--grad-hero);
+  display: flex;
+  align-items: center;
+  padding: 100px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -80px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(121,80,242,.07) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -40px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(59,91,219,.05) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--violet);
+  margin-bottom: 16px;
+}
+.hero-h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.hero-h1 em {
+  font-style: normal;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #4a5180;
+  max-width: 480px;
+  margin-bottom: 36px;
+}
+.hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--grad-primary);
+  color: #fff;
+  padding: 13px 26px;
+  border-radius: var(--radius-btn);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity .15s, transform .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary:hover { opacity: .9; transform: translateY(-1px); }
+.btn-ghost {
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 13px 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: gap .15s;
+}
+.btn-ghost:hover { gap: 10px; }
+
+/* ===== HERO WIDGET - Workforce Readiness Dashboard ===== */
+.hero-widget {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 40px rgba(59,91,219,.12), 0 1px 4px rgba(59,91,219,.06);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.widget-header {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f3f0ff 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.widget-dots { display: flex; gap: 5px; }
+.widget-dots span {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.widget-dots span:nth-child(1) { background: #fa5252; }
+.widget-dots span:nth-child(2) { background: #fab005; }
+.widget-dots span:nth-child(3) { background: #40c057; }
+.widget-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: .03em;
+  margin-left: 4px;
+}
+.widget-badge {
+  margin-left: auto;
+  background: #e3f9e5;
+  color: #2b7a3d;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  padding: 3px 8px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+.widget-body { padding: 20px; }
+
+/* Readiness score ring */
+.readiness-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.score-ring {
+  position: relative;
+  width: 80px; height: 80px;
+}
+.score-ring svg { transform: rotate(-90deg); }
+.score-ring-track { fill: none; stroke: #eef2ff; stroke-width: 8; }
+.score-ring-fill {
+  fill: none;
+  stroke: url(#ringGrad);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 201;
+  stroke-dashoffset: 50;
+  transition: stroke-dashoffset 1.4s ease-out;
+}
+.score-ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.score-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--blue);
+}
+.score-pct { font-size: 10px; color: var(--muted); font-weight: 500; }
+.readiness-info {}
+.readiness-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.readiness-sub { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.readiness-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #2b7a3d;
+  background: #e3f9e5;
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+
+/* Function breakdown */
+.fn-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.fn-row { display: grid; grid-template-columns: 90px 1fr auto; gap: 10px; align-items: center; }
+.fn-label { font-size: 12px; font-weight: 500; color: var(--text); }
+.fn-bar-track {
+  height: 6px;
+  background: var(--bg);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.fn-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 1s ease-out;
+}
+.fn-pct { font-size: 11px; font-weight: 600; color: var(--muted); width: 30px; text-align: right; }
+
+/* Risk chips */
+.risk-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.risk-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff5f5;
+  border: 1px solid #ffc9c9;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #c92a2a;
+}
+.risk-chip .ri { width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+.risk-chip.amber {
+  background: #fff8e1;
+  border-color: #ffe08a;
+  color: #854d0e;
+}
+.risk-chip.amber .ri { background: var(--yellow); }
+
+/* ===== TRUST BAR ===== */
+.trust-bar {
+  background: #f8f9fe;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+}
+.trust-bar-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.trust-icon {
+  width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--blue);
+  font-size: 14px;
+}
+
+/* ===== SECTION BASE ===== */
+.section { padding: 96px 24px; }
+.section-inner { max-width: 1160px; margin: 0 auto; }
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--violet);
+  margin-bottom: 12px;
+}
+.section-h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.section-lead {
+  font-size: 16px;
+  color: #4a5180;
+  max-width: 580px;
+  line-height: 1.65;
+  margin-bottom: 56px;
+}
+
+/* ===== PROBLEM SECTION ===== */
+.problem-section { background: #fff; }
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.problem-list { display: flex; flex-direction: column; gap: 28px; }
+.prob-item {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.prob-icon {
+  width: 44px; height: 44px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.prob-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+.prob-desc { font-size: 14px; color: var(--muted); line-height: 1.55; }
+.prob-stat {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+  margin-top: 6px;
+  letter-spacing: .03em;
+}
+
+/* Confidence meter widget */
+.confidence-widget {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+}
+.cw-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.cw-sub { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+.cw-meter-wrap { position: relative; margin-bottom: 20px; }
+.cw-meter-track {
+  height: 12px;
+  background: #e4e9f4;
+  border-radius: 100px;
+  overflow: visible;
+  position: relative;
+}
+.cw-meter-fill {
+  height: 100%;
+  width: 26%;
+  background: linear-gradient(90deg, var(--red) 0%, #ff922b 100%);
+  border-radius: 100px;
+  position: relative;
+  transition: width 1.2s ease-out;
+}
+.cw-meter-fill::after {
+  content: '26%';
+  position: absolute;
+  right: -2px;
+  top: -22px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+  white-space: nowrap;
+}
+.cw-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.cw-context { font-size: 12px; color: #4a5180; line-height: 1.5; margin-bottom: 16px; }
+.cw-source { font-size: 11px; color: var(--muted); font-style: italic; }
+.cw-divider { height: 1px; background: var(--border); margin: 20px 0; }
+.cw-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cw-stat { text-align: center; }
+.cw-stat-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.cw-stat-label { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+/* ===== WHAT YOU GET SECTION ===== */
+.outcomes-section { background: var(--bg); }
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.outcome-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+  transition: transform .2s, box-shadow .2s;
+}
+.outcome-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+.outcome-card.featured {
+  background: linear-gradient(145deg, #f0f4ff, #f5f0ff);
+  border-color: #c5d0fa;
+}
+.outcome-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.outcome-num span { color: var(--violet); }
+.outcome-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  margin-top: 10px;
+}
+.outcome-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+/* ===== CAPABILITY DEEP DIVE ===== */
+.capabilities-section { background: #fff; }
+.cap-tabs { display: flex; gap: 6px; margin-bottom: 48px; flex-wrap: wrap; }
+.cap-tab {
+  padding: 9px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all .15s;
+}
+.cap-tab.active {
+  background: var(--grad-primary);
+  color: #fff;
+  border-color: transparent;
+}
+.cap-pane { display: none; }
+.cap-pane.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.cap-text {}
+.cap-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+.cap-desc { font-size: 15px; color: #4a5180; line-height: 1.65; margin-bottom: 24px; }
+.cap-points { display: flex; flex-direction: column; gap: 12px; }
+.cap-point {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+}
+.cap-check {
+  width: 20px; height: 20px;
+  background: linear-gradient(135deg, #eef2ff, #f0f4ff);
+  border: 1px solid #c5d0fa;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.cap-point-text { font-size: 14px; color: #4a5180; line-height: 1.5; }
+.cap-point-text strong { color: var(--text); font-weight: 600; }
+
+/* Board readiness panel */
+.board-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.board-panel-header {
+  background: linear-gradient(135deg, #3b5bdb 0%, #7950f2 100%);
+  padding: 16px 20px;
+  color: #fff;
+}
+.bp-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bp-title { font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700; }
+.bp-quarter { font-size: 11px; opacity: .7; }
+.board-panel-body { padding: 20px; }
+
+/* Supply vs demand chart */
+.svd-chart { margin-bottom: 20px; }
+.svd-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+.svd-label { color: var(--muted); font-weight: 500; }
+.svd-bar-group { display: flex; flex-direction: column; gap: 3px; }
+.svd-mini-row { display: flex; align-items: center; gap: 6px; }
+.svd-bar {
+  height: 8px;
+  border-radius: 100px;
+}
+.bar-supply { background: #74c0fc; }
+.bar-demand { background: #ffa94d; }
+.svd-val { font-size: 10px; color: var(--muted); width: 28px; }
+.svd-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.svd-leg-dot {
+  width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* Risk heat row */
+.bp-risks { display: flex; flex-direction: column; gap: 8px; padding-top: 16px; border-top: 1px solid var(--border); }
+.bp-risk-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.heat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.heat-red { background: var(--red); }
+.heat-yellow { background: var(--yellow); }
+.heat-green { background: var(--green); }
+.bp-risk-label { flex: 1; color: var(--text); }
+.bp-risk-val { font-weight: 700; color: var(--text); font-size: 11px; }
+.bp-risk-trend { font-size: 10px; color: var(--muted); }
+
+/* Mobility panel */
+.mobility-panel {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+}
+.mob-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.mob-sub { font-size: 11px; color: var(--muted); margin-bottom: 20px; }
+.mob-flow { display: flex; flex-direction: column; gap: 10px; }
+.mob-row {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+  align-items: center;
+}
+.mob-person { font-size: 12px; font-weight: 600; color: var(--text); }
+.mob-from { font-size: 11px; color: var(--muted); }
+.mob-arrow { font-size: 14px; color: var(--muted); }
+.mob-to { font-size: 11px; color: var(--blue); font-weight: 600; }
+.mob-match {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+.mob-match.high { background: #e3f9e5; color: #2b7a3d; }
+.mob-match.med { background: #fff8e1; color: #854d0e; }
+.mob-footer {
+  margin-top: 14px;
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mob-footer strong { color: var(--blue); }
+
+/* Succession panel */
+.succession-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.suc-header {
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #f8f9ff, #f3f0ff);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.suc-header-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+.suc-count {
+  font-size: 11px;
+  background: var(--bg);
+  color: var(--muted);
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+}
+.suc-body { padding: 16px 20px; }
+.suc-roles { display: flex; flex-direction: column; gap: 14px; }
+.suc-role-row {}
+.suc-role-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.suc-depth-label {
+  font-size: 10px;
+  color: var(--muted);
+}
+.suc-candidates { display: flex; gap: 6px; }
+.suc-cand {
+  flex: 1;
+  text-align: center;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 4px;
+  font-size: 10px;
+}
+.suc-cand-name { font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.suc-cand-match { color: var(--muted); }
+.suc-cand.ready-now {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+.suc-cand.ready-now .suc-cand-name { color: #166534; }
+.suc-cand.gap {
+  background: #fff8e1;
+  border-color: #ffe08a;
+}
+.suc-tier-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 3px;
+  color: var(--muted);
+}
+
+/* ===== BOARD REPORTING SECTION ===== */
+.board-section { background: linear-gradient(145deg, #f8f9ff 0%, #f5f3ff 100%); }
+.board-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.board-report-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.brc-header {
+  background: linear-gradient(135deg, #3b5bdb 0%, #7950f2 100%);
+  padding: 20px 24px;
+  color: #fff;
+}
+.brc-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; opacity: .7; margin-bottom: 6px; }
+.brc-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.brc-date { font-size: 11px; opacity: .65; }
+.brc-body { padding: 20px 24px; }
+.brc-metric-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.brc-metric { text-align: center; }
+.brc-metric-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.brc-metric-num.green { color: var(--green); }
+.brc-metric-num.red { color: var(--red); }
+.brc-metric-label { font-size: 10px; color: var(--muted); line-height: 1.4; }
+.brc-divider { height: 1px; background: var(--border); margin: 16px 0; }
+.brc-insight {
+  font-size: 12px;
+  color: #4a5180;
+  line-height: 1.6;
+  padding: 12px;
+  background: #f8f9ff;
+  border-radius: 10px;
+  border-left: 3px solid var(--blue);
+}
+.brc-insight strong { color: var(--text); }
+
+.board-text {}
+.board-quote {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 24px;
+  position: relative;
+  padding-left: 20px;
+}
+.board-quote::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 3px;
+  background: var(--grad-primary);
+  border-radius: 100px;
+}
+.board-bullets { display: flex; flex-direction: column; gap: 14px; }
+.board-bullet { display: flex; gap: 12px; align-items: start; }
+.bb-icon {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #eef2ff, #f5f0ff);
+  border: 1px solid #c5d0fa;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.bb-text { font-size: 14px; color: #4a5180; line-height: 1.55; }
+.bb-text strong { color: var(--text); font-weight: 600; }
+
+/* ===== ROI SECTION ===== */
+.roi-section { background: #fff; }
+.roi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.roi-calculator {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+}
+.roi-calc-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.roi-calc-sub { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+.roi-inputs { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
+.roi-input-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+.roi-input-label { font-size: 12px; color: var(--text); font-weight: 500; }
+.roi-input-val {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue);
+  text-align: right;
+}
+.roi-input-bar { grid-column: 1 / -1; }
+.roi-bar-track {
+  height: 4px;
+  background: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.roi-bar-fill { height: 100%; background: var(--grad-primary); border-radius: 100px; }
+.roi-result {
+  background: linear-gradient(135deg, #3b5bdb 0%, #7950f2 100%);
+  border-radius: 14px;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+}
+.roi-result-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; opacity: .8; margin-bottom: 6px; }
+.roi-result-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.roi-result-sub { font-size: 12px; opacity: .75; }
+
+.roi-text {}
+.roi-items { display: flex; flex-direction: column; gap: 20px; }
+.roi-item {}
+.roi-item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.roi-item-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, #eef2ff, #f5f0ff);
+  border: 1px solid #c5d0fa;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.roi-item-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.roi-item-saving {
+  margin-left: auto;
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--green);
+}
+.roi-item-desc { font-size: 13px; color: var(--muted); line-height: 1.55; padding-left: 46px; }
+
+/* ===== TESTIMONIAL ===== */
+.testimonial-section { background: var(--bg); }
+.testimonial-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+.test-quote-mark {
+  font-size: 64px;
+  line-height: 1;
+  color: var(--subtle);
+  font-family: Georgia, serif;
+  margin-bottom: 8px;
+}
+.test-quote {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+.test-author { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.test-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+.test-name { font-weight: 700; color: var(--text); font-size: 14px; margin-bottom: 2px; }
+.test-role { font-size: 13px; color: var(--muted); }
+
+/* ===== CTA ===== */
+.cta-section {
+  background: linear-gradient(145deg, #eef2ff 0%, #f5f3ff 60%, #faf5ff 100%);
+  padding: 96px 24px;
+  text-align: center;
+}
+.cta-inner { max-width: 640px; margin: 0 auto; }
+.cta-h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.cta-sub { font-size: 16px; color: #4a5180; margin-bottom: 36px; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.cta-secondary {
+  padding: 13px 26px;
+  border-radius: var(--radius-btn);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--blue);
+  background: #fff;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+}
+.cta-secondary:hover { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,91,219,.1); }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #f8f9fe;
+  border-top: 1px solid var(--border);
+  padding: 48px 24px 32px;
+}
+.footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.footer-brand {}
+.footer-logo {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+.footer-logo span { color: var(--violet); }
+.footer-tagline { font-size: 13px; color: var(--muted); max-width: 220px; line-height: 1.55; }
+.footer-col {}
+.footer-col-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-links a { font-size: 13px; color: var(--muted); transition: color .15s; }
+.footer-links a:hover { color: var(--blue); }
+.footer-bottom {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+
+/* ===== OTHER PERSONAS NAV ===== */
+.persona-nav {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  margin-top: 64px;
+}
+.persona-nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+}
+.pnav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 14px 20px;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pnav-link:hover { color: var(--text); border-bottom-color: var(--border); }
+.pnav-link.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 960px) {
+  .hero-inner, .problem-grid, .cap-pane.active, .board-grid, .roi-grid { grid-template-columns: 1fr; gap: 32px; }
+  .outcomes-grid { grid-template-columns: 1fr 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .section { padding: 64px 16px; }
+  .hero { padding: 90px 16px 60px; }
+  .outcomes-grid { grid-template-columns: 1fr; }
+  .cap-tabs { gap: 4px; }
+  .cap-tab { font-size: 12px; padding: 7px 12px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo">Core<span>Catalyst</span></div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="solutions-chro.html" class="active">Solutions</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#" class="nav-cta">Get a Demo</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PERSONA SUB-NAV -->
+<div class="persona-nav">
+  <div class="persona-nav-inner">
+    <a class="pnav-link active" href="solutions-chro.html">&#9654; CHRO &amp; People Leaders</a>
+    <a class="pnav-link" href="#">&#9654; People Managers</a>
+    <a class="pnav-link" href="#">&#9654; HR Operations</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="persona-label"><span class="dot"></span>For CHROs &amp; People Leaders</div>
+      <div class="hero-eyebrow">Workforce Intelligence</div>
+      <h1 class="hero-h1">Finally, skills data the board <em>actually trusts</em></h1>
+      <p class="hero-sub">74% of CHROs say they lack confidence in their organization's skills data. CoreCatalyst reconciles every source - CV, LMS, assessments, performance - into a single verified picture of workforce readiness you can present at board level.</p>
+      <div class="hero-actions">
+        <button class="btn-primary">See a Board Demo <span>&#8594;</span></button>
+        <button class="btn-ghost">Download the CHRO guide <span>&#8594;</span></button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <!-- Workforce Readiness Dashboard Widget -->
+      <div class="hero-widget">
+        <div class="widget-header">
+          <div class="widget-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="widget-title">Workforce Readiness Dashboard</span>
+          <span class="widget-badge">Live</span>
+        </div>
+        <div class="widget-body">
+          <!-- Score ring -->
+          <div class="readiness-row">
+            <div class="score-ring">
+              <svg width="80" height="80" viewBox="0 0 80 80">
+                <defs>
+                  <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#3b5bdb"/>
+                    <stop offset="100%" style="stop-color:#7950f2"/>
+                  </linearGradient>
+                </defs>
+                <circle class="score-ring-track" cx="40" cy="40" r="32"/>
+                <circle class="score-ring-fill" id="ringFill" cx="40" cy="40" r="32"/>
+              </svg>
+              <div class="score-ring-label">
+                <span class="score-num">75</span>
+                <span class="score-pct">readiness</span>
+              </div>
+            </div>
+            <div class="readiness-info">
+              <div class="readiness-title">Org Readiness Score</div>
+              <div class="readiness-sub">Across 10,000 employees, 6 functions</div>
+              <span class="readiness-delta">&#8593; +8pts from last quarter</span>
+            </div>
+          </div>
+          <!-- Function breakdown -->
+          <div class="fn-list">
+            <div class="fn-row">
+              <span class="fn-label">Engineering</span>
+              <div class="fn-bar-track"><div class="fn-bar-fill bar-supply" style="width:88%"></div></div>
+              <span class="fn-pct">88%</span>
+            </div>
+            <div class="fn-row">
+              <span class="fn-label">Finance</span>
+              <div class="fn-bar-track"><div class="fn-bar-fill bar-supply" style="width:81%"></div></div>
+              <span class="fn-pct">81%</span>
+            </div>
+            <div class="fn-row">
+              <span class="fn-label">Operations</span>
+              <div class="fn-bar-track"><div class="fn-bar-fill bar-supply" style="width:67%"></div></div>
+              <span class="fn-pct">67%</span>
+            </div>
+            <div class="fn-row">
+              <span class="fn-label">AI/Data</span>
+              <div class="fn-bar-track"><div class="fn-bar-fill" style="width:43%; background: linear-gradient(90deg,#fa5252,#ff922b);"></div></div>
+              <span class="fn-pct" style="color:var(--red)">43%</span>
+            </div>
+          </div>
+          <!-- Risk chips -->
+          <div class="risk-row">
+            <div class="risk-chip"><span class="ri"></span>AI/Data skills gap</div>
+            <div class="risk-chip"><span class="ri"></span>Ops succession thin</div>
+            <div class="risk-chip amber"><span class="ri"></span>Procurement: watch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><span class="trust-icon">&#9724;</span> Board-ready reporting templates</div>
+    <div class="trust-item"><span class="trust-icon">&#9724;</span> 45K-skill taxonomy, auto-reconciled</div>
+    <div class="trust-item"><span class="trust-icon">&#9724;</span> SOC 2 Type II certified</div>
+    <div class="trust-item"><span class="trust-icon">&#9724;</span> GDPR &amp; CCPA compliant</div>
+    <div class="trust-item"><span class="trust-icon">&#9724;</span> HRIS write-back in real time</div>
+  </div>
+</div>
+
+<!-- PROBLEM SECTION -->
+<section class="section problem-section">
+  <div class="section-inner">
+    <div class="problem-grid">
+      <div class="problem-text">
+        <div class="section-label">The CHRO challenge</div>
+        <h2 class="section-h2 reveal">Your board is asking questions HR data can't answer</h2>
+        <p class="section-lead reveal reveal-delay-1">The questions are getting harder. "Do we have the AI skills to execute our 3-year strategy?" "Where are our succession gaps?" "What's our workforce readiness score?" The data exists - it just lives in four different systems, none of which agree.</p>
+        <div class="problem-list">
+          <div class="prob-item reveal reveal-delay-1">
+            <div class="prob-icon">&#128203;</div>
+            <div>
+              <div class="prob-title">Data fragmentation kills credibility</div>
+              <div class="prob-desc">Your HRIS shows one skills picture. The LMS shows another. CVs tell a third story. When asked by the board, you average them and hope. That's not a strategy.</div>
+              <div class="prob-stat">87% of CHROs cite skills data fragmentation as their #1 barrier</div>
+            </div>
+          </div>
+          <div class="prob-item reveal reveal-delay-2">
+            <div class="prob-icon">&#9200;</div>
+            <div>
+              <div class="prob-title">By the time reports are ready, they're stale</div>
+              <div class="prob-desc">Manually reconciling skills data across systems takes weeks. Quarterly board packs are built on data that's already 90 days old. Decisions get made on guesswork.</div>
+              <div class="prob-stat">Average skills data lag: 4-6 months behind reality</div>
+            </div>
+          </div>
+          <div class="prob-item reveal reveal-delay-3">
+            <div class="prob-icon">&#128683;</div>
+            <div>
+              <div class="prob-title">Strategy and workforce aren't connected</div>
+              <div class="prob-desc">When the business pivots to AI-first operations, HR can't quickly answer: "Do we have the people for this?" The gap between strategy and workforce visibility costs $8.5T globally.</div>
+              <div class="prob-stat">$8.5T in unrealized revenue tied to the workforce readiness gap</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Confidence widget -->
+      <div class="confidence-widget reveal">
+        <div class="cw-title">CHRO Confidence in Skills Data</div>
+        <div class="cw-sub">Industry benchmark - Q3 2025</div>
+        <div class="cw-meter-wrap">
+          <div class="cw-meter-track">
+            <div class="cw-meter-fill" id="cwFill"></div>
+          </div>
+          <div class="cw-labels">
+            <span>0% - No confidence</span>
+            <span>100% - Fully confident</span>
+          </div>
+        </div>
+        <p class="cw-context">Only <strong>26%</strong> of CHROs report being "highly confident" or "confident" in their organization's ability to identify and map workforce skills. The majority are making critical workforce decisions on incomplete or disputed data.</p>
+        <div class="cw-source">Source: Cornerstone Galaxy Workforce Readiness Report, 2024</div>
+        <div class="cw-divider"></div>
+        <div class="cw-stat-row">
+          <div class="cw-stat">
+            <div class="cw-stat-num">74%</div>
+            <div class="cw-stat-label">CHROs lacking confidence in skills data</div>
+          </div>
+          <div class="cw-stat">
+            <div class="cw-stat-num">4.2x</div>
+            <div class="cw-stat-label">ROI from verified skills data vs. unverified</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET - OUTCOMES -->
+<section class="section outcomes-section">
+  <div class="section-inner">
+    <div class="section-label">What CHROs get</div>
+    <h2 class="section-h2 reveal">From data chaos to board-ready clarity</h2>
+    <p class="section-lead reveal reveal-delay-1">CoreCatalyst gives you a single, verified, continuously updated view of your workforce - so every conversation with the board, every strategic decision, starts from ground truth.</p>
+    <div class="outcomes-grid">
+      <div class="outcome-card reveal reveal-delay-1">
+        <div class="outcome-num">75<span>%</span></div>
+        <div class="outcome-title">Faster skills intelligence</div>
+        <div class="outcome-desc">What used to take a 6-week manual pull is now a live dashboard. Workforce readiness data refreshes automatically from every connected source.</div>
+      </div>
+      <div class="outcome-card featured reveal reveal-delay-2">
+        <div class="outcome-num">94<span>%</span></div>
+        <div class="outcome-title">Conflicts auto-resolved</div>
+        <div class="outcome-desc">Our reconciliation engine resolves 94% of skills conflicts across systems automatically - no manual adjudication required from HR.</div>
+      </div>
+      <div class="outcome-card reveal reveal-delay-3">
+        <div class="outcome-num">3x</div>
+        <div class="outcome-title">Internal mobility rate</div>
+        <div class="outcome-desc">Organizations using verified skills data move talent internally 3x more often, reducing external hiring costs and improving retention.</div>
+      </div>
+      <div class="outcome-card reveal reveal-delay-1">
+        <div class="outcome-num">45<span>K</span></div>
+        <div class="outcome-title">Skill taxonomy nodes</div>
+        <div class="outcome-desc">The largest skills taxonomy in the market - 45,000 nodes, continuously updated for emerging roles and AI-era capabilities.</div>
+      </div>
+      <div class="outcome-card reveal reveal-delay-2">
+        <div class="outcome-num">90<span>%</span></div>
+        <div class="outcome-title">Board confidence rating</div>
+        <div class="outcome-desc">CHROs using CoreCatalyst report 90% satisfaction from boards on workforce data quality - a 3.5x improvement from pre-implementation.</div>
+      </div>
+      <div class="outcome-card reveal reveal-delay-3">
+        <div class="outcome-num">&lt;8<span>wk</span></div>
+        <div class="outcome-title">Time to first insight</div>
+        <div class="outcome-desc">From contract to your first board-ready workforce report in under 8 weeks. Pre-built connectors for Workday, SAP, Oracle, and all major LMS platforms.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITY DEEP DIVE -->
+<section class="section capabilities-section">
+  <div class="section-inner">
+    <div class="section-label">Core capabilities</div>
+    <h2 class="section-h2 reveal">Three things every CHRO needs, finally in one place</h2>
+    <p class="section-lead reveal reveal-delay-1">Pick the capability that matters most to you right now.</p>
+
+    <div class="cap-tabs">
+      <button class="cap-tab active" onclick="switchCap('board', this)">Board reporting</button>
+      <button class="cap-tab" onclick="switchCap('mobility', this)">Internal mobility</button>
+      <button class="cap-tab" onclick="switchCap('succession', this)">Succession pipeline</button>
+    </div>
+
+    <!-- Board reporting pane -->
+    <div class="cap-pane active" id="cap-board">
+      <div class="cap-text">
+        <h3 class="cap-title">One-click board reports that tell the real story</h3>
+        <p class="cap-desc">Stop building board packs manually. CoreCatalyst generates executive-ready workforce intelligence reports - readiness scores, gap analysis, skills risk heatmaps - at the click of a button, refreshed from live data.</p>
+        <div class="cap-points">
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Readiness score by function</strong> - see exactly which teams are ready for the next strategic challenge and which need investment now</div>
+          </div>
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Skills risk heatmap</strong> - pinpoint where critical skills are dangerously thin, with drill-down to individual teams</div>
+          </div>
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Quarter-over-quarter trends</strong> - show the board a trajectory, not just a snapshot. Track which investments are moving the needle</div>
+          </div>
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Board-native format</strong> - pre-built templates aligned to board reporting cadence; no reformatting, no copy-paste</div>
+          </div>
+        </div>
+      </div>
+      <div class="cap-visual">
+        <div class="board-panel">
+          <div class="board-panel-header">
+            <div class="bp-header-row">
+              <span class="bp-title">Q3 Workforce Readiness Report</span>
+              <span class="bp-quarter">Board Pack - September 2026</span>
+            </div>
+          </div>
+          <div class="board-panel-body">
+            <div class="svd-legend">
+              <span><span class="svd-leg-dot" style="background:#74c0fc;"></span>Supply (we have)</span>
+              <span><span class="svd-leg-dot" style="background:#ffa94d;"></span>Demand (we need)</span>
+            </div>
+            <div class="svd-chart">
+              <div class="svd-row">
+                <span class="svd-label">AI/Data</span>
+                <div class="svd-bar-group">
+                  <div class="svd-mini-row"><div class="svd-bar bar-supply" style="width:43%"></div><span class="svd-val">430</span></div>
+                  <div class="svd-mini-row"><div class="svd-bar bar-demand" style="width:82%"></div><span class="svd-val">820</span></div>
+                </div>
+                <span style="font-size:10px;color:var(--red);font-weight:700;">-390</span>
+              </div>
+              <div class="svd-row">
+                <span class="svd-label">Engineering</span>
+                <div class="svd-bar-group">
+                  <div class="svd-mini-row"><div class="svd-bar bar-supply" style="width:78%"></div><span class="svd-val">780</span></div>
+                  <div class="svd-mini-row"><div class="svd-bar bar-demand" style="width:72%"></div><span class="svd-val">720</span></div>
+                </div>
+                <span style="font-size:10px;color:var(--green);font-weight:700;">+60</span>
+              </div>
+              <div class="svd-row">
+                <span class="svd-label">Finance</span>
+                <div class="svd-bar-group">
+                  <div class="svd-mini-row"><div class="svd-bar bar-supply" style="width:65%"></div><span class="svd-val">320</span></div>
+                  <div class="svd-mini-row"><div class="svd-bar bar-demand" style="width:55%"></div><span class="svd-val">270</span></div>
+                </div>
+                <span style="font-size:10px;color:var(--green);font-weight:700;">+50</span>
+              </div>
+              <div class="svd-row">
+                <span class="svd-label">Operations</span>
+                <div class="svd-bar-group">
+                  <div class="svd-mini-row"><div class="svd-bar bar-supply" style="width:60%"></div><span class="svd-val">1,200</span></div>
+                  <div class="svd-mini-row"><div class="svd-bar bar-demand" style="width:75%"></div><span class="svd-val">1,500</span></div>
+                </div>
+                <span style="font-size:10px;color:#e67700;font-weight:700;">-300</span>
+              </div>
+            </div>
+            <div class="bp-risks">
+              <div class="bp-risk-row"><span class="heat-dot heat-red"></span><span class="bp-risk-label">AI/Data capability gap</span><span class="bp-risk-val">390 roles</span><span class="bp-risk-trend">&#8593; worsening</span></div>
+              <div class="bp-risk-row"><span class="heat-dot heat-yellow"></span><span class="bp-risk-label">Operations automation readiness</span><span class="bp-risk-val">Medium</span><span class="bp-risk-trend">&#8594; stable</span></div>
+              <div class="bp-risk-row"><span class="heat-dot heat-green"></span><span class="bp-risk-label">Finance - succession pipeline</span><span class="bp-risk-val">Healthy</span><span class="bp-risk-trend">&#8593; improving</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Internal mobility pane -->
+    <div class="cap-pane" id="cap-mobility">
+      <div class="cap-text">
+        <h3 class="cap-title">Move talent before you lose it</h3>
+        <p class="cap-desc">Internal mobility is 3x cheaper than external hiring and dramatically improves retention. But it only works when you can actually see who's ready for what. CoreCatalyst surfaces hidden talent matches across your entire workforce.</p>
+        <div class="cap-points">
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Skills-to-role matching</strong> - CoreCatalyst compares verified skills profiles against every open role and surfaces the strongest internal candidates automatically</div>
+          </div>
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Gap-to-readiness timelines</strong> - for near-matches, calculate exactly which skills are needed and how long a targeted development plan would take</div>
+          </div>
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Cross-function visibility</strong> - break down departmental silos; surface Finance talent ready for an Operations leadership role they'd never self-nominate for</div>
+          </div>
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Manager alerts</strong> - automatically notify managers when team members match open roles, before the person starts looking externally</div>
+          </div>
+        </div>
+      </div>
+      <div class="cap-visual">
+        <div class="mobility-panel">
+          <div class="mob-title">Internal Mobility Matches</div>
+          <div class="mob-sub">This week - 14 high-confidence matches found</div>
+          <div class="mob-flow">
+            <div class="mob-row">
+              <div>
+                <div class="mob-person">Sarah K.</div>
+                <div class="mob-from">Senior Analyst, Finance</div>
+              </div>
+              <div style="font-size:12px;color:var(--muted);">&#8594;</div>
+              <div style="text-align:right;">
+                <div class="mob-to">Head of FP&amp;A, Asia-Pac</div>
+                <div class="mob-match high">92% match</div>
+              </div>
+            </div>
+            <div class="mob-row">
+              <div>
+                <div class="mob-person">James T.</div>
+                <div class="mob-from">Procurement Manager</div>
+              </div>
+              <div style="font-size:12px;color:var(--muted);">&#8594;</div>
+              <div style="text-align:right;">
+                <div class="mob-to">Supply Chain Director</div>
+                <div class="mob-match high">87% match</div>
+              </div>
+            </div>
+            <div class="mob-row">
+              <div>
+                <div class="mob-person">Priya M.</div>
+                <div class="mob-from">Data Analyst, Operations</div>
+              </div>
+              <div style="font-size:12px;color:var(--muted);">&#8594;</div>
+              <div style="text-align:right;">
+                <div class="mob-to">AI Solutions Lead</div>
+                <div class="mob-match med">74% match</div>
+              </div>
+            </div>
+          </div>
+          <div class="mob-footer">
+            <span>&#128196;</span>
+            <span>Avg. external hire cost saved: <strong>$38K per placement</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Succession pane -->
+    <div class="cap-pane" id="cap-succession">
+      <div class="cap-text">
+        <h3 class="cap-title">Know your succession pipeline before the board asks</h3>
+        <p class="cap-desc">Succession planning built on job titles and gut instinct misses the people who are actually ready. CoreCatalyst builds succession slates from verified skills data - so the board sees real pipeline depth, not wishful thinking.</p>
+        <div class="cap-points">
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Skills-verified successor slates</strong> - see which potential successors truly have the required capabilities vs. who looks good on paper</div>
+          </div>
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Pipeline depth by critical role</strong> - instantly see how many ready-now, ready-in-12-months, and developing successors exist for every key position</div>
+          </div>
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Gap-targeted development</strong> - for each successor, generate a precise development plan targeting the exact skills delta, not a generic leadership program</div>
+          </div>
+          <div class="cap-point">
+            <div class="cap-check">&#10003;</div>
+            <div class="cap-point-text"><strong>Risk alerts</strong> - flag critical roles with thin or empty successor pipelines before they become emergencies</div>
+          </div>
+        </div>
+      </div>
+      <div class="cap-visual">
+        <div class="succession-panel">
+          <div class="suc-header">
+            <span class="suc-header-title">Succession Pipeline - Critical Roles</span>
+            <span class="suc-count">8 roles tracked</span>
+          </div>
+          <div class="suc-body">
+            <div class="suc-roles">
+              <div class="suc-role-row">
+                <div class="suc-role-name">
+                  Chief Operating Officer
+                  <span class="suc-depth-label">Depth: 3 candidates</span>
+                </div>
+                <div class="suc-candidates">
+                  <div class="suc-cand ready-now">
+                    <div class="suc-tier-label">Ready now</div>
+                    <div class="suc-cand-name">M. Chen</div>
+                    <div class="suc-cand-match">94% match</div>
+                  </div>
+                  <div class="suc-cand">
+                    <div class="suc-tier-label">12 months</div>
+                    <div class="suc-cand-name">R. Patel</div>
+                    <div class="suc-cand-match">81% match</div>
+                  </div>
+                  <div class="suc-cand gap">
+                    <div class="suc-tier-label">Developing</div>
+                    <div class="suc-cand-name">A. Wolfe</div>
+                    <div class="suc-cand-match">68% match</div>
+                  </div>
+                </div>
+              </div>
+              <div class="suc-role-row">
+                <div class="suc-role-name">
+                  VP Engineering
+                  <span class="suc-depth-label">Depth: 2 candidates</span>
+                </div>
+                <div class="suc-candidates">
+                  <div class="suc-cand ready-now">
+                    <div class="suc-tier-label">Ready now</div>
+                    <div class="suc-cand-name">J. Torres</div>
+                    <div class="suc-cand-match">89% match</div>
+                  </div>
+                  <div class="suc-cand gap">
+                    <div class="suc-tier-label">Developing</div>
+                    <div class="suc-cand-name">S. Kim</div>
+                    <div class="suc-cand-match">71% match</div>
+                  </div>
+                </div>
+              </div>
+              <div class="suc-role-row">
+                <div class="suc-role-name" style="color:var(--red);">
+                  Head of AI Strategy
+                  <span class="suc-depth-label" style="color:var(--red);">&#9888; Pipeline thin</span>
+                </div>
+                <div class="suc-candidates">
+                  <div class="suc-cand gap">
+                    <div class="suc-tier-label">Developing</div>
+                    <div class="suc-cand-name">L. Nkosi</div>
+                    <div class="suc-cand-match">57% match</div>
+                  </div>
+                  <div class="suc-cand" style="background:#fff5f5;border-color:#ffc9c9;">
+                    <div class="suc-tier-label" style="color:var(--red);">External gap</div>
+                    <div class="suc-cand-name" style="color:var(--red);">Hire needed</div>
+                    <div class="suc-cand-match">-</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOARD REPORTING SECTION -->
+<section class="section board-section">
+  <div class="section-inner">
+    <div class="board-grid">
+      <div class="board-report-card reveal">
+        <div class="brc-header">
+          <div class="brc-label">Board Pack - Workforce Intelligence</div>
+          <div class="brc-title">Q3 2026 Workforce Readiness Summary</div>
+          <div class="brc-date">Generated automatically - September 1, 2026</div>
+        </div>
+        <div class="brc-body">
+          <div class="brc-metric-row">
+            <div class="brc-metric">
+              <div class="brc-metric-num">75%</div>
+              <div class="brc-metric-label">Overall readiness score</div>
+            </div>
+            <div class="brc-metric">
+              <div class="brc-metric-num green">+8pts</div>
+              <div class="brc-metric-label">vs. Q2 2026</div>
+            </div>
+            <div class="brc-metric">
+              <div class="brc-metric-num red">2</div>
+              <div class="brc-metric-label">High-risk skill gaps</div>
+            </div>
+          </div>
+          <div class="brc-divider"></div>
+          <div class="brc-insight">
+            <strong>Board recommendation:</strong> Prioritize AI/Data capability investment - current supply (430 FTEs capable) falls 390 short of 2027 strategic demand. Internal reskilling program targeting Operations analysts is the highest-ROI path, estimated 6-month ramp.
+          </div>
+        </div>
+      </div>
+      <div class="board-text reveal reveal-delay-1">
+        <div class="section-label">Why this matters now</div>
+        <h2 class="section-h2" style="margin-bottom:20px;">The board is already asking. Now you can answer.</h2>
+        <div class="board-quote">
+          "We used to spend 3 weeks before each board meeting pulling skills data together manually. Now CoreCatalyst generates the report in minutes - and for the first time, the board actually trusts the numbers."
+        </div>
+        <div class="board-bullets">
+          <div class="board-bullet">
+            <div class="bb-icon">&#128197;</div>
+            <div class="bb-text"><strong>Auto-refreshed quarterly reports</strong> - tied directly to your board cadence, generated the moment the period closes</div>
+          </div>
+          <div class="board-bullet">
+            <div class="bb-icon">&#128200;</div>
+            <div class="bb-text"><strong>Strategy-to-workforce linkage</strong> - map workforce capability against your 3-year strategy; show where you're ready and where you're exposed</div>
+          </div>
+          <div class="board-bullet">
+            <div class="bb-icon">&#127919;</div>
+            <div class="bb-text"><strong>Investment prioritization</strong> - tell the board exactly which skills investments have the highest ROI based on strategic gap analysis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI SECTION -->
+<section class="section roi-section">
+  <div class="section-inner">
+    <div class="section-label">Business case</div>
+    <h2 class="section-h2 reveal">The numbers the CFO will want to see</h2>
+    <p class="section-lead reveal reveal-delay-1">CoreCatalyst isn't an HR tool - it's a business investment with measurable returns that finance leaders recognize.</p>
+    <div class="roi-grid">
+      <div class="roi-calculator reveal">
+        <div class="roi-calc-title">ROI Estimate - 10,000 employee org</div>
+        <div class="roi-calc-sub">Conservative assumptions; your CSM will model your specific numbers</div>
+        <div class="roi-inputs">
+          <div class="roi-input-row">
+            <span class="roi-input-label">External hires avoided (internal fill)</span>
+            <span class="roi-input-val">120 roles/yr</span>
+          </div>
+          <div class="roi-input-bar"><div class="roi-bar-track"><div class="roi-bar-fill" style="width:60%"></div></div></div>
+          <div class="roi-input-row">
+            <span class="roi-input-label">Avg. external hire cost saved</span>
+            <span class="roi-input-val">$38K</span>
+          </div>
+          <div class="roi-input-bar"><div class="roi-bar-track"><div class="roi-bar-fill" style="width:45%"></div></div></div>
+          <div class="roi-input-row">
+            <span class="roi-input-label">HR analyst time reclaimed (hrs/mo)</span>
+            <span class="roi-input-val">240 hrs</span>
+          </div>
+          <div class="roi-input-bar"><div class="roi-bar-track"><div class="roi-bar-fill" style="width:70%"></div></div></div>
+          <div class="roi-input-row">
+            <span class="roi-input-label">Retention improvement (attrition)</span>
+            <span class="roi-input-val">-1.8%pts</span>
+          </div>
+          <div class="roi-input-bar"><div class="roi-bar-track"><div class="roi-bar-fill" style="width:55%"></div></div></div>
+        </div>
+        <div class="roi-result">
+          <div class="roi-result-label">Estimated Year 1 Return</div>
+          <div class="roi-result-num">$6.2M</div>
+          <div class="roi-result-sub">on a typical enterprise investment - 4.8x ROI</div>
+        </div>
+      </div>
+      <div class="roi-text reveal reveal-delay-1">
+        <div class="roi-items">
+          <div class="roi-item">
+            <div class="roi-item-header">
+              <div class="roi-item-icon">&#128179;</div>
+              <div class="roi-item-title">Reduced external hiring</div>
+              <div class="roi-item-saving">$4.6M</div>
+            </div>
+            <div class="roi-item-desc">Internal mobility rates improve 3x when skills data is verified. At $38K average external hire cost, 120 avoided external hires per year drives significant savings.</div>
+          </div>
+          <div class="roi-item">
+            <div class="roi-item-header">
+              <div class="roi-item-icon">&#128202;</div>
+              <div class="roi-item-title">HR productivity gain</div>
+              <div class="roi-item-saving">$840K</div>
+            </div>
+            <div class="roi-item-desc">Automated reconciliation eliminates 240+ hours/month of manual skills data work across HR, freeing the team for strategic work. At fully-loaded HR cost, that's meaningful savings.</div>
+          </div>
+          <div class="roi-item">
+            <div class="roi-item-header">
+              <div class="roi-item-icon">&#128100;</div>
+              <div class="roi-item-title">Attrition reduction</div>
+              <div class="roi-item-saving">$760K</div>
+            </div>
+            <div class="roi-item-desc">Employees with clear career paths and internal mobility opportunities stay 18 months longer on average. A 1.8-point reduction in attrition rate for a 10K-person org saves significantly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="section testimonial-section">
+  <div class="section-inner">
+    <div class="testimonial-card reveal">
+      <div class="test-quote-mark">&ldquo;</div>
+      <p class="test-quote">For the first time in my career, I walked into a board meeting with workforce data I completely trusted. The readiness gap we identified in AI capabilities actually changed our hiring strategy for the year. That's the conversation HR should be having.</p>
+      <div class="test-author">
+        <div class="test-avatar">SL</div>
+        <div>
+          <div class="test-name">Sarah Lindqvist</div>
+          <div class="test-role">CHRO, Global Manufacturing Co. - 12,000 employees</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="persona-label" style="margin:0 auto 20px;"><span class="dot"></span>Ready to elevate your board game?</div>
+    <h2 class="cta-h2 reveal">See what your workforce is actually capable of</h2>
+    <p class="cta-sub reveal reveal-delay-1">Book a 30-minute CHRO demo and walk away with a live readiness score for your organization - no implementation required.</p>
+    <div class="cta-actions reveal reveal-delay-2">
+      <button class="btn-primary">Book a CHRO Demo &#8594;</button>
+      <button class="cta-secondary">Download the ROI guide</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Core<span>Catalyst</span></div>
+      <p class="footer-tagline">The skills reconciliation engine for the modern enterprise.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Product</div>
+      <ul class="footer-links">
+        <li><a href="#">How It Works</a></li>
+        <li><a href="#">Integrations</a></li>
+        <li><a href="#">Security</a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Solutions</div>
+      <ul class="footer-links">
+        <li><a href="#">For CHROs</a></li>
+        <li><a href="#">For Managers</a></li>
+        <li><a href="#">For HR Ops</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 CoreCatalyst. All rights reserved.</span>
+    <span>Privacy - Terms - Security</span>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 20);
+}, { passive: true });
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const revealIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealIO.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealIO.observe(el));
+
+// Score ring animation
+(function() {
+  const ring = document.getElementById('ringFill');
+  if (!ring) return;
+  const circumference = 201;
+  const target = circumference - (75 / 100) * circumference; // 75% readiness
+  ring.style.strokeDashoffset = circumference; // start empty
+  const ringIO = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      setTimeout(() => { ring.style.strokeDashoffset = target; }, 200);
+      ringIO.disconnect();
+    }
+  }, { threshold: 0.5 });
+  ringIO.observe(ring);
+})();
+
+// Confidence meter animation
+(function() {
+  const fill = document.getElementById('cwFill');
+  if (!fill) return;
+  const meterIO = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      fill.style.width = '26%';
+      meterIO.disconnect();
+    }
+  }, { threshold: 0.5 });
+  meterIO.observe(fill);
+})();
+
+// Capability tab switching
+function switchCap(id, btn) {
+  document.querySelectorAll('.cap-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.cap-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('cap-' + id).classList.add('active');
+}
+</script>
+</body>
+</html>

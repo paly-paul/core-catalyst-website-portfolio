@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Careers - CoreCatalyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#3b5bdb;--violet:#7950f2;--green:#40c057;--cyan:#22b8cf;
+  --red:#fa5252;--yellow:#fab005;--orange:#fd7e14;
+  --ink:#0f172a;--muted:#64748b;--border:#e2e8f0;
+  --surface:#f8fafc;--white:#ffffff;
+  --nav-h:60px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--white);
+  line-height:1.6;padding-top:var(--nav-h)}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+.nav-logo{font-family:'Sora',sans-serif;font-weight:800;font-size:18px;
+  background:linear-gradient(135deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-decoration:none}
+.nav-links{display:flex;align-items:stretch;height:100%;gap:0;list-style:none}
+.nav-links a{display:flex;align-items:center;font-size:14px;font-weight:500;
+  color:var(--muted);padding:0 16px;text-decoration:none;
+  border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-actions{display:flex;align-items:center;gap:12px}
+.btn-ghost{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  color:var(--muted);background:none;border:1.5px solid var(--border);
+  border-radius:8px;padding:7px 18px;cursor:pointer;text-decoration:none;transition:all .15s}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink)}
+.btn-primary{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  color:#fff;background:linear-gradient(135deg,var(--blue),var(--violet));
+  border:none;border-radius:8px;padding:8px 20px;cursor:pointer;text-decoration:none;transition:opacity .15s}
+.btn-primary:hover{opacity:.88}
+
+/* HERO */
+.careers-hero{
+  background:linear-gradient(145deg,#eef2ff 0%,#f5f3ff 50%,#faf5ff 100%);
+  padding:72px 40px 64px;
+  position:relative;overflow:hidden}
+.careers-hero::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,#c7d2fe 1px,transparent 1px);
+  background-size:28px 28px;opacity:.3;pointer-events:none}
+.hero-inner{position:relative;max-width:1160px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero-left .eyebrow{display:inline-block;font-size:11px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--blue);
+  background:#e0e7ff;border-radius:20px;padding:4px 14px;margin-bottom:20px}
+.hero-left h1{font-family:'Sora',sans-serif;font-size:clamp(30px,4vw,46px);
+  font-weight:800;line-height:1.12;color:var(--ink);margin-bottom:16px}
+.hero-left h1 span{background:linear-gradient(135deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-left p{font-size:16px;color:var(--muted);line-height:1.65;margin-bottom:28px}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;
+  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;
+  color:#fff;background:linear-gradient(135deg,var(--blue),var(--violet));
+  border:none;border-radius:10px;padding:12px 24px;text-decoration:none;
+  transition:opacity .15s}
+.hero-cta:hover{opacity:.88}
+
+/* team snapshot */
+.team-snap{background:rgba(255,255,255,0.8);border:1.5px solid #c7d2fe;
+  border-radius:18px;padding:24px 26px}
+.snap-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:18px}
+.snap-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:14px}
+.snap-row:last-child{margin-bottom:0}
+.snap-icon{width:28px;height:28px;border-radius:7px;display:flex;
+  align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.snap-label{color:var(--muted)}
+.snap-val{font-weight:600;color:var(--ink);margin-left:auto}
+
+/* NUMBERS BAR */
+.numbers-bar{background:var(--white);border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);padding:36px 40px}
+.numbers-inner{max-width:1160px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  divide-x:1px solid var(--border)}
+.number-item{text-align:center;padding:0 20px;
+  border-right:1px solid var(--border)}
+.number-item:last-child{border-right:none}
+.num-val{font-family:'Sora',sans-serif;font-size:36px;font-weight:800;
+  background:linear-gradient(135deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:6px}
+.num-label{font-size:13px;color:var(--muted)}
+
+/* WHY SECTION */
+.why-section{max-width:1160px;margin:0 auto;padding:72px 40px}
+.why-section .section-label{font-size:11px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.why-section h2{font-family:'Sora',sans-serif;font-size:30px;font-weight:800;
+  margin-bottom:44px;color:var(--ink)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.why-card{display:flex;align-items:flex-start;gap:16px;
+  border:1.5px solid var(--border);border-radius:14px;padding:24px;
+  background:var(--white);transition:box-shadow .2s}
+.why-card:hover{box-shadow:0 4px 20px rgba(59,91,219,.07)}
+.why-icon{width:44px;height:44px;border-radius:11px;display:flex;
+  align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.why-card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.why-card p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* BENEFITS */
+.benefits-section{background:var(--surface);border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);padding:72px 40px}
+.benefits-inner{max-width:1160px;margin:0 auto}
+.benefits-inner .section-label{font-size:11px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.benefits-inner h2{font-family:'Sora',sans-serif;font-size:30px;font-weight:800;
+  margin-bottom:44px;color:var(--ink)}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.benefit-card{background:var(--white);border:1.5px solid var(--border);
+  border-radius:14px;padding:24px 22px}
+.benefit-icon{font-size:28px;margin-bottom:12px}
+.benefit-card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.benefit-card p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ROLES SECTION */
+.roles-section{max-width:1160px;margin:0 auto;padding:72px 40px 80px}
+.roles-header{display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:32px;gap:20px;flex-wrap:wrap}
+.roles-header div .section-label{font-size:11px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.roles-header h2{font-family:'Sora',sans-serif;font-size:30px;font-weight:800;color:var(--ink)}
+
+/* dept filter */
+.dept-filter{display:flex;gap:8px;flex-wrap:wrap}
+.dept-tab{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;
+  padding:7px 16px;border:1.5px solid var(--border);border-radius:20px;
+  cursor:pointer;color:var(--muted);background:var(--white);
+  transition:all .15s;user-select:none}
+.dept-tab:hover{border-color:var(--blue);color:var(--blue)}
+.dept-tab.active{background:#eef2ff;border-color:var(--blue);color:var(--blue);font-weight:600}
+
+/* role listings */
+.roles-list{display:flex;flex-direction:column;gap:12px}
+.role-item{border:1.5px solid var(--border);border-radius:14px;background:var(--white);
+  overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.role-item:hover{border-color:#bfdbfe;box-shadow:0 4px 16px rgba(59,91,219,.07)}
+.role-item.hidden{display:none}
+.role-header{display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;cursor:pointer;gap:16px}
+.role-left{display:flex;align-items:center;gap:16px}
+.role-dept-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.role-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--ink)}
+.role-tags{display:flex;gap:8px;flex-wrap:wrap}
+.role-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+.tag-location{background:#f0f9ff;color:#0369a1}
+.tag-type{background:#f0fdf4;color:#166534}
+.tag-dept{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+.role-toggle{width:28px;height:28px;border-radius:50%;background:var(--surface);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--muted);flex-shrink:0;transition:all .2s}
+.role-item.open .role-toggle{background:var(--blue);color:#fff;transform:rotate(45deg)}
+
+/* role body */
+.role-body{padding:0 24px;max-height:0;overflow:hidden;
+  transition:max-height .35s ease,padding .25s}
+.role-item.open .role-body{max-height:600px;padding-bottom:24px}
+.role-body p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+.role-details{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.rd-block h4{font-size:12px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.07em;color:var(--muted);margin-bottom:8px}
+.rd-block ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.rd-block ul li{font-size:13px;color:var(--ink);display:flex;align-items:flex-start;gap:7px}
+.rd-block ul li::before{content:'·';color:var(--blue);font-weight:700;flex-shrink:0}
+.apply-btn{display:inline-block;font-family:'DM Sans',sans-serif;font-size:14px;
+  font-weight:700;color:#fff;background:linear-gradient(135deg,var(--blue),var(--violet));
+  border:none;border-radius:9px;padding:10px 22px;cursor:pointer;text-decoration:none;
+  transition:opacity .15s}
+.apply-btn:hover{opacity:.88}
+
+/* no roles */
+.no-roles{display:none;text-align:center;padding:48px;color:var(--muted);font-size:15px}
+.no-roles.visible{display:block}
+
+/* PROCESS */
+.process-section{background:linear-gradient(145deg,#eef2ff 0%,#f5f3ff 60%,#faf5ff 100%);
+  border-top:1px solid var(--border);padding:72px 40px}
+.process-inner{max-width:900px;margin:0 auto;text-align:center}
+.process-inner h2{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;
+  margin-bottom:8px;color:var(--ink)}
+.process-inner .sub{color:var(--muted);font-size:15px;margin-bottom:48px}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  position:relative}
+.process-steps::before{content:'';position:absolute;top:22px;left:10%;right:10%;
+  height:2px;background:linear-gradient(90deg,var(--blue),var(--violet));
+  z-index:0}
+.ps-item{display:flex;flex-direction:column;align-items:center;
+  gap:12px;position:relative;z-index:1}
+.ps-num{width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--violet));
+  color:#fff;font-family:'Sora',sans-serif;font-size:16px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 4px #fff,0 0 0 6px #c7d2fe}
+.ps-label{font-size:13px;font-weight:600;color:var(--ink);text-align:center}
+.ps-sub{font-size:12px;color:var(--muted);text-align:center}
+
+/* CTA */
+.careers-cta{padding:72px 40px;text-align:center}
+.careers-cta h2{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;
+  margin-bottom:12px;color:var(--ink)}
+.careers-cta h2 span{background:linear-gradient(135deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.careers-cta p{color:var(--muted);font-size:15px;margin-bottom:24px;max-width:460px;
+  margin-left:auto;margin-right:auto}
+.careers-cta a{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;
+  color:var(--blue);border:1.5px solid var(--blue);border-radius:10px;
+  padding:11px 26px;text-decoration:none;display:inline-block;transition:all .2s}
+.careers-cta a:hover{background:#eef2ff}
+
+/* FOOTER */
+footer{background:var(--ink);color:#94a3b8;padding:48px 40px 28px}
+.footer-inner{max-width:1160px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo{font-family:'Sora',sans-serif;font-weight:800;font-size:18px;
+  background:linear-gradient(135deg,#818cf8,#a78bfa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+.footer-brand p{font-size:13px;line-height:1.6;max-width:220px;color:#64748b}
+.footer-col h4{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:#e2e8f0;margin-bottom:14px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col ul a{font-size:13px;color:#64748b;text-decoration:none;transition:color .15s}
+.footer-col ul a:hover{color:#e2e8f0}
+.footer-bottom{border-top:1px solid #1e293b;padding-top:24px;display:flex;
+  align-items:center;justify-content:space-between;font-size:12px}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+.reveal.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="home.html" class="nav-logo">CoreCatalyst</a>
+  <ul class="nav-links">
+    <li><a href="home.html">Platform</a></li>
+    <li><a href="how-it-works.html">How It Works</a></li>
+    <li><a href="#" onclick="return false">Solutions</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn-ghost">Sign in</a>
+    <a href="demo.html" class="btn-primary">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="careers-hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="eyebrow">We're hiring</div>
+      <h1>Hard problem.<br/>Small team.<br/><span>Real impact.</span></h1>
+      <p>We're fixing how enterprise organizations understand their own workforce. It's a genuinely unsolved problem, and we're early enough that the people joining now will shape how it gets solved.</p>
+      <a href="#open-roles" class="hero-cta">See open roles &darr;</a>
+    </div>
+    <div>
+      <div class="team-snap">
+        <div class="snap-title">Team snapshot &mdash; September 2025</div>
+        <div class="snap-row">
+          <div class="snap-icon" style="background:#e0e7ff">&#128101;</div>
+          <span class="snap-label">Team size</span>
+          <span class="snap-val">28 people</span>
+        </div>
+        <div class="snap-row">
+          <div class="snap-icon" style="background:#dcfce7">&#127760;</div>
+          <span class="snap-label">Countries</span>
+          <span class="snap-val">7</span>
+        </div>
+        <div class="snap-row">
+          <div class="snap-icon" style="background:#f0f9ff">&#128187;</div>
+          <span class="snap-label">Engineering</span>
+          <span class="snap-val">14 people</span>
+        </div>
+        <div class="snap-row">
+          <div class="snap-icon" style="background:#ede9fe">&#128221;</div>
+          <span class="snap-label">Remote-first</span>
+          <span class="snap-val">Yes</span>
+        </div>
+        <div class="snap-row">
+          <div class="snap-icon" style="background:#fff7ed">&#127881;</div>
+          <span class="snap-label">Founded</span>
+          <span class="snap-val">2022</span>
+        </div>
+        <div class="snap-row">
+          <div class="snap-icon" style="background:#fef9c3">&#128200;</div>
+          <span class="snap-label">Stage</span>
+          <span class="snap-val">Series A (2024)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<div class="numbers-bar">
+  <div class="numbers-inner">
+    <div class="number-item"><div class="num-val">28</div><div class="num-label">Team members</div></div>
+    <div class="number-item"><div class="num-val">7</div><div class="num-label">Countries represented</div></div>
+    <div class="number-item"><div class="num-val">6</div><div class="num-label">Open roles right now</div></div>
+    <div class="number-item"><div class="num-val">100%</div><div class="num-label">Remote-friendly</div></div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section class="why-section reveal">
+  <div class="section-label">Why CoreCatalyst</div>
+  <h2>What makes this different from other start-ups</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon" style="background:#e0e7ff">&#129504;</div>
+      <div>
+        <h3>A problem that actually needs solving</h3>
+        <p>Skills data chaos is real and expensive. Every enterprise HR leader we talk to has the same problem. You'll be working on something customers genuinely need, not something we're hoping they'll want.</p>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon" style="background:#dcfce7">&#128640;</div>
+      <div>
+        <h3>Early enough to matter</h3>
+        <p>We have paying customers and a working product, but the core architecture is still being shaped. The decisions you make in the next 12 months will be in the product for years.</p>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon" style="background:#ede9fe">&#128736;</div>
+      <div>
+        <h3>Technically interesting</h3>
+        <p>Graph traversal at scale, NLP-driven taxonomy matching, weighted conflict resolution across heterogeneous data sources - this isn't a CRUD app. The engineering problems are genuinely hard.</p>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon" style="background:#f0f9ff">&#129309;</div>
+      <div>
+        <h3>A team that treats people like adults</h3>
+        <p>No mandatory office days. No performance theatre. We care about output, not hours. We write things down, make decisions transparently, and don't require people to be always-on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits-section">
+  <div class="benefits-inner reveal">
+    <div class="section-label">Benefits</div>
+    <h2>What we offer</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">&#128181;</div>
+        <h3>Competitive salary + equity</h3>
+        <p>Market-rate salaries benchmarked quarterly, plus meaningful equity with a standard 4-year vest and 1-year cliff. We're transparent about ranges at offer stage.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#127968;</div>
+        <h3>Remote-first, genuinely</h3>
+        <p>Work from anywhere. We have offices in London, San Francisco, and Berlin if you want them - but there's no expectation you use them. Async by default.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#127968;</div>
+        <h3>Home office budget</h3>
+        <p>£/€/$1,500 to set up your home workspace when you join. Annual £/€/$500 top-up. We also cover a co-working membership if you prefer not to work from home.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#128218;</div>
+        <h3>Learning budget</h3>
+        <p>£/€/$2,000 per year for courses, books, conferences, or certifications. No approval process - spend it on what actually helps you grow.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#9989;</div>
+        <h3>Flexible time off</h3>
+        <p>Unlimited PTO with a minimum of 25 days encouraged. We track whether people are taking enough time off, not whether they're taking too much.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#128139;</div>
+        <h3>Health &amp; wellbeing</h3>
+        <p>Private health insurance (UK/EU/US), mental health support via Spill, and a £/€/$100/month wellbeing allowance to spend however you choose.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN ROLES -->
+<section class="roles-section" id="open-roles">
+  <div class="roles-header">
+    <div>
+      <div class="section-label">Open roles</div>
+      <h2>6 positions open right now</h2>
+    </div>
+    <div class="dept-filter" id="deptFilter">
+      <div class="dept-tab active" data-dept="all">All</div>
+      <div class="dept-tab" data-dept="engineering">Engineering</div>
+      <div class="dept-tab" data-dept="product">Product &amp; Design</div>
+      <div class="dept-tab" data-dept="go-to-market">Go-to-market</div>
+      <div class="dept-tab" data-dept="customer">Customer</div>
+    </div>
+  </div>
+
+  <div class="roles-list" id="rolesList">
+
+    <!-- Role 1 -->
+    <div class="role-item" data-dept="engineering" onclick="toggleRole(this)">
+      <div class="role-header">
+        <div class="role-left">
+          <div class="role-dept-dot" style="background:var(--blue)"></div>
+          <div>
+            <div class="role-title">Senior Backend Engineer</div>
+            <div class="role-tags" style="margin-top:6px">
+              <span class="role-tag tag-location">&#127760; Remote (EU/UK)</span>
+              <span class="role-tag tag-type">Full-time</span>
+              <span class="role-tag tag-dept" style="background:#e0e7ff;color:var(--blue)">Engineering</span>
+            </div>
+          </div>
+        </div>
+        <div class="role-toggle">+</div>
+      </div>
+      <div class="role-body">
+        <p>We're looking for a senior backend engineer to work on the core reconciliation pipeline and HRIS connector infrastructure. You'll own significant parts of the system end-to-end, from designing the conflict resolution algorithm improvements to shipping the write-back connectors that push resolved skill records into Workday and SAP.</p>
+        <div class="role-details">
+          <div class="rd-block">
+            <h4>You'll work on</h4>
+            <ul>
+              <li>Reconciliation engine performance at scale</li>
+              <li>HRIS connector architecture (Workday, SAP, Oracle)</li>
+              <li>Graph traversal optimizations on the taxonomy</li>
+              <li>Data pipeline reliability and observability</li>
+            </ul>
+          </div>
+          <div class="rd-block">
+            <h4>We're looking for</h4>
+            <ul>
+              <li>5+ years backend engineering experience</li>
+              <li>Strong Python or Go, PostgreSQL at scale</li>
+              <li>Experience with graph databases (nice to have)</li>
+              <li>Comfort with distributed systems</li>
+            </ul>
+          </div>
+        </div>
+        <a href="mailto:careers@corecatalyst.ai?subject=Senior Backend Engineer" class="apply-btn">Apply for this role &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Role 2 -->
+    <div class="role-item" data-dept="product" onclick="toggleRole(this)">
+      <div class="role-header">
+        <div class="role-left">
+          <div class="role-dept-dot" style="background:var(--violet)"></div>
+          <div>
+            <div class="role-title">Product Designer</div>
+            <div class="role-tags" style="margin-top:6px">
+              <span class="role-tag tag-location">&#127760; Remote (global)</span>
+              <span class="role-tag tag-type">Full-time</span>
+              <span class="role-tag tag-dept" style="background:#ede9fe;color:var(--violet)">Product &amp; Design</span>
+            </div>
+          </div>
+        </div>
+        <div class="role-toggle">+</div>
+      </div>
+      <div class="role-body">
+        <p>We have one designer and are ready to bring in a second. You'll work across the full product surface - the reconciliation console, manager adjudication queue, and the CHRO analytics dashboard. Complex B2B data problems that need clear, opinionated UI solutions.</p>
+        <div class="role-details">
+          <div class="rd-block">
+            <h4>You'll work on</h4>
+            <ul>
+              <li>Manager-facing adjudication and review flows</li>
+              <li>CHRO analytics and board reporting dashboards</li>
+              <li>HR Ops reconciliation console</li>
+              <li>Design system maintenance and expansion</li>
+            </ul>
+          </div>
+          <div class="rd-block">
+            <h4>We're looking for</h4>
+            <ul>
+              <li>4+ years product design, ideally B2B SaaS</li>
+              <li>Strong in Figma, comfortable in code (CSS/HTML)</li>
+              <li>Experience designing data-dense interfaces</li>
+              <li>Portfolio showing systems thinking, not just visuals</li>
+            </ul>
+          </div>
+        </div>
+        <a href="mailto:careers@corecatalyst.ai?subject=Product Designer" class="apply-btn">Apply for this role &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Role 3 -->
+    <div class="role-item" data-dept="go-to-market" onclick="toggleRole(this)">
+      <div class="role-header">
+        <div class="role-left">
+          <div class="role-dept-dot" style="background:var(--green)"></div>
+          <div>
+            <div class="role-title">Enterprise Account Executive (EMEA)</div>
+            <div class="role-tags" style="margin-top:6px">
+              <span class="role-tag tag-location">&#127987; London or Remote (EMEA)</span>
+              <span class="role-tag tag-type">Full-time</span>
+              <span class="role-tag tag-dept" style="background:#dcfce7;color:#166534">Go-to-market</span>
+            </div>
+          </div>
+        </div>
+        <div class="role-toggle">+</div>
+      </div>
+      <div class="role-body">
+        <p>We're adding our first dedicated EMEA AE as we expand beyond our initial UK and DACH customer base. You'll own the full sales cycle - from qualification through to contract - working with CHROs, VP People, and HR Ops leaders at 500-10,000 person enterprises.</p>
+        <div class="role-details">
+          <div class="rd-block">
+            <h4>You'll work on</h4>
+            <ul>
+              <li>Owning the EMEA pipeline and quota</li>
+              <li>Running discovery, demo, and POC cycles</li>
+              <li>Working with CS on pilot-to-expansion motions</li>
+              <li>Shaping EMEA go-to-market strategy</li>
+            </ul>
+          </div>
+          <div class="rd-block">
+            <h4>We're looking for</h4>
+            <ul>
+              <li>5+ years enterprise SaaS sales, HR tech preferred</li>
+              <li>Track record closing £150K+ ACV deals</li>
+              <li>Experience selling to CHRO / VP People buyers</li>
+              <li>Comfortable with complex multi-stakeholder deals</li>
+            </ul>
+          </div>
+        </div>
+        <a href="mailto:careers@corecatalyst.ai?subject=Enterprise AE EMEA" class="apply-btn">Apply for this role &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Role 4 -->
+    <div class="role-item" data-dept="engineering" onclick="toggleRole(this)">
+      <div class="role-header">
+        <div class="role-left">
+          <div class="role-dept-dot" style="background:var(--blue)"></div>
+          <div>
+            <div class="role-title">ML Engineer - Taxonomy &amp; NLP</div>
+            <div class="role-tags" style="margin-top:6px">
+              <span class="role-tag tag-location">&#127760; Remote (EU/UK/US)</span>
+              <span class="role-tag tag-type">Full-time</span>
+              <span class="role-tag tag-dept" style="background:#e0e7ff;color:var(--blue)">Engineering</span>
+            </div>
+          </div>
+        </div>
+        <div class="role-toggle">+</div>
+      </div>
+      <div class="role-body">
+        <p>Our 45K-node taxonomy is the backbone of everything CoreCatalyst does. We need an ML engineer to own the taxonomy expansion, improve skill entity extraction from unstructured sources, and build the models that power conflict resolution scoring.</p>
+        <div class="role-details">
+          <div class="rd-block">
+            <h4>You'll work on</h4>
+            <ul>
+              <li>Skill entity recognition and normalization models</li>
+              <li>Taxonomy expansion and curation pipelines</li>
+              <li>Conflict resolution confidence scoring</li>
+              <li>Embedding models for skill similarity</li>
+            </ul>
+          </div>
+          <div class="rd-block">
+            <h4>We're looking for</h4>
+            <ul>
+              <li>3+ years ML/NLP engineering in production</li>
+              <li>Experience with knowledge graphs or ontologies</li>
+              <li>Python, PyTorch or similar, familiarity with LLMs</li>
+              <li>Comfort shipping models, not just training them</li>
+            </ul>
+          </div>
+        </div>
+        <a href="mailto:careers@corecatalyst.ai?subject=ML Engineer - Taxonomy" class="apply-btn">Apply for this role &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Role 5 -->
+    <div class="role-item" data-dept="customer" onclick="toggleRole(this)">
+      <div class="role-header">
+        <div class="role-left">
+          <div class="role-dept-dot" style="background:var(--cyan)"></div>
+          <div>
+            <div class="role-title">Implementation Consultant</div>
+            <div class="role-tags" style="margin-top:6px">
+              <span class="role-tag tag-location">&#127760; Remote (EU/UK)</span>
+              <span class="role-tag tag-type">Full-time</span>
+              <span class="role-tag tag-dept" style="background:#cffafe;color:#0e7490">Customer</span>
+            </div>
+          </div>
+        </div>
+        <div class="role-toggle">+</div>
+      </div>
+      <div class="role-body">
+        <p>You'll run pilot implementations from kickoff to first live report - typically a 2-4 week sprint. This means getting into the detail of a customer's HRIS configuration, understanding their skill data landscape, and making the product work in their environment.</p>
+        <div class="role-details">
+          <div class="rd-block">
+            <h4>You'll work on</h4>
+            <ul>
+              <li>Running pilot implementations end-to-end</li>
+              <li>HRIS connector configuration and testing</li>
+              <li>Customer data mapping and taxonomy alignment</li>
+              <li>Handoff to CSM post-go-live</li>
+            </ul>
+          </div>
+          <div class="rd-block">
+            <h4>We're looking for</h4>
+            <ul>
+              <li>3+ years in HR tech implementation or consulting</li>
+              <li>Hands-on Workday, SAP, or Oracle HCM experience</li>
+              <li>Comfortable with JSON, REST APIs, basic scripting</li>
+              <li>Structured project management in fast timelines</li>
+            </ul>
+          </div>
+        </div>
+        <a href="mailto:careers@corecatalyst.ai?subject=Implementation Consultant" class="apply-btn">Apply for this role &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Role 6 -->
+    <div class="role-item" data-dept="customer" onclick="toggleRole(this)">
+      <div class="role-header">
+        <div class="role-left">
+          <div class="role-dept-dot" style="background:var(--cyan)"></div>
+          <div>
+            <div class="role-title">Customer Success Manager</div>
+            <div class="role-tags" style="margin-top:6px">
+              <span class="role-tag tag-location">&#127760; Remote (global)</span>
+              <span class="role-tag tag-type">Full-time</span>
+              <span class="role-tag tag-dept" style="background:#cffafe;color:#0e7490">Customer</span>
+            </div>
+          </div>
+        </div>
+        <div class="role-toggle">+</div>
+      </div>
+      <div class="role-body">
+        <p>You'll own a book of Scale and Enterprise accounts post-implementation. That means driving adoption, running quarterly business reviews, spotting expansion opportunities, and being the voice of the customer back into the product team.</p>
+        <div class="role-details">
+          <div class="rd-block">
+            <h4>You'll work on</h4>
+            <ul>
+              <li>Owning retention and expansion for your accounts</li>
+              <li>Quarterly business reviews with HR leaders</li>
+              <li>Driving feature adoption and change management</li>
+              <li>Capturing product feedback and escalating issues</li>
+            </ul>
+          </div>
+          <div class="rd-block">
+            <h4>We're looking for</h4>
+            <ul>
+              <li>3+ years CSM in B2B SaaS, HR tech preferred</li>
+              <li>Comfortable working with CHRO-level stakeholders</li>
+              <li>Data-driven: uses product analytics to guide conversations</li>
+              <li>Strong written communicator (async team)</li>
+            </ul>
+          </div>
+        </div>
+        <a href="mailto:careers@corecatalyst.ai?subject=Customer Success Manager" class="apply-btn">Apply for this role &rarr;</a>
+      </div>
+    </div>
+
+  </div><!-- /roles-list -->
+
+  <div class="no-roles" id="noRoles">No open roles in this department right now. <a href="mailto:careers@corecatalyst.ai" style="color:var(--blue);font-weight:600">Send us a speculative application</a>.</div>
+
+</section><!-- /roles-section -->
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="process-inner reveal">
+    <h2>Our hiring process</h2>
+    <div class="sub">Four steps, no surprises. We respect your time - if it's not working, we'll tell you quickly.</div>
+    <div class="process-steps">
+      <div class="ps-item">
+        <div class="ps-num">1</div>
+        <div class="ps-label">Application review</div>
+        <div class="ps-sub">We read every application. Response within 5 days.</div>
+      </div>
+      <div class="ps-item">
+        <div class="ps-num">2</div>
+        <div class="ps-label">Intro call</div>
+        <div class="ps-sub">30 min with the hiring manager. Two-way conversation.</div>
+      </div>
+      <div class="ps-item">
+        <div class="ps-num">3</div>
+        <div class="ps-label">Skills interview</div>
+        <div class="ps-sub">Technical or role-specific. Take-home or live - your choice.</div>
+      </div>
+      <div class="ps-item">
+        <div class="ps-num">4</div>
+        <div class="ps-label">Final &amp; offer</div>
+        <div class="ps-sub">Meet the team. Offer within 2 days of final stage.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="careers-cta">
+  <h2>Don't see the right role?<br/><span>Reach out anyway.</span></h2>
+  <p>If you think you'd be a strong fit for what we're building, we'd still like to hear from you. We keep speculative applications on file and reach out when something relevant opens.</p>
+  <a href="mailto:careers@corecatalyst.ai">Send a speculative application &rarr;</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">CoreCatalyst</div>
+        <p>The skills reconciliation engine for the modern enterprise. Powered by yourskills.ai</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="home.html">Overview</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="solutions-chro.html">For CHROs</a></li>
+          <li><a href="solutions-managers.html">For Managers</a></li>
+          <li><a href="solutions-hrops.html">For HR Ops</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 CoreCatalyst. Built on yourskills.ai</span>
+      <span>Privacy &bull; <a href="security.html" style="color:#64748b;text-decoration:none">Security</a> &bull; <a href="contact.html" style="color:#64748b;text-decoration:none">Contact</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Dept filter
+document.querySelectorAll('.dept-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.dept-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const dept = tab.dataset.dept;
+    let visible = 0;
+    document.querySelectorAll('.role-item').forEach(item => {
+      const match = dept === 'all' || item.dataset.dept === dept;
+      item.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+    document.getElementById('noRoles').classList.toggle('visible', visible === 0);
+  });
+});
+
+// Toggle role open/close
+function toggleRole(el) {
+  // Don't toggle if clicking the apply button
+  if (event.target.classList.contains('apply-btn')) return;
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.role-item.open').forEach(r => r.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+// Reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

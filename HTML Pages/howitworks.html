@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How It Works - CoreCatalyst Skills Intelligence Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #1a1f36;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ===== TOKENS ===== */
+:root {
+  --blue: #3b5bdb;
+  --indigo: #4c6ef5;
+  --violet: #7950f2;
+  --green: #40c057;
+  --red: #fa5252;
+  --yellow: #fab005;
+  --cyan: #22b8cf;
+  --bg: #f2f4fb;
+  --surface: #ffffff;
+  --border: #e4e9f4;
+  --text: #1a1f36;
+  --muted: #8792b2;
+  --subtle: #c4cbe8;
+  --grad-primary: linear-gradient(135deg, #3b5bdb 0%, #7950f2 100%);
+  --grad-hero: linear-gradient(145deg, #eef2ff 0%, #f5f3ff 50%, #faf5ff 100%);
+  --shadow-card: 0 2px 20px rgba(59,91,219,.08);
+  --shadow-hover: 0 8px 32px rgba(59,91,219,.14);
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s, box-shadow .2s;
+}
+.nav.solid { border-bottom-color: var(--border); box-shadow: 0 2px 16px rgba(59,91,219,.07); }
+.nav-inner {
+  max-width: 1160px; margin: 0 auto; padding: 0 24px;
+  height: 64px; display: flex; align-items: center; gap: 36px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 18px; color: var(--text);
+  flex-shrink: 0;
+}
+.nav-logo-mark {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: var(--grad-primary);
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-mark svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2.5; }
+.nav-logo .dot-ai { color: var(--muted); font-weight: 400; }
+.nav-links { display: flex; align-items: center; gap: 4px; flex: 1; }
+.nav-links a {
+  padding: 6px 14px; border-radius: 8px;
+  font-size: 14px; font-weight: 500; color: #5c6587;
+  transition: background .15s, color .15s;
+}
+.nav-links a:hover { background: var(--bg); color: var(--blue); }
+.nav-links a.active { color: var(--blue); background: #eef1ff; font-weight: 600; }
+.nav-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.btn-ghost-sm {
+  padding: 8px 18px; border-radius: 10px; font-size: 13.5px; font-weight: 600;
+  color: var(--text); border: 1px solid var(--border); background: #fff; cursor: pointer;
+  transition: all .15s;
+}
+.btn-ghost-sm:hover { background: var(--bg); border-color: var(--indigo); color: var(--blue); }
+.btn-primary {
+  padding: 9px 22px; border-radius: 10px; font-size: 13.5px; font-weight: 600;
+  color: #fff; background: var(--grad-primary); border: none; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(76,110,245,.30); transition: transform .15s, box-shadow .15s;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(76,110,245,.42); }
+
+/* ===== SHARED ===== */
+.container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+section { padding: 96px 0; }
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 16px;
+}
+.section-eyebrow svg { width: 13px; height: 13px; stroke: var(--blue); fill: none; stroke-width: 2.5; }
+.section-h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 800; line-height: 1.13; letter-spacing: -.02em;
+  color: var(--text); margin-bottom: 18px;
+}
+.section-sub {
+  font-size: 17px; color: #5c6587; line-height: 1.7; max-width: 560px;
+}
+.center { text-align: center; }
+.center .section-sub { margin: 0 auto; }
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.d1 { transition-delay: .08s; }
+.d2 { transition-delay: .16s; }
+.d3 { transition-delay: .24s; }
+.d4 { transition-delay: .32s; }
+
+/* ===== HERO ===== */
+.hero {
+  padding-top: 64px;
+  background: var(--grad-hero);
+  position: relative; overflow: hidden;
+}
+.hero-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(100px); pointer-events: none; opacity: .28;
+}
+.hero-blob-1 {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, #c7d2fe 0%, transparent 70%);
+  top: -260px; right: -160px;
+}
+.hero-blob-2 {
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, #ddd6fe 0%, transparent 70%);
+  bottom: -80px; left: -60px;
+}
+.hero-inner {
+  max-width: 1160px; margin: 0 auto;
+  padding: 88px 24px 80px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff; border: 1px solid var(--border); border-radius: 20px;
+  padding: 5px 14px 5px 8px; font-size: 12.5px; font-weight: 600; color: var(--blue);
+  margin-bottom: 22px;
+}
+.hero-eyebrow-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--blue);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
+.hero-h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(34px, 4vw, 54px);
+  font-weight: 800; line-height: 1.12; letter-spacing: -.022em;
+  color: var(--text); margin-bottom: 22px;
+}
+.hero-h1 .grad {
+  background: var(--grad-primary);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub { font-size: 17px; color: #5c6587; line-height: 1.72; max-width: 480px; margin-bottom: 36px; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: 9px; }
+.hero-pill {
+  display: flex; align-items: center; gap: 7px;
+  background: #fff; border: 1px solid var(--border); border-radius: 20px;
+  padding: 6px 14px; font-size: 13px; font-weight: 600; color: var(--text);
+}
+.hero-pill svg { width: 14px; height: 14px; stroke-width: 2.5; fill: none; }
+.hero-pill .icon-blue { stroke: var(--blue); }
+.hero-pill .icon-green { stroke: var(--green); }
+.hero-pill .icon-violet { stroke: var(--violet); }
+
+/* ===== HERO DIAGRAM ===== */
+.hero-diagram {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: 0 16px 56px rgba(59,91,219,.12);
+  padding: 28px 24px;
+  position: relative;
+}
+.diag-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 6px;
+}
+.diag-label svg { width: 12px; height: 12px; stroke: var(--muted); fill: none; stroke-width: 2.5; }
+.diag-sources {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px;
+}
+.diag-source {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+  padding: 12px 10px; text-align: center;
+}
+.diag-source-icon {
+  width: 32px; height: 32px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 8px;
+}
+.diag-source-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 2; }
+.diag-source-name { font-size: 11.5px; font-weight: 700; color: var(--text); }
+.diag-source-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.diag-arrow-row {
+  display: flex; align-items: center; justify-content: center; gap: 0;
+  margin-bottom: 18px; position: relative;
+}
+.diag-arrow-line {
+  flex: 1; height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--violet));
+  border-radius: 1px;
+  position: relative;
+}
+.diag-arrow-line::after {
+  content: '';
+  position: absolute; right: -1px; top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid var(--violet);
+}
+.diag-engine {
+  background: linear-gradient(135deg, #eef1ff, #f5f3ff);
+  border: 1.5px solid #c5d3f7;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: 14px;
+}
+.engine-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--grad-primary);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.engine-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; }
+.engine-title { font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); }
+.engine-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.engine-badge {
+  margin-left: auto;
+  background: #e6f9ed; color: var(--green);
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 10px;
+  white-space: nowrap;
+}
+.diag-outputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.diag-output {
+  background: #fff; border: 1px solid var(--border); border-radius: 10px;
+  padding: 11px 13px; display: flex; align-items: center; gap: 10px;
+}
+.diag-output-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.diag-output-text { font-size: 12px; font-weight: 600; color: var(--text); }
+
+/* ===== STEP PROGRESS NAV ===== */
+.steps-nav-section {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  position: sticky; top: 64px; z-index: 50;
+}
+.steps-nav-inner {
+  max-width: 1160px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: stretch;
+}
+.step-nav-item {
+  flex: 1; padding: 18px 14px;
+  display: flex; align-items: center; gap: 12px;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  transition: background .15s;
+  border-bottom: 3px solid transparent;
+  text-decoration: none;
+}
+.step-nav-item:last-child { border-right: none; }
+.step-nav-item:hover { background: var(--bg); }
+.step-nav-item.active { border-bottom-color: var(--blue); background: #fafbff; }
+.step-nav-num {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--bg); border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700;
+  color: var(--muted); flex-shrink: 0;
+  transition: all .2s;
+}
+.step-nav-item.active .step-nav-num {
+  background: var(--blue); border-color: var(--blue); color: #fff;
+}
+.step-nav-label { font-size: 13px; font-weight: 600; color: #5c6587; line-height: 1.3; }
+.step-nav-item.active .step-nav-label { color: var(--blue); }
+
+/* ===== STEP SECTIONS ===== */
+.step-section { padding: 96px 0; }
+.step-section:nth-child(even) { background: #f8f9ff; }
+.step-section:nth-child(odd) { background: #fff; }
+
+.step-section-inner {
+  max-width: 1160px; margin: 0 auto; padding: 0 24px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: center;
+}
+.step-section-inner.reverse { }
+.step-section-inner.reverse .step-visual { order: -1; }
+
+.step-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 24px;
+}
+.step-number {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--grad-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 800; color: #fff;
+}
+.step-badge-label {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--blue);
+}
+.step-h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 800; line-height: 1.18; letter-spacing: -.02em;
+  color: var(--text); margin-bottom: 16px;
+}
+.step-desc {
+  font-size: 16px; color: #5c6587; line-height: 1.75; margin-bottom: 28px;
+}
+.step-points { display: flex; flex-direction: column; gap: 12px; }
+.step-point {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--bg); border-radius: 12px;
+  padding: 14px 16px; border: 1px solid var(--border);
+}
+.step-point-icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: #eef1ff;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.step-point-icon svg { width: 14px; height: 14px; stroke: var(--blue); fill: none; stroke-width: 2.5; }
+.step-point-text { font-size: 13.5px; font-weight: 500; color: var(--text); line-height: 1.55; }
+
+/* ===== STEP VISUAL PANELS ===== */
+.step-visual {
+  position: relative;
+}
+.visual-card {
+  background: #fff;
+  border: 1px solid var(--border); border-radius: 20px;
+  box-shadow: var(--shadow-card); overflow: hidden;
+}
+.visual-card-header {
+  padding: 13px 18px;
+  background: #f8f9ff; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.win-dots { display: flex; gap: 6px; }
+.win-dots span { width: 9px; height: 9px; border-radius: 50%; }
+.win-dots span:nth-child(1){background:#ff5f57}
+.win-dots span:nth-child(2){background:#febc2e}
+.win-dots span:nth-child(3){background:#28c840}
+.win-title { font-size: 11.5px; font-weight: 600; color: var(--muted); letter-spacing:.04em; margin-left:4px; }
+.visual-card-body { padding: 20px 18px; }
+
+/* Step 1 - Source connectors visual */
+.connector-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+.connector-item {
+  background: #f8f9ff; border: 1px solid var(--border); border-radius: 11px;
+  padding: 14px 10px; text-align: center;
+  transition: transform .2s, border-color .2s;
+  cursor: default;
+}
+.connector-item:hover { transform: translateY(-2px); border-color: var(--indigo); }
+.connector-item.connected { border-color: #bbf7d0; background: #f0fdf4; }
+.conn-icon {
+  width: 34px; height: 34px; border-radius: 9px;
+  margin: 0 auto 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.conn-icon svg { width: 18px; height: 18px; fill: none; stroke-width: 2; }
+.conn-name { font-size: 11.5px; font-weight: 700; color: var(--text); }
+.conn-status {
+  font-size: 10px; font-weight: 600; margin-top: 4px;
+  display: flex; align-items: center; justify-content: center; gap: 3px;
+}
+.conn-status.live { color: var(--green); }
+.conn-status.pending { color: var(--yellow); }
+.conn-status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.connector-item.connected .conn-icon { background: #e6f9ed; }
+.connector-item.connected .conn-icon svg { stroke: var(--green); }
+
+/* Step 2 - Taxonomy visual */
+.taxonomy-panel { }
+.tax-search {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.tax-search-input {
+  flex: 1; font-size: 13px; color: var(--text); background: none; border: none; outline: none;
+}
+.tax-search svg { width: 15px; height: 15px; stroke: var(--muted); fill: none; stroke-width: 2; }
+.tax-result-header {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+}
+.tax-result-list { display: flex; flex-direction: column; gap: 7px; }
+.tax-result-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; background: var(--bg); border-radius: 9px;
+  border: 1px solid var(--border);
+}
+.tax-result-item.match { background: #eef1ff; border-color: #c5d3f7; }
+.tax-result-name { flex: 1; font-size: 12.5px; font-weight: 600; color: var(--text); }
+.tax-result-id { font-size: 10px; color: var(--muted); font-family: monospace; }
+.tax-result-lang { font-size: 10.5px; font-weight: 600; color: var(--blue); background: #eef1ff; padding: 2px 7px; border-radius: 8px; }
+.tax-meta-row {
+  display: flex; gap: 10px; margin-top: 14px;
+}
+.tax-meta-chip {
+  flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 10px 8px; text-align: center;
+}
+.tax-meta-num { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 800; color: var(--text); }
+.tax-meta-lbl { font-size: 10px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+
+/* Step 3 - Reconciliation visual */
+.recon-panel { }
+.recon-conflict-box {
+  background: #fffbf0; border: 1px solid #fde68a; border-radius: 13px;
+  padding: 14px 16px; margin-bottom: 14px;
+}
+.recon-conflict-title {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: #c05400; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.recon-conflict-title svg { width: 12px; height: 12px; stroke: #c05400; fill: none; stroke-width: 2.5; }
+.recon-source-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.recon-source-row:last-child { margin-bottom: 0; }
+.recon-source-chip {
+  font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: 10px; flex-shrink: 0;
+}
+.recon-source-chip.cv { background: #eef1ff; color: var(--blue); }
+.recon-source-chip.lms { background: #f5f3ff; color: var(--violet); }
+.recon-source-chip.mgr { background: #e6f9ed; color: var(--green); }
+.recon-source-chip.proj { background: #e3f9fc; color: var(--cyan); }
+.recon-source-val { font-size: 12.5px; font-weight: 600; color: var(--text); }
+.recon-source-weight { margin-left: auto; font-size: 11px; color: var(--muted); }
+.recon-algo {
+  background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 11px;
+  padding: 12px 14px; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 12px;
+}
+.recon-algo svg { width: 18px; height: 18px; stroke: var(--violet); fill: none; stroke-width: 2; flex-shrink: 0; }
+.recon-algo-text { font-size: 12.5px; color: #5c6587; line-height: 1.5; }
+.recon-algo-text strong { color: var(--violet); }
+.recon-output {
+  background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 11px;
+  padding: 12px 14px; display: flex; align-items: center; gap: 12px;
+}
+.recon-output svg { width: 18px; height: 18px; stroke: var(--green); fill: none; stroke-width: 2.5; flex-shrink: 0; }
+.recon-output-text { font-size: 12.5px; font-weight: 600; color: var(--text); }
+.recon-output-level { margin-left: auto; }
+.recon-output-level span {
+  font-size: 13px; font-weight: 700; color: var(--green);
+  background: #e6f9ed; padding: 3px 12px; border-radius: 10px;
+}
+
+/* Step 4 - Adjudication visual */
+.adj-header-row {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+}
+.adj-count-badge {
+  font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 10px;
+  background: #fff9e6; color: #c05400;
+}
+.adj-item {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 16px; margin-bottom: 10px;
+}
+.adj-item:last-of-type { margin-bottom: 14px; }
+.adj-item-top {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.adj-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+.adj-person-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.adj-skill-tag {
+  margin-left: auto; font-size: 11px; font-weight: 700;
+  background: #f5f3ff; color: var(--violet); padding: 2px 10px; border-radius: 10px;
+}
+.adj-conflict-row {
+  display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap;
+}
+.adj-source-pill {
+  font-size: 10.5px; font-weight: 600; padding: 3px 9px; border-radius: 9px;
+}
+.adj-actions { display: flex; gap: 8px; }
+.adj-btn {
+  flex: 1; padding: 7px 8px; border-radius: 8px;
+  font-size: 11.5px; font-weight: 600; cursor: pointer; border: none; text-align: center;
+  transition: all .15s;
+}
+.adj-btn-accept { background: var(--blue); color: #fff; }
+.adj-btn-accept:hover { background: #2f4ac7; }
+.adj-btn-override { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+.adj-btn-override:hover { background: #eef1ff; color: var(--blue); }
+.adj-timer {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11.5px; color: var(--muted); background: var(--bg);
+  border-radius: 10px; padding: 8px 14px; border: 1px solid var(--border);
+}
+.adj-timer svg { width: 13px; height: 13px; stroke: var(--green); fill: none; stroke-width: 2.5; }
+
+/* Step 5 - Living profile visual */
+.profile-pulse {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.profile-update-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 11px;
+  padding: 11px 14px;
+}
+.pulse-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  flex-shrink: 0; position: relative;
+}
+.pulse-dot::after {
+  content: ''; position: absolute;
+  inset: -4px; border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0; animation: ring-pulse 2s ease-out infinite;
+}
+@keyframes ring-pulse {
+  0% { opacity: .6; transform: scale(.6); }
+  100% { opacity: 0; transform: scale(1.6); }
+}
+.pulse-dot.blue { background: var(--blue); color: var(--blue); }
+.pulse-dot.green { background: var(--green); color: var(--green); animation-delay: .4s; }
+.pulse-dot.violet { background: var(--violet); color: var(--violet); animation-delay: .8s; }
+.pulse-dot.cyan { background: var(--cyan); color: var(--cyan); animation-delay: 1.2s; }
+.pulse-update-text { flex: 1; font-size: 12.5px; font-weight: 600; color: var(--text); }
+.pulse-update-time { font-size: 11px; color: var(--muted); }
+.pulse-update-delta {
+  font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 10px;
+}
+.pulse-update-delta.up { background: #e6f9ed; color: var(--green); }
+.pulse-update-delta.sync { background: #eef1ff; color: var(--blue); }
+.downstream-section {
+  margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px;
+}
+.downstream-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+}
+.downstream-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.downstream-chip {
+  font-size: 11px; font-weight: 600; padding: 4px 11px; border-radius: 10px;
+  background: #fff; border: 1px solid var(--border); color: var(--text);
+  display: flex; align-items: center; gap: 5px;
+}
+.downstream-chip svg { width: 11px; height: 11px; stroke: var(--green); fill: none; stroke-width: 2.5; }
+
+/* ===== TRUST / SECURITY ===== */
+.trust-section {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 64px 0;
+}
+.trust-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 40px;
+}
+.trust-card {
+  background: #fff; border: 1px solid var(--border); border-radius: 16px;
+  padding: 24px 22px; box-shadow: var(--shadow-card);
+}
+.trust-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+}
+.trust-icon svg { width: 22px; height: 22px; fill: none; stroke-width: 1.8; }
+.trust-icon.blue { background: #eef1ff; }
+.trust-icon.blue svg { stroke: var(--blue); }
+.trust-icon.green { background: #e6f9ed; }
+.trust-icon.green svg { stroke: var(--green); }
+.trust-icon.violet { background: #f5f3ff; }
+.trust-icon.violet svg { stroke: var(--violet); }
+.trust-icon.cyan { background: #e3f9fc; }
+.trust-icon.cyan svg { stroke: var(--cyan); }
+.trust-card-title { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.trust-card-desc { font-size: 13px; color: #5c6587; line-height: 1.65; }
+
+/* ===== CTA ===== */
+.cta-section { background: #fff; padding: 96px 0; }
+.cta-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+.cta-inner .section-h2 { font-size: clamp(30px, 3.5vw, 48px); }
+.cta-inner .section-sub { margin: 0 auto 40px; }
+.cta-buttons { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.btn-cta-primary {
+  padding: 14px 34px; border-radius: 12px; font-size: 15px; font-weight: 600;
+  color: #fff; background: var(--grad-primary); border: none; cursor: pointer;
+  box-shadow: 0 5px 20px rgba(76,110,245,.35); transition: transform .15s, box-shadow .15s;
+}
+.btn-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(76,110,245,.45); }
+.btn-cta-ghost {
+  padding: 13px 34px; border-radius: 12px; font-size: 15px; font-weight: 600;
+  color: var(--text); background: #fff; border: 1.5px solid var(--border); cursor: pointer;
+  transition: all .15s;
+}
+.btn-cta-ghost:hover { border-color: var(--indigo); color: var(--blue); background: #eef1ff; }
+.cta-trust-row {
+  display: flex; align-items: center; justify-content: center; gap: 22px;
+  margin-top: 36px; flex-wrap: wrap;
+}
+.cta-trust-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--muted);
+}
+.cta-trust-item svg { width: 13px; height: 13px; stroke: var(--green); fill: none; stroke-width: 2.5; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #f8f9ff; border-top: 1px solid var(--border);
+  padding: 56px 0 32px;
+}
+.footer-inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 44px;
+}
+.footer-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700;
+  color: var(--text); margin-bottom: 14px;
+}
+.footer-tagline { font-size: 13.5px; color: var(--muted); line-height: 1.65; max-width: 280px; }
+.footer-col-title {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text); margin-bottom: 16px;
+}
+.footer-col a { display: block; font-size: 13.5px; color: var(--muted); margin-bottom: 10px; transition: color .15s; }
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom {
+  border-top: 1px solid var(--border); padding-top: 28px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy { font-size: 12.5px; color: var(--muted); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 12.5px; color: var(--muted); transition: color .15s; }
+.footer-links a:hover { color: var(--blue); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 960px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 64px 24px 48px; }
+  .step-section-inner { grid-template-columns: 1fr; gap: 40px; }
+  .step-section-inner.reverse .step-visual { order: unset; }
+  .trust-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .steps-nav-inner { overflow-x: auto; }
+  .step-nav-item { min-width: 140px; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .trust-grid { grid-template-columns: 1fr; }
+  .cta-buttons { flex-direction: column; }
+  .footer-top { grid-template-columns: 1fr; }
+  .diag-sources { grid-template-columns: 1fr 1fr; }
+  .connector-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="home.html" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      CoreCatalyst<span class="dot-ai">.ai</span>
+    </a>
+    <div class="nav-links">
+      <a href="home.html">Platform</a>
+      <a href="#" class="active">How It Works</a>
+      <a href="#">Solutions</a>
+      <a href="#">Pricing</a>
+      <a href="#">Resources</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#" class="btn-ghost-sm">Sign in</a>
+      <a href="#" class="btn-primary">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        Under the hood
+      </div>
+      <h1 class="hero-h1">
+        From scattered signals<br>
+        to <span class="grad">verified skills truth</span> -<br>
+        in five steps.
+      </h1>
+      <p class="hero-sub">CoreCatalyst doesn't ask employees to self-report their skills, or trust any single source blindly. It pulls from every system, resolves the conflicts, and hands managers a clean picture - continuously, automatically.</p>
+      <div class="hero-pills">
+        <span class="hero-pill"><svg viewBox="0 0 24 24" class="icon-blue"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> 200+ data connectors</span>
+        <span class="hero-pill"><svg viewBox="0 0 24 24" class="icon-green"><path d="M20 6L9 17l-5-5"/></svg> 94% auto-resolved</span>
+        <span class="hero-pill"><svg viewBox="0 0 24 24" class="icon-violet"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Live in 1 day</span>
+      </div>
+    </div>
+    <div>
+      <div class="hero-diagram">
+        <div class="diag-label">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          Data sources feeding the engine
+        </div>
+        <div class="diag-sources">
+          <div class="diag-source">
+            <div class="diag-source-icon" style="background:#eef1ff">
+              <svg viewBox="0 0 24 24" style="stroke:var(--blue)"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+            </div>
+            <div class="diag-source-name">CV / Resume</div>
+            <div class="diag-source-sub">Self-declared</div>
+          </div>
+          <div class="diag-source">
+            <div class="diag-source-icon" style="background:#f5f3ff">
+              <svg viewBox="0 0 24 24" style="stroke:var(--violet)"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <div class="diag-source-name">LMS Records</div>
+            <div class="diag-source-sub">Completion data</div>
+          </div>
+          <div class="diag-source">
+            <div class="diag-source-icon" style="background:#e6f9ed">
+              <svg viewBox="0 0 24 24" style="stroke:var(--green)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <div class="diag-source-name">Manager Input</div>
+            <div class="diag-source-sub">Assessed levels</div>
+          </div>
+          <div class="diag-source">
+            <div class="diag-source-icon" style="background:#e3f9fc">
+              <svg viewBox="0 0 24 24" style="stroke:var(--cyan)"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            </div>
+            <div class="diag-source-name">Job History</div>
+            <div class="diag-source-sub">Demonstrated use</div>
+          </div>
+          <div class="diag-source">
+            <div class="diag-source-icon" style="background:#fff9e6">
+              <svg viewBox="0 0 24 24" style="stroke:var(--yellow)"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="diag-source-name">Assessments</div>
+            <div class="diag-source-sub">Test scores</div>
+          </div>
+          <div class="diag-source">
+            <div class="diag-source-icon" style="background:#fff0f0">
+              <svg viewBox="0 0 24 24" style="stroke:var(--red)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="diag-source-name">Performance</div>
+            <div class="diag-source-sub">Review data</div>
+          </div>
+        </div>
+        <div class="diag-arrow-row">
+          <div class="diag-arrow-line"></div>
+        </div>
+        <div class="diag-engine">
+          <div class="engine-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <div class="engine-title">CoreCatalyst Reconciliation Engine</div>
+            <div class="engine-sub">AI-powered, 45K-skill taxonomy, recency-weighted confidence</div>
+          </div>
+          <span class="engine-badge">94% automated</span>
+        </div>
+        <div class="diag-outputs">
+          <div class="diag-output">
+            <div class="diag-output-dot" style="background:var(--blue)"></div>
+            <span class="diag-output-text">Verified skills profiles</span>
+          </div>
+          <div class="diag-output">
+            <div class="diag-output-dot" style="background:var(--green)"></div>
+            <span class="diag-output-text">Gap intelligence</span>
+          </div>
+          <div class="diag-output">
+            <div class="diag-output-dot" style="background:var(--violet)"></div>
+            <span class="diag-output-text">Career pathways</span>
+          </div>
+          <div class="diag-output">
+            <div class="diag-output-dot" style="background:var(--cyan)"></div>
+            <span class="diag-output-text">HRIS write-back</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP NAV -->
+<div class="steps-nav-section" id="step-nav">
+  <div class="steps-nav-inner">
+    <a href="#step1" class="step-nav-item active" onclick="setStepActive(this)">
+      <div class="step-nav-num">1</div>
+      <span class="step-nav-label">Connect your sources</span>
+    </a>
+    <a href="#step2" class="step-nav-item" onclick="setStepActive(this)">
+      <div class="step-nav-num">2</div>
+      <span class="step-nav-label">Ingest &amp; normalise</span>
+    </a>
+    <a href="#step3" class="step-nav-item" onclick="setStepActive(this)">
+      <div class="step-nav-num">3</div>
+      <span class="step-nav-label">AI reconciliation</span>
+    </a>
+    <a href="#step4" class="step-nav-item" onclick="setStepActive(this)">
+      <div class="step-nav-num">4</div>
+      <span class="step-nav-label">Human adjudication</span>
+    </a>
+    <a href="#step5" class="step-nav-item" onclick="setStepActive(this)">
+      <div class="step-nav-num">5</div>
+      <span class="step-nav-label">Living skills profiles</span>
+    </a>
+  </div>
+</div>
+
+<!-- STEP 1 -->
+<section class="step-section" id="step1">
+  <div class="step-section-inner container">
+    <div class="step-copy reveal">
+      <div class="step-badge">
+        <div class="step-number">1</div>
+        <span class="step-badge-label">Step one</span>
+      </div>
+      <h2 class="step-h3">Connect every system<br>your people data lives in.</h2>
+      <p class="step-desc">Most organisations have skills data sitting in 4 to 8 different systems - none talking to each other. CoreCatalyst connects to all of them in hours, not months, using pre-built connectors that require no engineering resources to configure.</p>
+      <div class="step-points">
+        <div class="step-point">
+          <div class="step-point-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+          <span class="step-point-text">200+ pre-built connectors for Workday, SAP SuccessFactors, Oracle HCM, Cornerstone, Degreed, Saba, LinkedIn Learning, and all major ATS platforms</span>
+        </div>
+        <div class="step-point">
+          <div class="step-point-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <span class="step-point-text">Open REST API and webhooks for custom sources - if a system can export data, CoreCatalyst can ingest it</span>
+        </div>
+        <div class="step-point">
+          <div class="step-point-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <span class="step-point-text">OAuth 2.0 and API key authentication - data stays encrypted in transit and at rest, with field-level access controls</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-visual reveal d2">
+      <div class="visual-card">
+        <div class="visual-card-header">
+          <div class="win-dots"><span></span><span></span><span></span></div>
+          <span class="win-title">Connector setup - CoreCatalyst</span>
+        </div>
+        <div class="visual-card-body">
+          <div class="connector-grid">
+            <div class="connector-item connected">
+              <div class="conn-icon"><svg viewBox="0 0 24 24" style="stroke:var(--green)"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+              <div class="conn-name">Workday</div>
+              <div class="conn-status live"><span class="conn-status-dot"></span> Live</div>
+            </div>
+            <div class="connector-item connected">
+              <div class="conn-icon"><svg viewBox="0 0 24 24" style="stroke:var(--green)"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+              <div class="conn-name">Cornerstone</div>
+              <div class="conn-status live"><span class="conn-status-dot"></span> Live</div>
+            </div>
+            <div class="connector-item connected">
+              <div class="conn-icon"><svg viewBox="0 0 24 24" style="stroke:var(--green)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+              <div class="conn-name">SAP SF</div>
+              <div class="conn-status live"><span class="conn-status-dot"></span> Live</div>
+            </div>
+            <div class="connector-item">
+              <div class="conn-icon" style="background:#fff9e6"><svg viewBox="0 0 24 24" style="stroke:var(--yellow)"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+              <div class="conn-name">Degreed</div>
+              <div class="conn-status pending"><span class="conn-status-dot"></span> Connecting</div>
+            </div>
+            <div class="connector-item">
+              <div class="conn-icon" style="background:#eef1ff"><svg viewBox="0 0 24 24" style="stroke:var(--blue)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div class="conn-name">Oracle HCM</div>
+              <div class="conn-status pending"><span class="conn-status-dot"></span> Scheduled</div>
+            </div>
+            <div class="connector-item">
+              <div class="conn-icon" style="background:#f5f3ff"><svg viewBox="0 0 24 24" style="stroke:var(--violet)"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+              <div class="conn-name">Custom API</div>
+              <div class="conn-status pending"><span class="conn-status-dot"></span> Configure</div>
+            </div>
+          </div>
+          <div style="margin-top:14px;background:#e6f9ed;border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;font-size:12px;font-weight:600;color:#166534;display:flex;align-items:center;gap:8px;">
+            <svg width="13" height="13" fill="none" stroke="#166534" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            3 sources active - first data ingestion will start within minutes
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step-section" id="step2">
+  <div class="step-section-inner container reverse">
+    <div class="step-copy reveal">
+      <div class="step-badge">
+        <div class="step-number" style="background:linear-gradient(135deg,#7950f2,#4c6ef5)">2</div>
+        <span class="step-badge-label" style="color:var(--violet)">Step two</span>
+      </div>
+      <h2 class="step-h3">All skills, mapped to one<br>universal taxonomy.</h2>
+      <p class="step-desc">Raw skills data is messy. One system calls it "Python Programming", another "Python 3", a third just "Python". CoreCatalyst's normalisation layer maps every variant to a shared taxonomy of 45,000+ skills in 35 languages - so comparisons are apples to apples.</p>
+      <div class="step-points">
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#f5f3ff"><svg viewBox="0 0 24 24" style="stroke:var(--violet)"><circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 000 11.4M17.7 17.7a8 8 0 000-11.4"/></svg></div>
+          <span class="step-point-text">45,000 skills with adjacency mappings, proficiency level definitions, and market demand signals updated monthly from live job postings</span>
+        </div>
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#f5f3ff"><svg viewBox="0 0 24 24" style="stroke:var(--violet)"><path d="M5 8l6 6M4 14l6-6 2-3M2 5h7M7 2v7M22 22l-5-10-5 10M14 18h6"/></svg></div>
+          <span class="step-point-text">Supports 35 languages natively - skills are matched across language variants so global teams get unified profiles regardless of input language</span>
+        </div>
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#f5f3ff"><svg viewBox="0 0 24 24" style="stroke:var(--violet)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <span class="step-point-text">Your own skills taxonomy can be imported and merged - CoreCatalyst bridges proprietary frameworks to the universal graph without losing your custom structure</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-visual reveal d2">
+      <div class="visual-card">
+        <div class="visual-card-header">
+          <div class="win-dots"><span></span><span></span><span></span></div>
+          <span class="win-title">Skills taxonomy lookup</span>
+        </div>
+        <div class="visual-card-body">
+          <div class="tax-search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span class="tax-search-input">Python</span>
+          </div>
+          <div class="tax-result-header">4 matches found - mapped to canonical skill</div>
+          <div class="tax-result-list">
+            <div class="tax-result-item match">
+              <span class="tax-result-name">Python Programming</span>
+              <span class="tax-result-id">SKL-0031-4</span>
+              <span class="tax-result-lang">EN</span>
+            </div>
+            <div class="tax-result-item">
+              <span class="tax-result-name">Python 3</span>
+              <span class="tax-result-id">SKL-0031-4</span>
+              <span class="tax-result-lang">EN</span>
+            </div>
+            <div class="tax-result-item">
+              <span class="tax-result-name">Programmation Python</span>
+              <span class="tax-result-id">SKL-0031-4</span>
+              <span class="tax-result-lang">FR</span>
+            </div>
+            <div class="tax-result-item">
+              <span class="tax-result-name">Python-Programmierung</span>
+              <span class="tax-result-id">SKL-0031-4</span>
+              <span class="tax-result-lang">DE</span>
+            </div>
+          </div>
+          <div class="tax-meta-row">
+            <div class="tax-meta-chip">
+              <div class="tax-meta-num">45K+</div>
+              <div class="tax-meta-lbl">Total skills</div>
+            </div>
+            <div class="tax-meta-chip">
+              <div class="tax-meta-num">35</div>
+              <div class="tax-meta-lbl">Languages</div>
+            </div>
+            <div class="tax-meta-chip">
+              <div class="tax-meta-num">98%</div>
+              <div class="tax-meta-lbl">Match rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step-section" id="step3">
+  <div class="step-section-inner container">
+    <div class="step-copy reveal">
+      <div class="step-badge">
+        <div class="step-number" style="background:linear-gradient(135deg,#22b8cf,#3b5bdb)">3</div>
+        <span class="step-badge-label" style="color:var(--cyan)">Step three</span>
+      </div>
+      <h2 class="step-h3">AI resolves conflicts -<br>not by guessing.</h2>
+      <p class="step-desc">When sources disagree on a skill level, CoreCatalyst doesn't pick the highest or most recent blindly. It applies a weighted confidence model that accounts for source reliability, data recency, evidence type, and the context of the disagreement.</p>
+      <div class="step-points">
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#e3f9fc"><svg viewBox="0 0 24 24" style="stroke:var(--cyan)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <span class="step-point-text">Recency weighting - a manager assessment from 3 months ago outweighs a CV entry from 4 years ago for the same skill</span>
+        </div>
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#e3f9fc"><svg viewBox="0 0 24 24" style="stroke:var(--cyan)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <span class="step-point-text">Source trust scoring - structured assessment data carries more weight than self-declared CV entries by default, with configurable overrides</span>
+        </div>
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#e3f9fc"><svg viewBox="0 0 24 24" style="stroke:var(--cyan)"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <span class="step-point-text">Confidence thresholds - only resolutions above a configurable confidence floor are auto-accepted; lower confidence cases route to human review</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-visual reveal d2">
+      <div class="visual-card">
+        <div class="visual-card-header">
+          <div class="win-dots"><span></span><span></span><span></span></div>
+          <span class="win-title">Reconciliation in progress - Aisha Patel</span>
+        </div>
+        <div class="visual-card-body">
+          <div class="recon-conflict-box">
+            <div class="recon-conflict-title">
+              <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+              Skill conflict: Data Visualisation
+            </div>
+            <div class="recon-source-row">
+              <span class="recon-source-chip cv">CV 2021</span>
+              <span class="recon-source-val">Expert</span>
+              <span class="recon-source-weight">Weight: 0.3 (age: 3yr)</span>
+            </div>
+            <div class="recon-source-row">
+              <span class="recon-source-chip lms">LMS 2024</span>
+              <span class="recon-source-val">Intermediate</span>
+              <span class="recon-source-weight">Weight: 0.7 (recent)</span>
+            </div>
+            <div class="recon-source-row">
+              <span class="recon-source-chip mgr">Mgr Q1 24</span>
+              <span class="recon-source-val">Advanced</span>
+              <span class="recon-source-weight">Weight: 0.85 (structured)</span>
+            </div>
+            <div class="recon-source-row">
+              <span class="recon-source-chip proj">Project</span>
+              <span class="recon-source-val">Advanced</span>
+              <span class="recon-source-weight">Weight: 0.75 (demonstrated)</span>
+            </div>
+          </div>
+          <div class="recon-algo">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <div class="recon-algo-text">Weighted consensus: <strong>Advanced</strong> (3 of 4 sources align at advanced or above, recency-adjusted). Confidence: <strong>82%</strong> - above threshold.</div>
+          </div>
+          <div class="recon-output">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            <span class="recon-output-text">Data Visualisation - resolved</span>
+            <div class="recon-output-level"><span>Advanced</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step-section" id="step4">
+  <div class="step-section-inner container reverse">
+    <div class="step-copy reveal">
+      <div class="step-badge">
+        <div class="step-number" style="background:linear-gradient(135deg,#fab005,#fd7e14)">4</div>
+        <span class="step-badge-label" style="color:var(--yellow)">Step four</span>
+      </div>
+      <h2 class="step-h3">The 6% that needs<br>a human takes 2 minutes.</h2>
+      <p class="step-desc">When confidence falls below threshold, the case goes to the manager's review queue - not buried in a form, not requiring any training. A clean card with the context they need, and two buttons. Most managers clear their queue over a coffee.</p>
+      <div class="step-points">
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#fff9e6"><svg viewBox="0 0 24 24" style="stroke:var(--yellow)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <span class="step-point-text">Managers see only their own team members - no access to other teams' data, with full RBAC controls configured at deployment</span>
+        </div>
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#fff9e6"><svg viewBox="0 0 24 24" style="stroke:var(--yellow)"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></div>
+          <span class="step-point-text">Every decision is logged with reason, timestamp, and reviewer identity - creating a full audit trail HR and compliance teams can export</span>
+        </div>
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#fff9e6"><svg viewBox="0 0 24 24" style="stroke:var(--yellow)"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg></div>
+          <span class="step-point-text">Overrides are fed back into the model - each manager decision improves the AI's confidence calibration for that team and skill cluster over time</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-visual reveal d2">
+      <div class="visual-card">
+        <div class="visual-card-header">
+          <div class="win-dots"><span></span><span></span><span></span></div>
+          <span class="win-title">Manager review queue - Sarah Chen</span>
+        </div>
+        <div class="visual-card-body">
+          <div class="adj-header-row">
+            <span style="font-size:12px;font-weight:600;color:var(--muted)">Needs your input</span>
+            <span class="adj-count-badge">2 pending</span>
+          </div>
+          <div class="adj-item">
+            <div class="adj-item-top">
+              <div class="adj-avatar" style="background:linear-gradient(135deg,#3b5bdb,#7950f2)">JK</div>
+              <div>
+                <div class="adj-person-name">James Kim</div>
+                <div style="font-size:11px;color:var(--muted)">Senior Engineer</div>
+              </div>
+              <span class="adj-skill-tag">Leadership</span>
+            </div>
+            <div class="adj-conflict-row">
+              <span class="adj-source-pill" style="background:#fff9e6;color:#c05400">LMS: Developing</span>
+              <span class="adj-source-pill" style="background:#e6f9ed;color:var(--green)">Mgr Q3: Emerging</span>
+              <span style="font-size:11px;color:var(--muted);margin-left:4px">Conf: 48%</span>
+            </div>
+            <div style="font-size:11.5px;color:var(--muted);margin-bottom:10px;background:#f8f9ff;border-radius:8px;padding:8px 10px;">AI suggests: <strong style="color:var(--text)">Emerging</strong> - confirm or set a different level below.</div>
+            <div class="adj-actions">
+              <button class="adj-btn adj-btn-accept" onclick="adjAccept(this, 'James Kim')">Confirm - Emerging</button>
+              <button class="adj-btn adj-btn-override">Set different level</button>
+            </div>
+          </div>
+          <div class="adj-timer">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Average adjudication time for your team: <strong style="color:var(--text);margin-left:4px">1m 47s per person</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 5 -->
+<section class="step-section" id="step5">
+  <div class="step-section-inner container">
+    <div class="step-copy reveal">
+      <div class="step-badge">
+        <div class="step-number" style="background:linear-gradient(135deg,#40c057,#22b8cf)">5</div>
+        <span class="step-badge-label" style="color:var(--green)">Step five</span>
+      </div>
+      <h2 class="step-h3">Skills profiles that stay<br>current - automatically.</h2>
+      <p class="step-desc">A skills profile that's 6 months old is already wrong. CoreCatalyst monitors all connected sources continuously and updates profiles as soon as new data arrives - whether that's a completed course, a new manager review, or a role change in your HRIS.</p>
+      <div class="step-points">
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#e6f9ed"><svg viewBox="0 0 24 24" style="stroke:var(--green)"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
+          <span class="step-point-text">HRIS write-back means Workday, SAP, and Oracle stay updated automatically - no manual re-entry, no sync jobs to manage</span>
+        </div>
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#e6f9ed"><svg viewBox="0 0 24 24" style="stroke:var(--green)"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <span class="step-point-text">Downstream systems - your ATS, talent marketplace, LMS content engine, and analytics tools - always receive the current verified profile via webhook push</span>
+        </div>
+        <div class="step-point">
+          <div class="step-point-icon" style="background:#e6f9ed"><svg viewBox="0 0 24 24" style="stroke:var(--green)"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+          <span class="step-point-text">Workforce intelligence dashboards reflect every change in real time - no waiting for quarterly snapshots to run decisions against stale data</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-visual reveal d2">
+      <div class="visual-card">
+        <div class="visual-card-header">
+          <div class="win-dots"><span></span><span></span><span></span></div>
+          <span class="win-title">Skills profile - live activity feed</span>
+        </div>
+        <div class="visual-card-body">
+          <div class="profile-pulse">
+            <div class="profile-update-item">
+              <div class="pulse-dot blue"></div>
+              <span class="pulse-update-text">Python - updated from LMS completion</span>
+              <span class="pulse-update-delta up">Expert</span>
+              <span class="pulse-update-time">Just now</span>
+            </div>
+            <div class="profile-update-item">
+              <div class="pulse-dot green"></div>
+              <span class="pulse-update-text">Cloud Architecture - manager confirmed</span>
+              <span class="pulse-update-delta up">Advanced</span>
+              <span class="pulse-update-time">4m ago</span>
+            </div>
+            <div class="profile-update-item">
+              <div class="pulse-dot violet"></div>
+              <span class="pulse-update-text">Stakeholder Management - auto-resolved</span>
+              <span class="pulse-update-delta up">Advanced</span>
+              <span class="pulse-update-time">12m ago</span>
+            </div>
+            <div class="profile-update-item">
+              <div class="pulse-dot cyan"></div>
+              <span class="pulse-update-text">Profile synced to Workday HCM</span>
+              <span class="pulse-update-delta sync">Synced</span>
+              <span class="pulse-update-time">12m ago</span>
+            </div>
+          </div>
+          <div class="downstream-section">
+            <div class="downstream-label">Downstream systems updated</div>
+            <div class="downstream-chips">
+              <span class="downstream-chip"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Workday</span>
+              <span class="downstream-chip"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Talent Marketplace</span>
+              <span class="downstream-chip"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> LMS engine</span>
+              <span class="downstream-chip"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Analytics</span>
+              <span class="downstream-chip"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> ATS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST / SECURITY -->
+<section class="trust-section">
+  <div class="container">
+    <div class="reveal center">
+      <div class="section-eyebrow" style="display:inline-flex">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Built to enterprise grade
+      </div>
+      <h2 class="section-h2">Your workforce data<br>is too sensitive to cut corners on.</h2>
+      <p class="section-sub center">CoreCatalyst was designed from day one for enterprise privacy and security requirements - not retrofitted after the fact.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="trust-icon blue">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <div class="trust-card-title">SOC 2 Type II</div>
+        <div class="trust-card-desc">Independently audited annually. All controls for security, availability, and confidentiality are verified by a third-party auditor.</div>
+      </div>
+      <div class="trust-card reveal d1">
+        <div class="trust-icon green">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="trust-card-title">GDPR &amp; CCPA compliant</div>
+        <div class="trust-card-desc">Full data subject rights support, configurable data residency, right-to-erasure workflows, and purpose limitation enforcement built into the platform.</div>
+      </div>
+      <div class="trust-card reveal d2">
+        <div class="trust-icon violet">
+          <svg viewBox="0 0 24 24"><path d="M1 6s3.5-3 11-3 11 3 11 3v2s-3.5 3-11 3S1 8 1 8V6z"/><path d="M1 14s3.5 3 11 3 11-3 11-3v-2s-3.5-3-11-3S1 12 1 12v2z"/></svg>
+        </div>
+        <div class="trust-card-title">Field-level encryption</div>
+        <div class="trust-card-desc">Skills data encrypted at rest using AES-256 with field-level granularity. Separate encryption keys per tenant, rotated automatically.</div>
+      </div>
+      <div class="trust-card reveal d3">
+        <div class="trust-icon cyan">
+          <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </div>
+        <div class="trust-card-title">Full audit trail</div>
+        <div class="trust-card-desc">Every skill change - who set it, which source triggered it, when, and what the previous value was - logged immutably and exportable for compliance review.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div class="section-eyebrow" style="display:inline-flex;margin:0 auto 16px;">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Ready to see it live?
+      </div>
+      <h2 class="section-h2">See the reconciliation engine<br>run on your own data.</h2>
+      <p class="section-sub">Bring a sample export from your LMS or HRIS. We'll run a live reconciliation in the demo and show you exactly what your skills picture would look like.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn-cta-primary">Book a live demo</a>
+        <a href="#" class="btn-cta-ghost">Read the technical docs</a>
+      </div>
+      <div class="cta-trust-row">
+        <span class="cta-trust-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> No synthetic data - we use yours</span>
+        <span class="cta-trust-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> 45-minute session</span>
+        <span class="cta-trust-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> NDA available before demo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <div class="nav-logo-mark" style="width:30px;height:30px;border-radius:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          CoreCatalyst<span style="color:var(--muted);font-weight:400;">.ai</span>
+        </div>
+        <p class="footer-tagline">Skills intelligence for enterprises building a skills-powered workforce. From scattered data to verified truth - in a day.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Platform</div>
+        <a href="#">How It Works</a>
+        <a href="#">Skills Graph</a>
+        <a href="#">Workforce Intelligence</a>
+        <a href="#">Internal Mobility</a>
+        <a href="#">Integrations</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Solutions</div>
+        <a href="#">For CHROs</a>
+        <a href="#">For Managers</a>
+        <a href="#">For HR Ops</a>
+        <a href="#">Enterprise</a>
+        <a href="#">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Security</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">- 2026 CoreCatalyst. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Security</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 40);
+});
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Step nav active highlight on scroll
+const stepIds = ['step1','step2','step3','step4','step5'];
+const stepNavItems = document.querySelectorAll('.step-nav-item');
+const stepIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      stepNavItems.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.4 });
+stepIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) stepIO.observe(el);
+});
+
+function setStepActive(el) {
+  stepNavItems.forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Adjudication accept
+function adjAccept(btn, name) {
+  const item = btn.closest('.adj-item');
+  item.style.background = '#f0fdf4';
+  item.style.borderColor = '#bbf7d0';
+  btn.textContent = 'Confirmed';
+  btn.style.background = 'var(--green)';
+  btn.disabled = true;
+  btn.nextElementSibling.disabled = true;
+}
+</script>
+</body>
+</html>

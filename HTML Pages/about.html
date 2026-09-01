@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>About - CoreCatalyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#3b5bdb;--violet:#7950f2;--green:#40c057;--cyan:#22b8cf;
+  --red:#fa5252;--yellow:#fab005;--orange:#fd7e14;
+  --ink:#0f172a;--muted:#64748b;--border:#e2e8f0;
+  --surface:#f8fafc;--white:#ffffff;
+  --nav-h:60px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--white);
+  line-height:1.6;padding-top:var(--nav-h)}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+.nav-logo{font-family:'Sora',sans-serif;font-weight:800;font-size:18px;
+  background:linear-gradient(135deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-decoration:none}
+.nav-links{display:flex;align-items:stretch;height:100%;gap:0;list-style:none}
+.nav-links a{display:flex;align-items:center;font-size:14px;font-weight:500;
+  color:var(--muted);padding:0 16px;text-decoration:none;
+  border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
+.nav-actions{display:flex;align-items:center;gap:12px}
+.btn-ghost{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  color:var(--muted);background:none;border:1.5px solid var(--border);
+  border-radius:8px;padding:7px 18px;cursor:pointer;text-decoration:none;
+  transition:color .15s,border-color .15s}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink)}
+.btn-primary{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  color:#fff;background:linear-gradient(135deg,var(--blue),var(--violet));
+  border:none;border-radius:8px;padding:8px 20px;cursor:pointer;text-decoration:none;
+  transition:opacity .15s}
+.btn-primary:hover{opacity:.88}
+
+/* ── HERO ── */
+.about-hero{
+  background:linear-gradient(145deg,#eef2ff 0%,#f5f3ff 50%,#faf5ff 100%);
+  padding:80px 40px 72px;
+  max-width:1160px;margin:0 auto;
+}
+.about-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.about-hero .eyebrow{display:inline-block;font-size:11px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--blue);
+  background:#e0e7ff;border-radius:20px;padding:4px 12px;margin-bottom:20px}
+.about-hero h1{font-family:'Sora',sans-serif;font-size:clamp(30px,4vw,48px);
+  font-weight:800;line-height:1.12;color:var(--ink);margin-bottom:20px}
+.about-hero h1 span{background:linear-gradient(135deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.about-hero p{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+
+/* stats cluster */
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.hstat{background:rgba(255,255,255,0.75);border:1.5px solid #c7d2fe;
+  border-radius:14px;padding:20px 22px}
+.hstat .val{font-family:'Sora',sans-serif;font-size:32px;font-weight:800;
+  background:linear-gradient(135deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:4px}
+.hstat .label{font-size:13px;color:var(--muted)}
+
+/* ── ORIGIN STORY ── */
+.origin{padding:80px 40px;max-width:1160px;margin:0 auto}
+.origin-grid{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
+.origin-label{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:12px}
+.origin-sidebar h2{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;
+  color:var(--ink);line-height:1.2;margin-bottom:20px}
+.origin-sidebar .pull{font-size:18px;font-style:italic;color:var(--ink);
+  line-height:1.55;border-left:3px solid var(--blue);padding-left:20px;
+  margin-top:24px}
+
+.origin-body p{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:20px}
+.origin-body p strong{color:var(--ink);font-weight:600}
+.origin-body p:last-child{margin-bottom:0}
+
+/* ── TIMELINE ── */
+.timeline-section{background:var(--surface);border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);padding:72px 40px}
+.timeline-inner{max-width:900px;margin:0 auto}
+.timeline-inner h2{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;
+  margin-bottom:48px;text-align:center}
+.tl{position:relative;display:flex;flex-direction:column;gap:0}
+.tl::before{content:'';position:absolute;left:100px;top:0;bottom:0;
+  width:2px;background:var(--border)}
+.tl-item{display:grid;grid-template-columns:100px 1fr;gap:0;position:relative;
+  padding-bottom:40px}
+.tl-item:last-child{padding-bottom:0}
+.tl-year{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;
+  color:var(--muted);padding-top:4px;padding-right:20px;text-align:right}
+.tl-dot{position:absolute;left:91px;top:6px;width:18px;height:18px;
+  border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));
+  border:3px solid var(--surface);z-index:1}
+.tl-content{padding-left:28px}
+.tl-content strong{font-size:15px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px}
+.tl-content span{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* ── VALUES ── */
+.values-section{padding:80px 40px;max-width:1160px;margin:0 auto}
+.values-section .section-label{font-size:11px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--blue);text-align:center;margin-bottom:12px}
+.values-section h2{font-family:'Sora',sans-serif;font-size:32px;font-weight:800;
+  text-align:center;margin-bottom:8px}
+.values-section .sub{text-align:center;color:var(--muted);font-size:15px;margin-bottom:48px}
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.val-card{border:1.5px solid var(--border);border-radius:16px;padding:28px 24px;
+  position:relative;overflow:hidden;background:var(--white);
+  transition:box-shadow .2s,border-color .2s}
+.val-card:hover{box-shadow:0 6px 24px rgba(59,91,219,.07);border-color:#bfdbfe}
+.val-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.val-card:nth-child(1)::before{background:linear-gradient(90deg,var(--blue),var(--violet))}
+.val-card:nth-child(2)::before{background:linear-gradient(90deg,var(--green),var(--cyan))}
+.val-card:nth-child(3)::before{background:linear-gradient(90deg,var(--violet),var(--blue))}
+.val-card:nth-child(4)::before{background:linear-gradient(90deg,var(--cyan),var(--green))}
+.val-icon{font-size:28px;margin-bottom:14px}
+.val-card h3{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;
+  color:var(--ink);margin-bottom:8px}
+.val-card p{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* ── TEAM ── */
+.team-section{background:linear-gradient(145deg,#f8fafc 0%,#f5f3ff 100%);
+  border-top:1px solid var(--border);padding:80px 40px}
+.team-inner{max-width:1160px;margin:0 auto}
+.team-inner .section-label{font-size:11px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.team-inner h2{font-family:'Sora',sans-serif;font-size:32px;font-weight:800;margin-bottom:8px}
+.team-inner .sub{color:var(--muted);font-size:15px;margin-bottom:48px;max-width:560px}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.team-card{background:var(--white);border:1.5px solid var(--border);
+  border-radius:18px;overflow:hidden;transition:box-shadow .2s,transform .2s}
+.team-card:hover{box-shadow:0 8px 32px rgba(59,91,219,.1);transform:translateY(-2px)}
+.team-avatar-wrap{height:200px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden}
+.team-avatar{width:100px;height:100px;border-radius:50%;display:flex;
+  align-items:center;justify-content:center;font-family:'Sora',sans-serif;
+  font-size:32px;font-weight:800;color:#fff;
+  box-shadow:0 4px 20px rgba(0,0,0,.12)}
+.team-body{padding:20px 24px 24px}
+.team-name{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;
+  color:var(--ink);margin-bottom:3px}
+.team-title{font-size:13px;color:var(--blue);font-weight:600;margin-bottom:10px}
+.team-bio{font-size:13px;color:var(--muted);line-height:1.6}
+.team-links{display:flex;gap:8px;margin-top:14px}
+.team-link{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;
+  padding:4px 10px;border:1.5px solid var(--border);border-radius:6px;
+  transition:color .15s,border-color .15s}
+.team-link:hover{color:var(--blue);border-color:var(--blue)}
+
+/* advisors */
+.advisors{margin-top:48px}
+.advisors h3{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;
+  margin-bottom:24px;color:var(--ink)}
+.advisor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.advisor-card{background:var(--white);border:1.5px solid var(--border);
+  border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;
+  transition:box-shadow .2s}
+.advisor-card:hover{box-shadow:0 4px 16px rgba(59,91,219,.07)}
+.adv-avatar{width:44px;height:44px;border-radius:50%;display:flex;
+  align-items:center;justify-content:center;font-size:16px;font-weight:700;
+  color:#fff;flex-shrink:0}
+.adv-name{font-size:14px;font-weight:600;color:var(--ink)}
+.adv-role{font-size:12px;color:var(--muted);line-height:1.4}
+
+/* ── INVESTORS / BACKERS ── */
+.backers-section{padding:60px 40px;border-top:1px solid var(--border);
+  max-width:1160px;margin:0 auto;text-align:center}
+.backers-section h2{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;
+  color:var(--muted);margin-bottom:32px}
+.backers-row{display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:20px}
+.backer-pill{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;
+  color:var(--muted);background:var(--surface);border:1.5px solid var(--border);
+  border-radius:10px;padding:10px 24px}
+
+/* ── JOIN US ── */
+.join-section{background:linear-gradient(145deg,#eef2ff 0%,#f5f3ff 60%,#faf5ff 100%);
+  border-top:1px solid var(--border);padding:72px 40px;text-align:center}
+.join-section h2{font-family:'Sora',sans-serif;font-size:32px;font-weight:800;
+  margin-bottom:12px;color:var(--ink)}
+.join-section h2 span{background:linear-gradient(135deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.join-section p{color:var(--muted);font-size:16px;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
+.open-roles{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:32px}
+.role-chip{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+  padding:8px 18px;border:1.5px solid var(--border);border-radius:20px;
+  background:var(--white);color:var(--ink);cursor:pointer;
+  transition:all .15s;text-decoration:none;display:inline-block}
+.role-chip:hover{border-color:var(--blue);color:var(--blue);background:#eef2ff}
+.role-chip .dot{display:inline-block;width:7px;height:7px;background:var(--green);
+  border-radius:50%;margin-right:6px}
+.join-cta a{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;
+  color:#fff;background:linear-gradient(135deg,var(--blue),var(--violet));
+  border:none;border-radius:10px;padding:12px 28px;cursor:pointer;
+  text-decoration:none;transition:opacity .15s;display:inline-block}
+.join-cta a:hover{opacity:.88}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:#94a3b8;padding:48px 40px 28px}
+.footer-inner{max-width:1160px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo{font-family:'Sora',sans-serif;font-weight:800;font-size:18px;
+  background:linear-gradient(135deg,#818cf8,#a78bfa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+.footer-brand p{font-size:13px;line-height:1.6;max-width:220px;color:#64748b}
+.footer-col h4{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:#e2e8f0;margin-bottom:14px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col ul a{font-size:13px;color:#64748b;text-decoration:none;transition:color .15s}
+.footer-col ul a:hover{color:#e2e8f0}
+.footer-bottom{border-top:1px solid #1e293b;padding-top:24px;display:flex;
+  align-items:center;justify-content:space-between;font-size:12px}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* bg patterns - subtle grid */
+.about-hero{position:relative;overflow:hidden}
+.about-hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,#c7d2fe 1px,transparent 1px);
+  background-size:32px 32px;opacity:.35;pointer-events:none}
+.about-hero-inner{position:relative}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="home.html" class="nav-logo">CoreCatalyst</a>
+  <ul class="nav-links">
+    <li><a href="home.html">Platform</a></li>
+    <li><a href="how-it-works.html">How It Works</a></li>
+    <li><a href="#" onclick="return false">Solutions</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn-ghost">Sign in</a>
+    <a href="demo.html" class="btn-primary">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="about-hero-inner">
+    <div>
+      <div class="eyebrow">Our Story</div>
+      <h1>We started because<br/><span>job titles were lying.</span></h1>
+      <p>Most organizations knew what roles their people held. Almost none knew what those people could actually do - and the gap was costing them dearly.</p>
+      <p>CoreCatalyst was built to close that gap: not with another skill survey, but with a reconciliation engine that works with the data that already exists across your systems.</p>
+    </div>
+    <div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="val">45K</div>
+          <div class="label">Skills mapped in our taxonomy</div>
+        </div>
+        <div class="hstat">
+          <div class="val">94%</div>
+          <div class="label">Conflicts auto-resolved on day one</div>
+        </div>
+        <div class="hstat">
+          <div class="val">2 wks</div>
+          <div class="label">Average time to first live report</div>
+        </div>
+        <div class="hstat">
+          <div class="val">3x</div>
+          <div class="label">Faster internal mobility decisions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN STORY -->
+<section class="origin reveal">
+  <div class="origin-grid">
+    <div class="origin-sidebar">
+      <div class="origin-label">The problem we saw</div>
+      <h2>Skills data exists. It just doesn't agree with itself.</h2>
+      <div class="pull">"Every HRIS said something different about the same person's skills. We wanted to know who was ready for what - and nobody could tell us."</div>
+    </div>
+    <div class="origin-body">
+      <p>The team behind CoreCatalyst spent years embedded in large enterprise HR functions - as consultants, as practitioners, as system architects. The pattern was always the same: <strong>organizations had skill data in abundance, scattered across Workday, LinkedIn, LMS platforms, performance reviews, and manager notes.</strong> None of it matched. None of it was trusted.</p>
+      <p>When a CHRO wanted to know if the organization had the skills to navigate an AI transition, the answer took three months and two off-cycle surveys to produce. When a manager wanted to know who on their team was ready for a stretch role, they picked up the phone and asked around. When HR Ops tried to keep Workday current, they ran manual reconciliation sprints that consumed entire weeks.</p>
+      <p><strong>The root cause wasn't lack of data. It was conflict.</strong> The same person had a different skill profile in every system they'd ever touched - and there was no engine to resolve the contradiction.</p>
+      <p>In 2023, the yourskills.ai team started building that engine. Not a survey tool. Not another profile. A reconciliation layer that sits beneath your existing systems, absorbs their conflicting signals, applies a 45,000-node taxonomy and a weighted conflict-resolution model, and writes a single trusted skills record back to your HRIS.</p>
+      <p>CoreCatalyst is that engine, packaged for enterprise HR teams who need answers in weeks - not months - and who can't afford to ask their workforce to fill in yet another form.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="timeline-inner reveal">
+    <h2>How we got here</h2>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-year">2021</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <strong>The insight</strong>
+          <span>Founding team identifies the skill reconciliation gap while advising a 12,000-person enterprise on a Workday migration. Three source systems, zero agreement on what anyone could do.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2022</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <strong>yourskills.ai launches</strong>
+          <span>The individual-facing layer goes live: a personal skills passport that aggregates credentials, work history, and assessments into one verified profile. Early signs that the employer side has an even bigger problem.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2023</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <strong>The enterprise pivot</strong>
+          <span>After 60+ conversations with HR leaders, a clear pattern: the problem isn't the employee's profile - it's the organization's inability to reconcile signals across systems. CoreCatalyst R&amp;D begins. The 45K-node taxonomy is seeded.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <strong>First enterprise pilots</strong>
+          <span>Three design partners go live. 94% auto-resolution rate on first run. HRIS write-back to Workday ships. The pattern holds: two weeks to first report, significant reduction in manual reconciliation hours.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <strong>CoreCatalyst GA</strong>
+          <span>General availability with three-tier pricing. Board reporting module ships. SAP and Oracle write-back connectors added. The team grows to 28 people across product, engineering, and customer success.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="section-label">What we believe</div>
+  <h2>Four things we won't compromise on</h2>
+  <div class="sub">These aren't wall posters. They're the decisions we make when trade-offs get hard.</div>
+  <div class="values-grid reveal">
+    <div class="val-card">
+      <div class="val-icon">&#128270;</div>
+      <h3>Truth over tidiness</h3>
+      <p>We'd rather surface a conflict than paper over it. Skill data that disagrees with itself is a fact to be resolved, not a discrepancy to be hidden.</p>
+    </div>
+    <div class="val-card">
+      <div class="val-icon">&#9889;</div>
+      <h3>Speed earns trust</h3>
+      <p>A pilot that goes live in two weeks proves more than a six-month RFP process. We ship fast, show results early, and let the numbers make the case.</p>
+    </div>
+    <div class="val-card">
+      <div class="val-icon">&#128274;</div>
+      <h3>Data belongs to you</h3>
+      <p>Your employees' skill data is yours - full stop. We process it, we never own it. No model training on customer data, ever.</p>
+    </div>
+    <div class="val-card">
+      <div class="val-icon">&#129309;</div>
+      <h3>Humans make the call</h3>
+      <p>The engine recommends. The manager decides. We automate the reconciliation, not the judgment. Every disputed skill goes to a human for adjudication.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="team-inner">
+    <div class="section-label">The team</div>
+    <h2>Built by people who've been in HR</h2>
+    <div class="sub">Not consultants theorizing about skills. Practitioners who've lived the problem and engineers who've solved hard data problems before.</div>
+
+    <div class="team-grid reveal">
+
+      <div class="team-card">
+        <div class="team-avatar-wrap" style="background:linear-gradient(145deg,#eef2ff,#ede9fe)">
+          <div class="team-avatar" style="background:linear-gradient(135deg,var(--blue),var(--violet))">RK</div>
+        </div>
+        <div class="team-body">
+          <div class="team-name">Ravi Krishnamurthy</div>
+          <div class="team-title">Co-founder &amp; CEO</div>
+          <div class="team-bio">Former VP People Technology at a 30,000-person manufacturing enterprise. Spent 8 years watching skill data contradict itself across every system he touched. Built CoreCatalyst to fix the problem at source.</div>
+          <div class="team-links">
+            <a href="#" class="team-link">LinkedIn</a>
+            <a href="#" class="team-link">Twitter</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar-wrap" style="background:linear-gradient(145deg,#f0fdf4,#ecfdf5)">
+          <div class="team-avatar" style="background:linear-gradient(135deg,var(--green),var(--cyan))">SL</div>
+        </div>
+        <div class="team-body">
+          <div class="team-name">Sofia Lindqvist</div>
+          <div class="team-title">Co-founder &amp; CTO</div>
+          <div class="team-bio">Previously Staff Engineer at a major talent intelligence platform, where she led the graph infrastructure that powers real-time skill matching at scale. Designed the 45K-node taxonomy and conflict resolution engine.</div>
+          <div class="team-links">
+            <a href="#" class="team-link">LinkedIn</a>
+            <a href="#" class="team-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar-wrap" style="background:linear-gradient(145deg,#fff5f0,#fff1f2)">
+          <div class="team-avatar" style="background:linear-gradient(135deg,var(--orange),var(--red))">MO</div>
+        </div>
+        <div class="team-body">
+          <div class="team-name">Marcus Osei-Bonsu</div>
+          <div class="team-title">VP Customer Success</div>
+          <div class="team-bio">10 years running enterprise HR transformations at two global consulting firms. Has personally implemented Workday at 14 organizations. Owns the relationship from pilot kick-off to full platform rollout.</div>
+          <div class="team-links">
+            <a href="#" class="team-link">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ADVISORS -->
+    <div class="advisors reveal">
+      <h3>Advisory board</h3>
+      <div class="advisor-grid">
+        <div class="advisor-card">
+          <div class="adv-avatar" style="background:linear-gradient(135deg,var(--blue),var(--violet))">AW</div>
+          <div>
+            <div class="adv-name">Anika Walters</div>
+            <div class="adv-role">Former CHRO, Fortune 500 retail</div>
+          </div>
+        </div>
+        <div class="advisor-card">
+          <div class="adv-avatar" style="background:linear-gradient(135deg,var(--green),var(--cyan))">PK</div>
+          <div>
+            <div class="adv-name">Priya Kapoor</div>
+            <div class="adv-role">Partner, Future of Work VC</div>
+          </div>
+        </div>
+        <div class="advisor-card">
+          <div class="adv-avatar" style="background:linear-gradient(135deg,var(--orange),var(--yellow))">DH</div>
+          <div>
+            <div class="adv-name">David Holloway</div>
+            <div class="adv-role">Ex-Workday product, 12 yrs</div>
+          </div>
+        </div>
+        <div class="advisor-card">
+          <div class="adv-avatar" style="background:linear-gradient(135deg,var(--cyan),var(--blue))">YM</div>
+          <div>
+            <div class="adv-name">Yuki Matsuda</div>
+            <div class="adv-role">NLP research lead, ex-Google</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKERS -->
+<section class="backers-section reveal">
+  <h2>Backed by investors who understand enterprise HR</h2>
+  <div class="backers-row">
+    <div class="backer-pill">Workforce Ventures</div>
+    <div class="backer-pill">Talent Capital Partners</div>
+    <div class="backer-pill">Horizon Seed Fund</div>
+    <div class="backer-pill">Future of Work Studio</div>
+    <div class="backer-pill">Angel: ex-Workday execs</div>
+  </div>
+</section>
+
+<!-- JOIN US -->
+<section class="join-section">
+  <h2>We're hiring people who<br/><span>care about getting it right.</span></h2>
+  <p>Small team, hard problem, real customers. If that sounds interesting, we'd like to talk.</p>
+  <div class="open-roles">
+    <a href="#" class="role-chip"><span class="dot"></span>Senior Backend Engineer</a>
+    <a href="#" class="role-chip"><span class="dot"></span>Product Designer</a>
+    <a href="#" class="role-chip"><span class="dot"></span>Enterprise Sales (EMEA)</a>
+    <a href="#" class="role-chip"><span class="dot"></span>ML Engineer - Taxonomy</a>
+    <a href="#" class="role-chip"><span class="dot"></span>Implementation Consultant</a>
+    <a href="#" class="role-chip"><span class="dot"></span>Customer Success Manager</a>
+  </div>
+  <div class="join-cta">
+    <a href="demo.html">See all open roles &rarr;</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">CoreCatalyst</div>
+        <p>The skills reconciliation engine for the modern enterprise. Powered by yourskills.ai</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="home.html">Overview</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="solutions-chro.html">For CHROs</a></li>
+          <li><a href="solutions-managers.html">For Managers</a></li>
+          <li><a href="solutions-hrops.html">For HR Ops</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="demo.html">Get a Demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 CoreCatalyst. Built on yourskills.ai</span>
+      <span>Privacy &bull; Terms &bull; Security</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
