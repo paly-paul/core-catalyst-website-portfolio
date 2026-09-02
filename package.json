@@ -1,0 +1,42 @@
+{
+  "name": "core-catalyst-website-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio-Website-Core-Catalyst",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paly-paul/core-catalyst-website-portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paly-paul/core-catalyst-website-portfolio/issues"
+  },
+  "homepage": "https://github.com/paly-paul/core-catalyst-website-portfolio#readme",
+  "dependencies": {
+    "@types/node": "^26.4.1",
+    "@types/react": "^19.2.18",
+    "clsx": "^2.1.1",
+    "framer-motion": "^13.1.1",
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.3.3"
+  }
+}

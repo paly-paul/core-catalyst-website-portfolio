@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nav-h: 64px;
+  --sub-nav-h: 44px;
+  --max-w: 1160px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #1a1f36;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  padding-top: var(--nav-h);
+}
+
+body.is-solutions {
+  padding-top: calc(var(--nav-h) + var(--sub-nav-h));
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Scroll reveal base styles */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Button base styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #3b5bdb 0%, #7950f2 100%);
+  color: #fff;
+  padding: 13px 26px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-ghost-sm {
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1a1f36;
+  border: 1px solid #e4e9f4;
+  background: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.btn-ghost-sm:hover {
+  background: #f2f4fb;
+  border-color: #4c6ef5;
+  color: #3b5bdb;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  border: 1.5px solid #e4e9f4;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1f36;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.btn-outline:hover {
+  border-color: #3b5bdb;
+  box-shadow: 0 0 0 3px rgba(59, 91, 219, 0.1);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #3b5bdb;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: gap 0.15s;
+}
+
+.btn-secondary:hover {
+  gap: 12px;
+}
