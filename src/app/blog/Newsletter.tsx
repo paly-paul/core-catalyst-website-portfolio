@@ -12,14 +12,14 @@ export default function Newsletter() {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-10 items-center bg-white rounded-2xl border border-border p-10">
+    <div className="flex items-center justify-between gap-10 bg-gradient-to-br from-[#eef2ff] to-[#ede9fe] border-[1.5px] border-[#c7d2fe] rounded-[20px] p-[44px_48px] mt-[60px]">
       <div>
-        <h2 className="font-sora text-2xl font-bold mb-2 text-text">The skills data brief</h2>
-        <p className="text-muted">
+        <h2 className="font-sora text-lg sm:text-[22px] font-extrabold mb-1.5 text-text">The skills data brief</h2>
+        <p className="text-sm text-muted">
           Monthly. Practical. No generic thought leadership - just what&apos;s actually working in enterprise skills programs.
         </p>
       </div>
-      <form onSubmit={handleSubmit} className="flex gap-3">
+      <form onSubmit={handleSubmit} className="flex gap-2.5 flex-shrink-0">
         <input
           type="email"
           required
@@ -27,12 +27,12 @@ export default function Newsletter() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@company.com"
-          className="flex-1 px-4 py-3 rounded-lg border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue/20 disabled:opacity-60"
+          className="w-60 px-4 py-2.5 rounded-[9px] border-[1.5px] border-[#c7d2fe] bg-white text-sm outline-none focus:border-blue transition-colors disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={subscribed}
-          className={`px-6 py-3 rounded-btn font-semibold text-sm text-white transition-opacity whitespace-nowrap ${
+          className={`px-[22px] py-2.5 rounded-[9px] font-semibold text-sm text-white transition-opacity whitespace-nowrap ${
             subscribed ? 'bg-green' : 'bg-grad-primary hover:opacity-90'
           }`}
         >

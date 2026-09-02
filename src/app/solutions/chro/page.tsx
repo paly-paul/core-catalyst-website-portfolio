@@ -64,14 +64,14 @@ export default function CHROSolution() {
     <div className="w-full">
       {/* HERO */}
       <section className="bg-grad-hero py-20 relative overflow-hidden">
-        <div className="max-w-site mx-auto px-6 grid grid-cols-2 gap-16 items-center relative z-10">
+        <div className="max-w-site mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
           <div>
             <div className="inline-flex items-center gap-2 bg-white border border-border rounded-full px-4 py-2 mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-violet" />
               <span className="text-xs font-semibold text-violet">For CHROs & People Leaders</span>
             </div>
             <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">Workforce Intelligence</div>
-            <h1 className="font-sora text-5xl font-bold leading-tight mb-6 text-text">
+            <h1 className="font-sora text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-text">
               Finally, skills data the board <em className="not-italic bg-grad-primary bg-clip-text text-transparent">actually trusts</em>
             </h1>
             <p className="text-lg text-muted mb-8 leading-relaxed">
@@ -132,7 +132,7 @@ export default function CHROSolution() {
 
       {/* TRUST BAR */}
       <div className="py-6 bg-white border-y border-border">
-        <div className="max-w-site mx-auto px-6 flex items-center justify-center gap-8 flex-wrap text-sm text-muted font-medium">
+        <div className="max-w-site mx-auto px-4 sm:px-6 flex items-center justify-center gap-8 flex-wrap text-sm text-muted font-medium">
           {['Board-ready reporting templates', '45K-skill taxonomy, auto-reconciled', 'SOC 2 Type II certified', 'GDPR & CCPA compliant', 'HRIS write-back in real time'].map((t, i) => (
             <span key={i} className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-blue" />
@@ -144,51 +144,55 @@ export default function CHROSolution() {
 
       {/* PROBLEM SECTION */}
       <RevealWrapper>
-        <section className="py-24 bg-bg">
-          <div className="max-w-site mx-auto px-6 grid grid-cols-[1fr_380px] gap-16">
+        <section className="py-14 lg:py-24 bg-white">
+          <div className="max-w-site mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">The CHRO challenge</div>
-              <h2 className="font-sora text-4xl font-bold mb-4 text-text">Your board is asking questions HR data can&apos;t answer</h2>
-              <p className="text-lg text-muted mb-10 leading-relaxed">
+              <div className="text-[11px] font-bold text-violet uppercase tracking-[.12em] mb-3">The CHRO challenge</div>
+              <h2 className="font-sora text-[clamp(26px,3vw,40px)] font-extrabold leading-[1.15] tracking-[-.025em] mb-4 text-text">Your board is asking questions HR data can&apos;t answer</h2>
+              <p className="text-base text-[#4a5180] mb-14 max-w-[580px] leading-[1.65]">
                 The questions are getting harder. &ldquo;Do we have the AI skills to execute our 3-year strategy?&rdquo; &ldquo;Where are our succession gaps?&rdquo; &ldquo;What&apos;s our workforce readiness score?&rdquo; The data exists - it just lives in four different systems, none of which agree.
               </p>
-              <div className="space-y-6">
+              <div className="flex flex-col gap-7">
                 {problems.map((p, i) => (
-                  <div key={i} className="flex gap-4">
-                    <div className="text-2xl flex-shrink-0">{p.icon}</div>
+                  <div key={i} className="grid grid-cols-[44px_1fr] gap-4 items-start">
+                    <div className="w-11 h-11 bg-bg border border-border rounded-xl flex items-center justify-center text-xl flex-shrink-0">{p.icon}</div>
                     <div>
-                      <h3 className="font-sora font-bold text-text mb-1.5">{p.title}</h3>
-                      <p className="text-sm text-muted leading-relaxed mb-2">{p.body}</p>
-                      <div className="text-xs font-semibold text-blue">{p.stat}</div>
+                      <h3 className="font-sora font-bold text-[15px] text-text mb-1.5">{p.title}</h3>
+                      <p className="text-sm text-muted leading-[1.55]">{p.body}</p>
+                      <div className="text-[11px] font-bold text-red tracking-[.03em] mt-1.5">{p.stat}</div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-border p-6 h-fit">
-              <div className="font-sora font-bold text-text mb-1">CHRO Confidence in Skills Data</div>
-              <div className="text-xs text-muted mb-4">Industry benchmark - Q3 2025</div>
-              <div className="h-2.5 bg-bg rounded-full overflow-hidden mb-1.5">
-                <AnimatedBar pct={26} className="bg-gradient-to-r from-red to-amber-400" />
-              </div>
-              <div className="flex justify-between text-[10px] text-muted mb-4">
-                <span>0% - No confidence</span>
-                <span>100% - Fully confident</span>
-              </div>
-              <p className="text-sm text-muted leading-relaxed mb-3">
-                Only <strong className="text-text">26%</strong> of CHROs report being &ldquo;highly confident&rdquo; or &ldquo;confident&rdquo; in their organization&apos;s ability to identify and map workforce skills. The majority are making critical workforce decisions on incomplete or disputed data.
-              </p>
-              <div className="text-[11px] text-muted mb-4">Source: Cornerstone Galaxy Workforce Readiness Report, 2024</div>
-              <div className="h-px bg-border mb-4" />
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <div className="font-sora font-bold text-2xl text-text">74%</div>
-                  <div className="text-xs text-muted">CHROs lacking confidence in skills data</div>
+            <div className="bg-bg border border-border rounded-[20px] p-7">
+              <div className="font-sora font-bold text-sm text-text mb-1.5">CHRO Confidence in Skills Data</div>
+              <div className="text-xs text-muted mb-6">Industry benchmark - Q3 2025</div>
+              <div className="relative mb-5">
+                <div className="h-3 bg-border rounded-full overflow-visible">
+                  <AnimatedBar pct={26} className="bg-gradient-to-r from-red to-[#ff922b]">
+                    <span className="absolute -top-[22px] right-0 text-[11px] font-bold text-red whitespace-nowrap">26%</span>
+                  </AnimatedBar>
                 </div>
-                <div>
-                  <div className="font-sora font-bold text-2xl text-text">4.2x</div>
-                  <div className="text-xs text-muted">ROI from verified skills data vs. unverified</div>
+                <div className="flex justify-between text-[10px] text-muted mt-1.5">
+                  <span>0% - No confidence</span>
+                  <span>100% - Fully confident</span>
+                </div>
+              </div>
+              <p className="text-xs text-[#4a5180] leading-[1.5] mb-4">
+                Only <strong>26%</strong> of CHROs report being &ldquo;highly confident&rdquo; or &ldquo;confident&rdquo; in their organization&apos;s ability to identify and map workforce skills. The majority are making critical workforce decisions on incomplete or disputed data.
+              </p>
+              <div className="text-[11px] text-muted italic">Source: Cornerstone Galaxy Workforce Readiness Report, 2024</div>
+              <div className="h-px bg-border my-5" />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center">
+                  <div className="font-sora font-extrabold text-[28px] leading-none text-blue mb-1">74%</div>
+                  <div className="text-[11px] text-muted leading-[1.4]">CHROs lacking confidence in skills data</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-sora font-extrabold text-[28px] leading-none text-blue mb-1">4.2x</div>
+                  <div className="text-[11px] text-muted leading-[1.4]">ROI from verified skills data vs. unverified</div>
                 </div>
               </div>
             </div>
@@ -198,22 +202,27 @@ export default function CHROSolution() {
 
       {/* OUTCOMES */}
       <RevealWrapper>
-        <section className="py-24 bg-white">
+        <section className="py-14 lg:py-24 bg-bg">
           <div className="max-w-site mx-auto px-6">
-            <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">What CHROs get</div>
-            <h2 className="font-sora text-4xl font-bold mb-4 text-text">From data chaos to board-ready clarity</h2>
-            <p className="text-lg text-muted mb-12 max-w-2xl leading-relaxed">
+            <div className="text-[11px] font-bold text-violet uppercase tracking-[.12em] mb-3">What CHROs get</div>
+            <h2 className="font-sora text-[clamp(26px,3vw,40px)] font-extrabold leading-[1.15] tracking-[-.025em] mb-4 text-text">From data chaos to board-ready clarity</h2>
+            <p className="text-base text-[#4a5180] mb-14 max-w-[580px] leading-[1.65]">
               CoreCatalyst gives you a single, verified, continuously updated view of your workforce - so every conversation with the board, every strategic decision, starts from ground truth.
             </p>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {outcomes.map((o, i) => (
-                <div key={i} className={`p-6 rounded-2xl border transition-all hover:-translate-y-1 hover:shadow-hover ${o.featured ? "border-2 border-blue bg-blue-50/30" : "border-border"}`}>
-                  <div className="font-sora font-bold text-4xl text-blue mb-3">
+                <div
+                  key={i}
+                  className={`p-[28px_24px] rounded-card border transition-all hover:-translate-y-1 hover:shadow-hover ${
+                    o.featured ? 'bg-gradient-to-br from-[#f0f4ff] to-[#f5f0ff] border-[#c5d0fa]' : 'bg-white border-border'
+                  }`}
+                >
+                  <div className="font-sora font-extrabold text-[40px] leading-none text-blue mb-1">
                     {o.num}
-                    <span className="text-xl">{o.suffix}</span>
+                    <span className="text-violet">{o.suffix}</span>
                   </div>
-                  <h3 className="font-sora font-bold text-base mb-2 text-text">{o.title}</h3>
-                  <p className="text-sm text-muted leading-relaxed">{o.body}</p>
+                  <h3 className="font-sora font-bold text-[15px] text-text mt-2.5 mb-2">{o.title}</h3>
+                  <p className="text-[13px] text-muted leading-[1.55]">{o.body}</p>
                 </div>
               ))}
             </div>
@@ -223,11 +232,11 @@ export default function CHROSolution() {
 
       {/* CAPABILITY DEEP DIVE */}
       <RevealWrapper>
-        <section className="py-24 bg-bg">
+        <section className="py-14 lg:py-24 bg-white">
           <div className="max-w-site mx-auto px-6">
-            <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">Core capabilities</div>
-            <h2 className="font-sora text-4xl font-bold mb-4 text-text">Three things every CHRO needs, finally in one place</h2>
-            <p className="text-lg text-muted mb-12">Pick the capability that matters most to you right now.</p>
+            <div className="text-[11px] font-bold text-violet uppercase tracking-[.12em] mb-3">Core capabilities</div>
+            <h2 className="font-sora text-[clamp(26px,3vw,40px)] font-extrabold leading-[1.15] tracking-[-.025em] mb-4 text-text">Three things every CHRO needs, finally in one place</h2>
+            <p className="text-base text-[#4a5180] mb-14 max-w-[580px] leading-[1.65]">Pick the capability that matters most to you right now.</p>
             <CapabilityTabs />
           </div>
         </section>
@@ -235,44 +244,51 @@ export default function CHROSolution() {
 
       {/* BOARD REPORTING */}
       <RevealWrapper>
-        <section className="py-24 bg-white">
-          <div className="max-w-site mx-auto px-6 grid grid-cols-2 gap-16 items-center">
-            <div className="bg-bg rounded-2xl border border-border p-6">
-              <div className="text-xs font-semibold text-muted mb-1">Board Pack - Workforce Intelligence</div>
-              <div className="font-sora font-bold text-lg text-text mb-1">Q3 2026 Workforce Readiness Summary</div>
-              <div className="text-xs text-muted mb-5">Generated automatically - September 1, 2026</div>
-              <div className="grid grid-cols-3 gap-3 mb-5">
-                <div>
-                  <div className="font-sora font-bold text-2xl text-text">75%</div>
-                  <div className="text-xs text-muted">Overall readiness score</div>
-                </div>
-                <div>
-                  <div className="font-sora font-bold text-2xl text-green">+8pts</div>
-                  <div className="text-xs text-muted">vs. Q2 2026</div>
-                </div>
-                <div>
-                  <div className="font-sora font-bold text-2xl text-red">2</div>
-                  <div className="text-xs text-muted">High-risk skill gaps</div>
-                </div>
+        <section className="py-14 lg:py-24 bg-gradient-to-br from-[#f8f9ff] to-[#f5f3ff]">
+          <div className="max-w-site mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div className="bg-white rounded-[20px] border border-border shadow-card overflow-hidden">
+              <div className="bg-grad-primary px-6 py-5 text-white">
+                <div className="text-[10px] font-semibold uppercase tracking-[.1em] opacity-70 mb-1.5">Board Pack - Workforce Intelligence</div>
+                <div className="font-sora font-bold text-base mb-1">Q3 2026 Workforce Readiness Summary</div>
+                <div className="text-[11px] opacity-65">Generated automatically - September 1, 2026</div>
               </div>
-              <div className="h-px bg-border mb-5" />
-              <p className="text-sm text-muted leading-relaxed">
-                <strong className="text-text">Board recommendation:</strong> Prioritize AI/Data capability investment - current supply (430 FTEs capable) falls 390 short of 2027 strategic demand. Internal reskilling program targeting Operations analysts is the highest-ROI path, estimated 6-month ramp.
-              </p>
+              <div className="px-6 py-5">
+                <div className="grid grid-cols-3 gap-3 mb-5">
+                  <div className="text-center">
+                    <div className="font-sora font-extrabold text-[22px] leading-none text-blue mb-0.5">75%</div>
+                    <div className="text-[10px] text-muted leading-tight">Overall readiness score</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="font-sora font-extrabold text-[22px] leading-none text-green mb-0.5">+8pts</div>
+                    <div className="text-[10px] text-muted leading-tight">vs. Q2 2026</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="font-sora font-extrabold text-[22px] leading-none text-red mb-0.5">2</div>
+                    <div className="text-[10px] text-muted leading-tight">High-risk skill gaps</div>
+                  </div>
+                </div>
+                <div className="h-px bg-border my-4" />
+                <p className="text-xs text-[#4a5180] leading-[1.6] p-3 bg-[#f8f9ff] rounded-[10px] border-l-[3px] border-blue">
+                  <strong className="text-text">Board recommendation:</strong> Prioritize AI/Data capability investment - current supply (430 FTEs capable) falls 390 short of 2027 strategic demand. Internal reskilling program targeting Operations analysts is the highest-ROI path, estimated 6-month ramp.
+                </p>
+              </div>
             </div>
 
             <div>
-              <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">Why this matters now</div>
-              <h2 className="font-sora text-3xl font-bold mb-6 text-text">The board is already asking. Now you can answer.</h2>
-              <div className="text-lg italic text-text border-l-4 border-violet pl-4 leading-relaxed mb-6">
-                &ldquo;We used to spend 3 weeks before each board meeting pulling skills data together manually. Now CoreCatalyst generates the report in minutes - and for the first time, the board actually trusts the numbers.&rdquo;
+              <div className="text-[11px] font-bold text-violet uppercase tracking-[.12em] mb-3">Why this matters now</div>
+              <h2 className="font-sora text-[clamp(26px,3vw,40px)] font-extrabold leading-[1.15] tracking-[-.025em] mb-5 text-text">The board is already asking. Now you can answer.</h2>
+              <div className="relative pl-5 mb-6">
+                <div className="absolute left-0 top-1 bottom-1 w-[3px] rounded-full bg-grad-primary" />
+                <p className="font-sora text-xl font-bold text-text leading-[1.4]">
+                  &ldquo;We used to spend 3 weeks before each board meeting pulling skills data together manually. Now CoreCatalyst generates the report in minutes - and for the first time, the board actually trusts the numbers.&rdquo;
+                </p>
               </div>
-              <div className="space-y-4">
+              <div className="flex flex-col gap-3.5">
                 {boardBullets.map((b, i) => (
-                  <div key={i} className="flex gap-3">
-                    <div className="text-xl flex-shrink-0">{b.icon}</div>
-                    <div className="text-sm text-muted leading-relaxed">
-                      <strong className="text-text">{b.title}</strong> - {b.body}
+                  <div key={i} className="flex gap-3 items-start">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#eef2ff] to-[#f5f0ff] border border-[#c5d0fa] rounded-[10px] flex items-center justify-center text-sm flex-shrink-0">{b.icon}</div>
+                    <div className="text-sm text-[#4a5180] leading-[1.55]">
+                      <strong className="text-text font-semibold">{b.title}</strong> - {b.body}
                     </div>
                   </div>
                 ))}
@@ -284,18 +300,18 @@ export default function CHROSolution() {
 
       {/* ROI */}
       <RevealWrapper>
-        <section className="py-24 bg-bg">
+        <section className="py-14 lg:py-24 bg-white">
           <div className="max-w-site mx-auto px-6">
-            <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">Business case</div>
-            <h2 className="font-sora text-4xl font-bold mb-4 text-text">The numbers the CFO will want to see</h2>
-            <p className="text-lg text-muted mb-12 max-w-2xl leading-relaxed">
+            <div className="text-[11px] font-bold text-violet uppercase tracking-[.12em] mb-3">Business case</div>
+            <h2 className="font-sora text-[clamp(26px,3vw,40px)] font-extrabold leading-[1.15] tracking-[-.025em] mb-4 text-text">The numbers the CFO will want to see</h2>
+            <p className="text-base text-[#4a5180] mb-14 max-w-[580px] leading-[1.65]">
               CoreCatalyst isn&apos;t an HR tool - it&apos;s a business investment with measurable returns that finance leaders recognize.
             </p>
-            <div className="grid grid-cols-2 gap-10">
-              <div className="bg-white rounded-2xl border border-border p-6">
-                <div className="font-sora font-bold text-text mb-1">ROI Estimate - 10,000 employee org</div>
-                <div className="text-xs text-muted mb-5">Conservative assumptions; your CSM will model your specific numbers</div>
-                <div className="space-y-3 mb-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="bg-bg rounded-[20px] border border-border p-7">
+                <div className="font-sora font-bold text-sm text-text mb-1">ROI Estimate - 10,000 employee org</div>
+                <div className="text-xs text-muted mb-6">Conservative assumptions; your CSM will model your specific numbers</div>
+                <div className="flex flex-col gap-3.5 mb-5">
                   {[
                     { label: 'External hires avoided (internal fill)', val: '120 roles/yr', pct: 60 },
                     { label: 'Avg. external hire cost saved', val: '$38K', pct: 45 },
@@ -303,32 +319,32 @@ export default function CHROSolution() {
                     { label: 'Retention improvement (attrition)', val: '-1.8%pts', pct: 55 },
                   ].map((r, i) => (
                     <div key={i}>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span className="text-muted">{r.label}</span>
-                        <span className="font-semibold text-text">{r.val}</span>
+                      <div className="grid grid-cols-[1fr_auto] gap-3 items-center mb-1.5">
+                        <span className="text-xs font-medium text-text">{r.label}</span>
+                        <span className="font-sora font-bold text-sm text-blue text-right">{r.val}</span>
                       </div>
-                      <div className="h-1.5 bg-bg rounded-full overflow-hidden">
-                        <div className="h-full bg-blue rounded-full" style={{ width: `${r.pct}%` }} />
+                      <div className="h-1 bg-border rounded-full overflow-hidden">
+                        <div className="h-full bg-grad-primary rounded-full" style={{ width: `${r.pct}%` }} />
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="bg-grad-primary rounded-xl p-5 text-center">
-                  <div className="text-xs text-white/80 mb-1">Estimated Year 1 Return</div>
-                  <div className="font-sora font-bold text-4xl text-white mb-1">$6.2M</div>
-                  <div className="text-xs text-white/80">on a typical enterprise investment - 4.8x ROI</div>
+                <div className="bg-grad-primary rounded-[14px] p-5 text-center">
+                  <div className="text-[11px] font-semibold uppercase tracking-[.08em] text-white/80 mb-1.5">Estimated Year 1 Return</div>
+                  <div className="font-sora font-extrabold text-4xl leading-none text-white mb-1">$6.2M</div>
+                  <div className="text-xs text-white/75">on a typical enterprise investment - 4.8x ROI</div>
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="flex flex-col gap-5">
                 {roiItems.map((r, i) => (
-                  <div key={i} className="bg-white rounded-2xl border border-border p-5">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-xl">{r.icon}</span>
-                      <span className="font-sora font-bold text-text flex-1">{r.title}</span>
-                      <span className="font-sora font-bold text-blue">{r.saving}</span>
+                  <div key={i}>
+                    <div className="flex items-center gap-2.5 mb-1.5">
+                      <span className="w-9 h-9 bg-gradient-to-br from-[#eef2ff] to-[#f5f0ff] border border-[#c5d0fa] rounded-[10px] flex items-center justify-center text-base flex-shrink-0">{r.icon}</span>
+                      <span className="font-sora font-bold text-[15px] text-text flex-1">{r.title}</span>
+                      <span className="font-sora font-extrabold text-lg text-green">{r.saving}</span>
                     </div>
-                    <p className="text-sm text-muted leading-relaxed">{r.body}</p>
+                    <p className="text-[13px] text-muted leading-[1.55] pl-[46px]">{r.body}</p>
                   </div>
                 ))}
               </div>
@@ -339,19 +355,21 @@ export default function CHROSolution() {
 
       {/* TESTIMONIAL */}
       <RevealWrapper>
-        <section className="py-24 bg-white">
-          <div className="max-w-site mx-auto px-6 max-w-2xl text-center">
-            <div className="text-5xl text-violet/30 font-sora mb-4">&ldquo;</div>
-            <p className="text-xl text-text leading-relaxed mb-8">
-              For the first time in my career, I walked into a board meeting with workforce data I completely trusted. The readiness gap we identified in AI capabilities actually changed our hiring strategy for the year. That&apos;s the conversation HR should be having.
-            </p>
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue to-violet text-white font-bold flex items-center justify-center">
-                SL
-              </div>
-              <div className="text-left">
-                <div className="font-semibold text-text">Sarah Lindqvist</div>
-                <div className="text-sm text-muted">CHRO, Global Manufacturing Co. - 12,000 employees</div>
+        <section className="py-14 lg:py-24 bg-bg">
+          <div className="max-w-site mx-auto px-6">
+            <div className="max-w-[800px] mx-auto bg-white border border-border rounded-[24px] shadow-card p-6 sm:p-12 text-center">
+              <div className="font-sora text-[40px] sm:text-[64px] leading-none text-subtle mb-2" style={{ fontFamily: 'Georgia, serif' }}>&ldquo;</div>
+              <p className="font-sora text-xl font-semibold text-text leading-[1.5] mb-7">
+                For the first time in my career, I walked into a board meeting with workforce data I completely trusted. The readiness gap we identified in AI capabilities actually changed our hiring strategy for the year. That&apos;s the conversation HR should be having.
+              </p>
+              <div className="flex items-center justify-center gap-3.5">
+                <div className="w-12 h-12 rounded-full bg-grad-primary text-white font-sora text-base font-bold flex items-center justify-center flex-shrink-0">
+                  SL
+                </div>
+                <div className="text-left">
+                  <div className="font-bold text-text text-sm mb-0.5">Sarah Lindqvist</div>
+                  <div className="text-[13px] text-muted">CHRO, Global Manufacturing Co. - 12,000 employees</div>
+                </div>
               </div>
             </div>
           </div>
@@ -360,13 +378,13 @@ export default function CHROSolution() {
 
       {/* CTA */}
       <RevealWrapper>
-        <section className="py-24 bg-grad-hero text-center">
+        <section className="py-14 lg:py-24 bg-grad-hero text-center">
           <div className="max-w-site mx-auto px-6">
             <div className="inline-flex items-center gap-2 bg-white border border-border rounded-full px-4 py-2 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-violet" />
               <span className="text-xs font-semibold text-violet">Ready to elevate your board game?</span>
             </div>
-            <h2 className="font-sora text-4xl font-bold mb-4 text-text">See what your workforce is actually capable of</h2>
+            <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-text">See what your workforce is actually capable of</h2>
             <p className="text-lg text-muted mb-8 max-w-xl mx-auto">
               Book a 30-minute CHRO demo and walk away with a live readiness score for your organization - no implementation required.
             </p>

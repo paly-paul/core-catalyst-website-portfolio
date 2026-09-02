@@ -176,15 +176,15 @@ export default function RolesList() {
       <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
         <div>
           <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">Open roles</div>
-          <h2 className="font-sora text-4xl font-bold text-text">6 positions open right now</h2>
+          <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold text-text">6 positions open right now</h2>
         </div>
         <div className="flex gap-2 flex-wrap">
           {depts.map((d) => (
             <button
               key={d.key}
               onClick={() => setDept(d.key)}
-              className={`px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
-                dept === d.key ? 'bg-text text-white border-text' : 'bg-white text-muted border-border hover:border-blue'
+              className={`px-3.5 py-[7px] rounded-[20px] text-[13px] border-[1.5px] transition-all ${
+                dept === d.key ? 'bg-[#eef2ff] border-blue text-blue font-semibold' : 'bg-white border-border text-muted font-medium hover:border-blue hover:text-blue'
               }`}
             >
               {d.label}
@@ -230,7 +230,7 @@ export default function RolesList() {
                 {isOpen && (
                   <div className="px-5 pb-6 border-t border-border pt-5">
                     <p className="text-muted leading-relaxed mb-5">{r.body}</p>
-                    <div className="grid grid-cols-2 gap-6 mb-5">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-5">
                       <div>
                         <h4 className="font-sora font-bold text-sm text-text mb-2">You&apos;ll work on</h4>
                         <ul className="space-y-1.5 text-sm text-muted list-disc list-inside">

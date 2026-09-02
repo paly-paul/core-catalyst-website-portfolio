@@ -45,7 +45,7 @@ export default function ContactForm() {
     return (
       <div className="bg-white rounded-2xl border border-border p-10 text-center">
         <div className="text-4xl mb-4">📫</div>
-        <h2 className="font-sora text-2xl font-bold mb-3 text-text">Message sent</h2>
+        <h2 className="font-sora text-xl sm:text-2xl font-bold mb-3 text-text">Message sent</h2>
         <p className="text-muted max-w-md mx-auto">
           Thanks for reaching out. We&apos;ll review your message and get back to you at <strong className="text-text">{email}</strong> within one business day.
         </p>
@@ -55,17 +55,17 @@ export default function ContactForm() {
 
   return (
     <div>
-      <div className="font-sora text-2xl font-bold mb-2 text-text">Send us a message</div>
-      <div className="text-muted mb-6">Not sure which team you need? Fill this in and we&apos;ll route it correctly.</div>
+      <div className="font-sora text-lg sm:text-[22px] font-extrabold mb-2 text-text">Send us a message</div>
+      <div className="text-sm text-muted mb-7">Not sure which team you need? Fill this in and we&apos;ll route it correctly.</div>
 
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex flex-wrap gap-2 mb-6">
         {reasons.map((r) => (
           <button
             key={r.key}
             type="button"
             onClick={() => setReason(r.key)}
-            className={`px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
-              reason === r.key ? 'bg-text text-white border-text' : 'bg-white text-muted border-border hover:border-blue'
+            className={`px-3.5 py-[7px] rounded-[20px] text-[13px] border-[1.5px] transition-all select-none ${
+              reason === r.key ? 'bg-[#eef2ff] border-blue text-blue font-semibold' : 'bg-white border-border text-muted font-medium hover:border-blue hover:text-blue'
             }`}
           >
             {r.label}
@@ -74,7 +74,7 @@ export default function ContactForm() {
       </div>
 
       <form onSubmit={handleSubmit} noValidate>
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block text-sm font-semibold text-text mb-1.5">
               Full name <span className="text-red">*</span>
@@ -107,7 +107,7 @@ export default function ContactForm() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block text-sm font-semibold text-text mb-1.5">Company</label>
             <input

@@ -27,15 +27,17 @@ export default function SecuritySidenav({ items }: { items: Item[] }) {
   }, [items])
 
   return (
-    <nav className="sticky top-24 self-start hidden lg:block">
-      <h3 className="text-xs font-bold text-muted uppercase tracking-wider mb-4">On this page</h3>
-      <ul className="space-y-1 border-l border-border">
+    <nav className="sticky top-[calc(var(--nav-h)+24px)] self-start hidden lg:block">
+      <h3 className="text-[11px] font-bold text-muted uppercase tracking-[.08em] mb-4">On this page</h3>
+      <ul className="flex flex-col gap-0.5">
         {items.map((item) => (
           <li key={item.id}>
             <a
               href={`#${item.id}`}
-              className={`block pl-4 py-1.5 text-sm border-l-2 -ml-px transition-colors ${
-                active === item.id ? 'border-blue text-blue font-semibold' : 'border-transparent text-muted hover:text-text'
+              className={`block text-sm font-medium px-3 py-[7px] rounded-lg border-l-2 transition-all ${
+                active === item.id
+                  ? 'border-blue text-blue font-semibold bg-[#eef2ff]'
+                  : 'border-transparent text-muted hover:text-text hover:bg-white'
               }`}
             >
               {item.label}

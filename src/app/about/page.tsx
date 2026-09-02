@@ -121,7 +121,7 @@ export default function About() {
   return (
     <div className="w-full">
       {/* HERO */}
-      <section className="relative overflow-hidden bg-grad-hero py-24">
+      <section className="relative overflow-hidden bg-grad-hero py-14 lg:py-24">
         <div
           className="absolute inset-0 opacity-35 pointer-events-none"
           style={{
@@ -129,12 +129,12 @@ export default function About() {
             backgroundSize: '32px 32px',
           }}
         />
-        <div className="relative max-w-site mx-auto px-6 grid grid-cols-2 gap-16 items-center">
+        <div className="relative max-w-site mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-white border border-border rounded-full px-4 py-2 mb-6">
               <span className="text-xs font-semibold text-violet">Our Story</span>
             </div>
-            <h1 className="font-sora text-6xl font-bold leading-tight mb-6 text-text">
+            <h1 className="font-sora text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-text">
               We started because<br />
               <span className="bg-grad-primary bg-clip-text text-transparent">job titles were lying.</span>
             </h1>
@@ -158,11 +158,11 @@ export default function About() {
 
       {/* ORIGIN STORY */}
       <RevealWrapper>
-        <section className="py-24 bg-white">
-          <div className="max-w-site mx-auto px-6 grid grid-cols-[320px_1fr] gap-16">
+        <section className="py-14 lg:py-24 bg-white">
+          <div className="max-w-site mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 lg:gap-16">
             <div>
               <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">The problem we saw</div>
-              <h2 className="font-sora text-3xl font-bold mb-6 text-text">Skills data exists. It just doesn&apos;t agree with itself.</h2>
+              <h2 className="font-sora text-2xl sm:text-3xl font-bold mb-6 text-text">Skills data exists. It just doesn&apos;t agree with itself.</h2>
               <div className="text-lg italic text-text border-l-4 border-violet pl-4 leading-relaxed">
                 &ldquo;Every HRIS said something different about the same person&apos;s skills. We wanted to know who was ready for what - and nobody could tell us.&rdquo;
               </div>
@@ -191,9 +191,9 @@ export default function About() {
 
       {/* TIMELINE */}
       <RevealWrapper>
-        <section className="py-24 bg-bg">
+        <section className="py-14 lg:py-24 bg-bg">
           <div className="max-w-site mx-auto px-6">
-            <h2 className="font-sora text-4xl font-bold mb-16 text-text">How we got here</h2>
+            <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold mb-16 text-text">How we got here</h2>
             <div className="relative pl-8 border-l-2 border-border space-y-12">
               {timeline.map((t, i) => (
                 <div key={i} className="relative">
@@ -212,12 +212,12 @@ export default function About() {
 
       {/* VALUES */}
       <RevealWrapper>
-        <section className="py-24 bg-white">
+        <section className="py-14 lg:py-24 bg-white">
           <div className="max-w-site mx-auto px-6">
             <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">What we believe</div>
-            <h2 className="font-sora text-4xl font-bold mb-4 text-text">Four things we won&apos;t compromise on</h2>
+            <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-text">Four things we won&apos;t compromise on</h2>
             <p className="text-lg text-muted mb-12 max-w-2xl">These aren&apos;t wall posters. They&apos;re the decisions we make when trade-offs get hard.</p>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {values.map((v, i) => (
                 <div key={i} className="p-6 rounded-2xl border border-border bg-white hover:shadow-card transition-shadow">
                   <div className="text-3xl mb-4">{v.icon}</div>
@@ -232,15 +232,15 @@ export default function About() {
 
       {/* TEAM */}
       <RevealWrapper>
-        <section className="py-24 bg-bg">
+        <section className="py-14 lg:py-24 bg-bg">
           <div className="max-w-site mx-auto px-6">
             <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">The team</div>
-            <h2 className="font-sora text-4xl font-bold mb-4 text-text">Built by people who&apos;ve been in HR</h2>
+            <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-text">Built by people who&apos;ve been in HR</h2>
             <p className="text-lg text-muted mb-12 max-w-2xl">
               Not consultants theorizing about skills. Practitioners who&apos;ve lived the problem and engineers who&apos;ve solved hard data problems before.
             </p>
 
-            <div className="grid grid-cols-3 gap-6 mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
               {team.map((m, i) => (
                 <div key={i} className="bg-white rounded-2xl border border-border overflow-hidden">
                   <div className={`h-28 bg-gradient-to-br ${m.wrap} flex items-end p-5`}>
@@ -264,7 +264,7 @@ export default function About() {
 
             <div>
               <h3 className="font-sora text-xl font-bold mb-6 text-text">Advisory board</h3>
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {advisors.map((a, i) => (
                   <div key={i} className="flex items-center gap-3 bg-white rounded-2xl border border-border p-4">
                     <div className={`w-10 h-10 flex-shrink-0 rounded-full bg-gradient-to-br ${a.avatar} text-white text-xs font-bold flex items-center justify-center`}>
@@ -285,8 +285,8 @@ export default function About() {
       {/* BACKERS */}
       <RevealWrapper>
         <section className="py-16 bg-white border-y border-border">
-          <div className="max-w-site mx-auto px-6 text-center">
-            <h2 className="font-sora text-2xl font-bold mb-8 text-text">Backed by investors who understand enterprise HR</h2>
+          <div className="max-w-site mx-auto px-4 sm:px-6 text-center">
+            <h2 className="font-sora text-xl sm:text-2xl font-bold mb-8 text-text">Backed by investors who understand enterprise HR</h2>
             <div className="flex items-center justify-center gap-4 flex-wrap">
               {backers.map((b, i) => (
                 <span key={i} className="px-5 py-2.5 rounded-full border border-border text-sm font-semibold text-muted">
@@ -300,9 +300,9 @@ export default function About() {
 
       {/* JOIN US */}
       <RevealWrapper>
-        <section className="py-24 bg-grad-hero text-center">
+        <section className="py-14 lg:py-24 bg-grad-hero text-center">
           <div className="max-w-site mx-auto px-6">
-            <h2 className="font-sora text-5xl font-bold mb-4 text-text">
+            <h2 className="font-sora text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-text">
               We&apos;re hiring people who<br />
               <span className="bg-grad-primary bg-clip-text text-transparent">care about getting it right.</span>
             </h2>

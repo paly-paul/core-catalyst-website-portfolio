@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${sora.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${sora.variable} ${dmSans.variable}`} suppressHydrationWarning>
       <body className="font-dm text-text">
         <Nav />
         <main>{children}</main>

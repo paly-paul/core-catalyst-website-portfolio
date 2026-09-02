@@ -27,7 +27,7 @@ const outputs = [
 const steps = [
   {
     num: 1,
-    color: 'from-blue to-indigo',
+    color: 'from-blue to-violet',
     label: 'Step one',
     labelColor: 'text-blue',
     title: 'Connect every system your people data lives in.',
@@ -103,7 +103,7 @@ function StepVisual({ num }: { num: number }) {
   if (num === 1) {
     return (
       <div className="space-y-3">
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px]">
           {[
             { name: 'Workday', status: 'Live', live: true },
             { name: 'Cornerstone', status: 'Live', live: true },
@@ -149,7 +149,7 @@ function StepVisual({ num }: { num: number }) {
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-3 gap-2 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px] text-center">
           {[{ n: '45K+', l: 'Total skills' }, { n: '35', l: 'Languages' }, { n: '98%', l: 'Match rate' }].map((m, i) => (
             <div key={i} className="bg-bg rounded-lg p-2">
               <div className="font-sora font-bold text-sm text-text">{m.n}</div>
@@ -261,15 +261,16 @@ export default function HowItWorks() {
   return (
     <div className="w-full">
       {/* Hero */}
-      <section className="bg-grad-hero py-24 relative overflow-hidden">
-        <div className="absolute w-96 h-96 bg-gradient-to-br from-indigo-200 to-transparent rounded-full blur-3xl opacity-30 -top-32 -right-24" />
-        <div className="max-w-site mx-auto px-6 relative z-10 grid grid-cols-2 gap-16 items-center">
+      <section className="bg-grad-hero pt-16 pb-20 relative overflow-hidden">
+        <div className="absolute w-[700px] h-[700px] rounded-full blur-[100px] opacity-[0.28] pointer-events-none -top-[260px] -right-[160px]" style={{ background: 'radial-gradient(circle, #c7d2fe 0%, transparent 70%)' }} />
+        <div className="absolute w-[420px] h-[420px] rounded-full blur-[100px] opacity-[0.28] pointer-events-none -bottom-20 -left-[60px]" style={{ background: 'radial-gradient(circle, #ddd6fe 0%, transparent 70%)' }} />
+        <div className="max-w-site mx-auto px-4 sm:px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-white border border-border rounded-full px-4 py-2 mb-6">
               <div className="w-1.5 h-1.5 rounded-full bg-blue animate-pulse" />
               <span className="text-xs font-semibold text-blue">Under the hood</span>
             </div>
-            <h1 className="font-sora text-5xl font-bold leading-tight mb-6 text-text">
+            <h1 className="font-sora text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-text">
               From scattered signals<br />
               to <span className="bg-grad-primary bg-clip-text text-transparent">verified skills truth</span> -<br />
               in five steps.
@@ -277,39 +278,57 @@ export default function HowItWorks() {
             <p className="text-lg text-muted mb-8 leading-relaxed">
               CoreCatalyst doesn&apos;t ask employees to self-report their skills, or trust any single source blindly. It pulls from every system, resolves the conflicts, and hands managers a clean picture - continuously, automatically.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border text-sm font-semibold text-text">200+ data connectors</span>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border text-sm font-semibold text-text">94% auto-resolved</span>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border text-sm font-semibold text-text">Live in 1 day</span>
+            <div className="flex flex-wrap gap-[9px]">
+              <span className="inline-flex items-center gap-[7px] px-3.5 py-1.5 rounded-full bg-white border border-border text-[13px] font-semibold text-text">
+                <svg className="w-3.5 h-3.5 text-blue" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>
+                200+ data connectors
+              </span>
+              <span className="inline-flex items-center gap-[7px] px-3.5 py-1.5 rounded-full bg-white border border-border text-[13px] font-semibold text-text">
+                <svg className="w-3.5 h-3.5 text-green" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
+                94% auto-resolved
+              </span>
+              <span className="inline-flex items-center gap-[7px] px-3.5 py-1.5 rounded-full bg-white border border-border text-[13px] font-semibold text-text">
+                <svg className="w-3.5 h-3.5 text-violet" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                Live in 1 day
+              </span>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-border shadow-card p-6">
-            <div className="text-xs font-bold text-muted uppercase tracking-wider mb-4">Data sources feeding the engine</div>
-            <div className="grid grid-cols-3 gap-2 mb-4">
+          <div className="bg-white rounded-[22px] border border-border shadow-[0_16px_56px_rgba(59,91,219,.12)] p-[28px_24px]">
+            <div className="text-[10.5px] font-bold text-muted uppercase tracking-[.09em] mb-4">Data sources feeding the engine</div>
+            <div className="grid grid-cols-3 gap-2.5 mb-[18px]">
               {dataSources.map((s, i) => (
-                <div key={i} className="text-center bg-bg rounded-lg p-2.5">
-                  <div className="w-8 h-8 mx-auto rounded-lg flex items-center justify-center text-base mb-1.5" style={{ background: s.bg }}>
+                <div key={i} className="text-center bg-bg border border-border rounded-xl p-[12px_10px]">
+                  <div className="w-8 h-8 mx-auto rounded-[9px] flex items-center justify-center text-base mb-2" style={{ background: s.bg }}>
                     {s.icon}
                   </div>
-                  <div className="text-[11px] font-semibold text-text leading-tight">{s.name}</div>
-                  <div className="text-[10px] text-muted">{s.sub}</div>
+                  <div className="text-[11.5px] font-bold text-text leading-tight">{s.name}</div>
+                  <div className="text-[10px] text-muted mt-0.5">{s.sub}</div>
                 </div>
               ))}
             </div>
-            <div className="flex items-center gap-3 bg-grad-primary rounded-xl p-3.5 mb-4">
-              <svg className="w-6 h-6 text-white flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>
-              <div className="flex-1">
-                <div className="text-xs font-bold text-white">CoreCatalyst Reconciliation Engine</div>
-                <div className="text-[10px] text-white/80">AI-powered, 45K-skill taxonomy, recency-weighted confidence</div>
-              </div>
-              <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-white/20 text-white flex-shrink-0">94% automated</span>
+            <div className="flex items-center mb-[18px]">
+              <div className="flex-1 h-0.5 bg-gradient-to-r from-blue to-violet rounded-full" />
+              <div
+                className="w-0 h-0 flex-shrink-0"
+                style={{ borderTop: '5px solid transparent', borderBottom: '5px solid transparent', borderLeft: '7px solid #7950f2' }}
+              />
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="flex items-center gap-3.5 bg-gradient-to-br from-[#eef1ff] to-[#f5f3ff] border-[1.5px] border-[#c5d3f7] rounded-[14px] p-[16px_18px] mb-[18px]">
+              <div className="w-11 h-11 rounded-xl bg-grad-primary flex items-center justify-center flex-shrink-0">
+                <svg className="w-[22px] h-[22px] text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>
+              </div>
+              <div className="flex-1">
+                <div className="font-sora text-sm font-bold text-text">CoreCatalyst Reconciliation Engine</div>
+                <div className="text-[11.5px] text-muted mt-0.5">AI-powered, 45K-skill taxonomy, recency-weighted confidence</div>
+              </div>
+              <span className="text-[11px] font-bold px-2.5 py-[3px] rounded-[10px] bg-[#e6f9ed] text-green flex-shrink-0 whitespace-nowrap">94% automated</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2.5">
               {outputs.map((o, i) => (
-                <div key={i} className="flex items-center gap-2 text-xs text-text">
-                  <span className={`w-2 h-2 rounded-full ${o.color}`} />
-                  {o.text}
+                <div key={i} className="flex items-center gap-2.5 bg-white border border-border rounded-[10px] p-[11px_13px]">
+                  <span className={`w-2 h-2 rounded-full flex-shrink-0 ${o.color}`} />
+                  <span className="text-xs font-semibold text-text">{o.text}</span>
                 </div>
               ))}
             </div>
@@ -323,39 +342,39 @@ export default function HowItWorks() {
       {/* Steps */}
       {steps.map((step, idx) => (
         <RevealWrapper key={step.num}>
-          <section id={`step-${step.num}`} className={idx % 2 === 0 ? 'bg-white py-24' : 'bg-bg py-24'}>
-            <div className="max-w-site mx-auto px-6 grid grid-cols-2 gap-12 items-center">
+          <section id={`step-${step.num}`} className={`py-14 lg:py-24 ${idx % 2 === 0 ? 'bg-white' : 'bg-[#f8f9ff]'}`}>
+            <div className="max-w-site mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[72px] items-center">
               <div className={idx % 2 === 1 ? 'order-2' : ''}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${step.color} text-white flex items-center justify-center font-bold text-lg`}>
+                <div className="inline-flex items-center gap-2.5 mb-6">
+                  <div className={`w-[42px] h-[42px] rounded-full bg-gradient-to-br ${step.color} text-white flex items-center justify-center font-sora font-extrabold text-lg`}>
                     {step.num}
                   </div>
-                  <span className={`text-xs font-bold uppercase tracking-wider ${step.labelColor}`}>{step.label}</span>
+                  <span className={`text-[11.5px] font-bold uppercase tracking-[.08em] ${step.labelColor}`}>{step.label}</span>
                 </div>
-                <h2 className="font-sora text-4xl font-bold mb-4 text-text leading-snug">{step.title}</h2>
-                <p className="text-lg text-muted mb-6 leading-relaxed">{step.desc}</p>
-                <ul className="space-y-3">
+                <h2 className="font-sora text-[clamp(24px,2.8vw,36px)] font-extrabold leading-[1.18] tracking-[-.02em] mb-4 text-text">{step.title}</h2>
+                <p className="text-base text-[#5c6587] mb-7 leading-[1.75]">{step.desc}</p>
+                <ul className="flex flex-col gap-3">
                   {step.points.map((point, i) => (
-                    <li key={i} className="flex gap-3 items-start bg-surface border border-border rounded-lg p-3">
-                      <div className="w-6 h-6 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                        <svg className="w-3 h-3 text-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    <li key={i} className="flex gap-3 items-start bg-bg border border-border rounded-xl p-[14px_16px]">
+                      <div className="w-7 h-7 rounded-lg bg-[#eef1ff] flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3.5 h-3.5 text-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <span className="text-sm text-text leading-relaxed">{point}</span>
+                      <span className="text-[13.5px] font-medium text-text leading-[1.55]">{point}</span>
                     </li>
                   ))}
                 </ul>
               </div>
               <div className={idx % 2 === 1 ? 'order-1' : ''}>
-                <div className="bg-white rounded-2xl border border-border shadow-lg overflow-hidden">
-                  <div className="px-5 py-3 bg-gray-50 border-b border-border flex items-center gap-2">
+                <div className="bg-white rounded-[20px] border border-border shadow-card overflow-hidden">
+                  <div className="px-[18px] py-[13px] bg-[#f8f9ff] border-b border-border flex items-center gap-2">
                     <div className="flex gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-red-400" />
-                      <div className="w-2 h-2 rounded-full bg-yellow-400" />
-                      <div className="w-2 h-2 rounded-full bg-green-400" />
+                      <div className="w-[9px] h-[9px] rounded-full" style={{ background: '#ff5f57' }} />
+                      <div className="w-[9px] h-[9px] rounded-full" style={{ background: '#febc2e' }} />
+                      <div className="w-[9px] h-[9px] rounded-full" style={{ background: '#28c840' }} />
                     </div>
-                    <span className="text-xs font-semibold text-muted ml-1">Step {step.num} preview</span>
+                    <span className="text-[11.5px] font-semibold text-muted tracking-[.04em] ml-1">Step {step.num} preview</span>
                   </div>
                   <div className="p-5">
                     <StepVisual num={step.num} />
@@ -369,18 +388,18 @@ export default function HowItWorks() {
 
       {/* TRUST / SECURITY */}
       <RevealWrapper>
-        <section className="py-24 bg-white">
-          <div className="max-w-site mx-auto px-6 text-center">
+        <section className="py-14 lg:py-24 bg-white">
+          <div className="max-w-site mx-auto px-4 sm:px-6 text-center">
             <div className="inline-flex items-center gap-2 bg-bg border border-border rounded-full px-4 py-2 mb-6">
               <span className="text-xs font-semibold text-blue">Built to enterprise grade</span>
             </div>
-            <h2 className="font-sora text-4xl font-bold mb-4 text-text">
+            <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-text">
               Your workforce data<br />is too sensitive to cut corners on.
             </h2>
             <p className="text-lg text-muted mb-16 max-w-2xl mx-auto">
               CoreCatalyst was designed from day one for enterprise privacy and security requirements - not retrofitted after the fact.
             </p>
-            <div className="grid grid-cols-4 gap-6 text-left">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-left">
               {trustCards.map((t, i) => (
                 <div key={i} className="p-6 rounded-2xl border border-border">
                   <div className={`text-3xl mb-4 ${t.color}`}>{t.icon}</div>
@@ -395,12 +414,12 @@ export default function HowItWorks() {
 
       {/* CTA */}
       <RevealWrapper>
-        <section className="py-24 bg-grad-hero">
-          <div className="max-w-site mx-auto px-6 text-center">
+        <section className="py-14 lg:py-24 bg-grad-hero">
+          <div className="max-w-site mx-auto px-4 sm:px-6 text-center">
             <div className="inline-flex items-center gap-2 bg-white border border-border rounded-full px-4 py-2 mb-6">
               <span className="text-xs font-semibold text-violet">Ready to see it live?</span>
             </div>
-            <h2 className="font-sora text-5xl font-bold mb-6 text-text">
+            <h2 className="font-sora text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-text">
               See the reconciliation engine<br />run on your own data.
             </h2>
             <p className="text-lg text-muted mb-8 max-w-2xl mx-auto">

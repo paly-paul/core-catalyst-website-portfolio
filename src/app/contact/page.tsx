@@ -62,16 +62,16 @@ export default function Contact() {
   return (
     <div className="w-full">
       {/* HERO */}
-      <section className="bg-grad-hero py-20 text-center">
+      <section className="bg-gradient-to-br from-[#eef2ff] via-[#f5f3ff] to-[#faf5ff] pt-16 pb-14 text-center">
         <div className="max-w-site mx-auto px-6">
-          <div className="inline-flex items-center gap-2 bg-white border border-border rounded-full px-4 py-2 mb-6">
-            <span className="text-xs font-semibold text-violet">Contact</span>
-          </div>
-          <h1 className="font-sora text-5xl font-bold leading-tight mb-6 text-text">
+          <span className="inline-block text-[11px] font-bold uppercase tracking-[.09em] text-blue bg-[#e0e7ff] rounded-full px-3.5 py-1 mb-[18px]">
+            Contact
+          </span>
+          <h1 className="font-sora text-[clamp(28px,4vw,44px)] font-extrabold leading-[1.12] mb-3.5 text-text">
             We&apos;re easy to<br />
             <span className="bg-grad-primary bg-clip-text text-transparent">reach - pick your route</span>
           </h1>
-          <p className="text-lg text-muted max-w-xl mx-auto">
+          <p className="text-base text-muted max-w-[480px] mx-auto">
             Sales questions, support requests, security disclosures, or just a general enquiry. We&apos;ll get back to you quickly.
           </p>
         </div>
@@ -79,16 +79,16 @@ export default function Contact() {
 
       {/* ROUTES */}
       <RevealWrapper>
-        <section className="py-16 bg-white">
-          <div className="max-w-site mx-auto px-6 grid grid-cols-4 gap-6">
+        <section className="pt-14 pb-0 bg-white">
+          <div className="max-w-[1100px] mx-auto px-4 sm:px-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
             {routes.map((r, i) => (
-              <a key={i} href={r.href} className="block p-6 rounded-2xl border border-border bg-white hover:shadow-card hover:-translate-y-0.5 transition-all">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4" style={{ background: r.bg }}>
+              <a key={i} href={r.href} className="block p-[24px_22px] rounded-2xl border-[1.5px] border-border bg-white hover:shadow-[0_6px_24px_rgba(59,91,219,.09)] hover:border-[#bfdbfe] hover:-translate-y-0.5 transition-all">
+                <div className="w-11 h-11 rounded-[11px] flex items-center justify-center text-xl mb-3.5" style={{ background: r.bg }}>
                   {r.icon}
                 </div>
-                <h3 className="font-sora font-bold text-lg mb-2 text-text">{r.title}</h3>
-                <p className="text-sm text-muted leading-relaxed mb-4">{r.body}</p>
-                <div className="text-sm font-semibold text-blue">{r.link}</div>
+                <h3 className="font-sora font-bold text-[15px] mb-1.5 text-text">{r.title}</h3>
+                <p className="text-[13px] text-muted leading-[1.55] mb-3.5">{r.body}</p>
+                <div className="text-[13px] font-semibold text-blue">{r.link}</div>
               </a>
             ))}
           </div>
@@ -96,16 +96,19 @@ export default function Contact() {
       </RevealWrapper>
 
       {/* MAIN BODY */}
-      <section className="py-16 bg-bg">
-        <div className="max-w-site mx-auto px-6 grid grid-cols-[1fr_360px] gap-16">
+      <section className="pt-12 pb-20 bg-white">
+        <div className="max-w-[1100px] mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 items-start">
           <ContactForm />
 
-          <RevealWrapper className="space-y-6">
-            <div className="bg-white rounded-2xl border border-border p-6">
-              <h3 className="font-sora font-bold text-lg mb-4 text-text">Typical response times</h3>
-              <div className="space-y-3">
+          <RevealWrapper className="flex flex-col gap-5">
+            <div className="bg-gradient-to-br from-[#eef2ff] to-[#ede9fe] border-[1.5px] border-[#c7d2fe] rounded-2xl p-6">
+              <h3 className="font-sora font-bold text-[15px] mb-3.5 text-text">Typical response times</h3>
+              <div className="flex flex-col">
                 {responseTimes.map((r, i) => (
-                  <div key={i} className="flex items-center justify-between text-sm">
+                  <div
+                    key={i}
+                    className={`flex items-center justify-between text-[13px] py-2 ${i !== responseTimes.length - 1 ? 'border-b border-[#c7d2fe]' : ''}`}
+                  >
                     <span className="text-muted">{r.label}</span>
                     <span className="font-semibold text-text">{r.val}</span>
                   </div>
@@ -113,14 +116,14 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-border p-6">
-              <h3 className="font-sora font-bold text-lg mb-4 text-text">Our offices</h3>
-              <div className="space-y-5">
+            <div className="bg-white border-[1.5px] border-border rounded-2xl p-6">
+              <h3 className="font-sora font-bold text-[15px] mb-4 text-text">Our offices</h3>
+              <div className="flex flex-col gap-3.5">
                 {offices.map((o, i) => (
-                  <div key={i} className="flex gap-3">
-                    <div className="text-xl">{o.icon}</div>
-                    <div className="text-sm">
-                      <strong className="block text-text mb-0.5">{o.name}</strong>
+                  <div key={i} className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-[#eef2ff] text-blue flex items-center justify-center text-sm flex-shrink-0 mt-0.5">{o.icon}</div>
+                    <div className="text-[13px]">
+                      <strong className="block text-text font-semibold">{o.name}</strong>
                       {o.lines.map((l, j) => (
                         <span key={j} className="block text-muted">{l}</span>
                       ))}
@@ -130,19 +133,19 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-border p-6">
-              <h3 className="font-sora font-bold text-lg mb-4 text-text">Follow us</h3>
-              <div className="space-y-3">
-                <a href="#" className="flex items-center gap-3 text-sm font-semibold text-text">
-                  <span className="w-8 h-8 rounded-lg bg-blue-50 text-blue flex items-center justify-center text-xs font-bold">in</span>
+            <div className="bg-white border-[1.5px] border-border rounded-2xl p-[20px_24px]">
+              <h3 className="font-sora font-bold text-sm mb-3.5 text-text">Follow us</h3>
+              <div className="flex flex-col gap-2">
+                <a href="#" className="flex items-center gap-2.5 text-sm text-muted hover:bg-surface hover:text-text rounded-lg px-2.5 py-2 transition-colors">
+                  <span className="w-7 h-7 rounded-[7px] bg-blue-50 text-blue flex items-center justify-center text-xs font-bold flex-shrink-0">in</span>
                   LinkedIn - CoreCatalyst
                 </a>
-                <a href="#" className="flex items-center gap-3 text-sm font-semibold text-text">
-                  <span className="w-8 h-8 rounded-lg bg-sky-50 text-sky-700 flex items-center justify-center text-xs font-bold">𝕏</span>
+                <a href="#" className="flex items-center gap-2.5 text-sm text-muted hover:bg-surface hover:text-text rounded-lg px-2.5 py-2 transition-colors">
+                  <span className="w-7 h-7 rounded-[7px] bg-sky-50 text-sky-700 flex items-center justify-center text-xs font-bold flex-shrink-0">𝕏</span>
                   @corecatalyst
                 </a>
-                <a href="#" className="flex items-center gap-3 text-sm font-semibold text-text">
-                  <span className="w-8 h-8 rounded-lg bg-green-50 text-green flex items-center justify-center text-xs font-bold">◇</span>
+                <a href="#" className="flex items-center gap-2.5 text-sm text-muted hover:bg-surface hover:text-text rounded-lg px-2.5 py-2 transition-colors">
+                  <span className="w-7 h-7 rounded-[7px] bg-green-50 text-green flex items-center justify-center text-xs font-bold flex-shrink-0">◇</span>
                   Status page
                 </a>
               </div>

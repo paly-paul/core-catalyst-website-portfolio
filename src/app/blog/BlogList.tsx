@@ -15,11 +15,11 @@ interface Post {
 }
 
 const catStyles: Record<Post['cat'], { label: string; bg: string; color: string }> = {
-  strategy: { label: 'Skills Strategy', bg: '#ede9fe', color: '#7950f2' },
+  strategy: { label: 'Skills Strategy', bg: '#e0e7ff', color: '#3b5bdb' },
   hrops: { label: 'HR Ops', bg: '#cffafe', color: '#0e7490' },
   product: { label: 'Product', bg: '#dcfce7', color: '#166534' },
-  research: { label: 'Research', bg: '#dbeafe', color: '#3b5bdb' },
-  guide: { label: 'Guide', bg: '#ffedd5', color: '#c2410c' },
+  research: { label: 'Research', bg: '#ede9fe', color: '#7950f2' },
+  guide: { label: 'Guide', bg: '#fff7ed', color: '#c2410c' },
 }
 
 const posts: Post[] = [
@@ -153,8 +153,8 @@ export default function BlogList() {
 
   return (
     <div>
-      <div className="flex items-center justify-between gap-6 mb-10 flex-wrap">
-        <div className="flex gap-2 flex-wrap">
+      <div className="flex items-center justify-between gap-5 flex-wrap mb-10 pb-0">
+        <div className="flex gap-0 flex-wrap">
           {filters.map((f) => (
             <button
               key={f.key}
@@ -162,16 +162,16 @@ export default function BlogList() {
                 setFilter(f.key)
                 setVisibleCount(PAGE_SIZE)
               }}
-              className={`px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
-                filter === f.key ? 'bg-text text-white border-text' : 'bg-white text-muted border-border hover:border-blue'
+              className={`px-[18px] pt-2.5 pb-3.5 text-sm whitespace-nowrap border-b-2 transition-colors ${
+                filter === f.key ? 'text-blue font-semibold border-blue' : 'text-muted font-medium border-transparent hover:text-text'
               }`}
             >
               {f.label}
             </button>
           ))}
         </div>
-        <div className="relative">
-          <svg className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.6}>
+        <div className="relative flex-shrink-0">
+          <svg className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.6}>
             <circle cx="6.5" cy="6.5" r="4.5" />
             <line x1="10" y1="10" x2="14" y2="14" />
           </svg>
@@ -183,7 +183,7 @@ export default function BlogList() {
               setVisibleCount(PAGE_SIZE)
             }}
             placeholder="Search articles..."
-            className="pl-9 pr-4 py-2.5 rounded-lg border border-border bg-white text-sm w-64 focus:outline-none focus:ring-2 focus:ring-blue/20"
+            className="pl-[38px] pr-4 py-2 rounded-full border-[1.5px] border-border bg-white/90 text-sm w-[220px] outline-none focus:border-blue focus:ring-[3px] focus:ring-blue/10 transition-colors"
           />
         </div>
       </div>
@@ -192,7 +192,7 @@ export default function BlogList() {
         <div className="text-center py-16 text-muted">No articles match your search. Try a different term or category.</div>
       ) : (
         <>
-          <div className="grid grid-cols-3 gap-6 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
             {visible.map((p, i) => {
               const cs = catStyles[p.cat]
               return (

@@ -37,58 +37,58 @@ const logos = ['Workday', 'SAP SuccessFactors', 'Oracle HCM', 'BambooHR', 'Rippl
 export default function Demo() {
   return (
     <div className="w-full">
-      <div className="max-w-site mx-auto px-6 py-20 grid grid-cols-[1fr_480px] gap-16 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[calc(100vh-var(--nav-h))]">
         {/* LEFT */}
-        <div className="space-y-10">
+        <div className="bg-gradient-to-br from-[#eef2ff] via-[#f5f3ff] to-[#faf5ff] lg:border-r-[1.5px] border-border p-6 sm:p-10 lg:p-[64px_56px_64px_60px] flex flex-col gap-8 lg:gap-10">
           <div>
-            <div className="inline-flex items-center gap-2 bg-bg border border-border rounded-full px-4 py-2 mb-6">
-              <span className="text-xs font-semibold text-violet">Book a Demo</span>
-            </div>
-            <h1 className="font-sora text-5xl font-bold leading-tight mb-6 text-text">
+            <span className="inline-block text-[11px] font-bold uppercase tracking-[.09em] text-blue bg-[#e0e7ff] rounded-full px-3 py-1 mb-4">
+              Book a Demo
+            </span>
+            <h1 className="font-sora text-[clamp(26px,3.5vw,40px)] font-extrabold leading-[1.15] mb-3 text-text">
               See CoreCatalyst<br />
               <span className="bg-grad-primary bg-clip-text text-transparent">live in 30 minutes</span>
             </h1>
-            <p className="text-lg text-muted leading-relaxed">
+            <p className="text-base text-muted leading-[1.65] max-w-[420px]">
               We&apos;ll walk through your specific skill data challenges - reconciliation conflicts, HRIS gaps, or board reporting - and show you exactly how CoreCatalyst resolves them.
             </p>
           </div>
 
           <div>
-            <h3 className="font-sora font-bold text-lg mb-5 text-text">What to expect</h3>
-            <div className="space-y-5">
+            <h3 className="font-sora text-sm font-bold uppercase tracking-[.07em] text-muted mb-4">What to expect</h3>
+            <div className="flex flex-col gap-4">
               {expectSteps.map((s) => (
-                <div key={s.num} className="flex gap-4">
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-grad-primary text-white flex items-center justify-center font-sora font-bold text-sm">
+                <div key={s.num} className="flex items-start gap-3.5">
+                  <div className="flex-shrink-0 mt-0.5 w-7 h-7 rounded-full bg-grad-primary text-white flex items-center justify-center font-sora font-bold text-xs">
                     {s.num}
                   </div>
                   <div>
-                    <strong className="block text-text mb-1">{s.title}</strong>
-                    <span className="text-sm text-muted">{s.body}</span>
+                    <strong className="block text-sm font-semibold text-text mb-0.5">{s.title}</strong>
+                    <span className="text-[13px] text-muted">{s.body}</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="flex flex-col gap-2.5">
             {trustItems.map((t, i) => (
-              <div key={i} className="flex items-center gap-3 text-sm text-text">
-                <span className="text-lg">{t.icon}</span>
+              <div key={i} className="flex items-center gap-2.5 text-[13px] text-muted">
+                <span className="w-[22px] h-[22px] rounded-[6px] bg-[#dbeafe] text-blue flex items-center justify-center text-xs flex-shrink-0">{t.icon}</span>
                 {t.text}
               </div>
             ))}
           </div>
 
-          <div className="bg-bg rounded-2xl border border-border p-6">
-            <p className="text-text italic leading-relaxed mb-4">
+          <div className="bg-white/75 border-[1.5px] border-[#c7d2fe] rounded-[14px] p-[20px_22px]">
+            <p className="text-sm text-text italic leading-[1.6] mb-3">
               &ldquo;We booked the demo on a Thursday. By the following Friday we had our first reconciliation report in Workday.&rdquo;
             </p>
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue to-violet text-white text-xs font-bold flex items-center justify-center">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-grad-primary text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
                 JT
               </div>
               <div>
-                <div className="text-sm font-semibold text-text">James Tran</div>
+                <div className="text-[13px] font-semibold text-text">James Tran</div>
                 <div className="text-xs text-muted">HR Ops Director, Meridian Logistics</div>
               </div>
             </div>
@@ -96,17 +96,17 @@ export default function Demo() {
         </div>
 
         {/* RIGHT */}
-        <div className="bg-white rounded-2xl border border-border shadow-card p-8">
+        <div className="p-6 sm:p-10 lg:p-[64px_60px_64px_56px] flex flex-col justify-start">
           <DemoForm />
         </div>
       </div>
 
       {/* LOGOS */}
-      <div className="border-t border-border py-10">
-        <div className="max-w-site mx-auto px-6 flex items-center justify-center gap-4 flex-wrap">
-          <span className="text-sm text-muted mr-2">Integrates with</span>
+      <div className="border-t border-border py-6 px-10">
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          <span className="text-xs font-semibold uppercase tracking-[.07em] text-muted mr-3">Integrates with</span>
           {logos.map((l, i) => (
-            <span key={i} className="px-4 py-2 rounded-full bg-bg text-sm font-semibold text-muted">
+            <span key={i} className="font-sora text-xs font-bold text-muted bg-white border-[1.5px] border-border rounded-lg px-4 py-1.5 whitespace-nowrap">
               {l}
             </span>
           ))}

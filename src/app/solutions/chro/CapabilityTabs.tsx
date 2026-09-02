@@ -31,10 +31,10 @@ const successionPoints = [
 
 function Points({ points }: { points: { strong: string; text: string }[] }) {
   return (
-    <div className="space-y-3">
+    <div className="flex flex-col gap-3">
       {points.map((p, i) => (
-        <div key={i} className="flex gap-3 items-start">
-          <div className="w-5 h-5 rounded-full bg-blue text-white flex items-center justify-center flex-shrink-0 text-[10px] font-bold mt-0.5">✓</div>
+        <div key={i} className="flex gap-2.5 items-start">
+          <div className="w-5 h-5 bg-gradient-to-br from-[#eef2ff] to-[#f0f4ff] border border-[#c5d0fa] rounded-[6px] flex items-center justify-center flex-shrink-0 text-blue text-[11px] font-bold">✓</div>
           <div className="text-sm text-muted leading-relaxed">
             <strong className="text-text">{p.strong}</strong> - {p.text}
           </div>
@@ -58,52 +58,54 @@ function BoardVisual() {
   ]
 
   return (
-    <div className="bg-white rounded-2xl border border-border p-6">
-      <div className="flex items-center justify-between mb-5">
-        <span className="font-sora font-bold text-sm text-text">Q3 Workforce Readiness Report</span>
-        <span className="text-xs text-muted">Board Pack - September 2026</span>
+    <div className="bg-white rounded-[20px] border border-border shadow-card overflow-hidden">
+      <div className="bg-grad-primary px-5 py-4 flex items-center justify-between">
+        <span className="font-sora font-bold text-[13px] text-white">Q3 Workforce Readiness Report</span>
+        <span className="text-[11px] text-white/70">Board Pack - September 2026</span>
       </div>
-      <div className="flex gap-4 text-xs text-muted mb-3">
-        <span className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full" style={{ background: '#74c0fc' }} />
-          Supply (we have)
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full" style={{ background: '#ffa94d' }} />
-          Demand (we need)
-        </span>
-      </div>
-      <div className="space-y-3 mb-5">
-        {rows.map((r, i) => (
-          <div key={i} className="flex items-center gap-3">
-            <span className="text-xs text-muted w-20 flex-shrink-0">{r.label}</span>
-            <div className="flex-1 space-y-1">
-              <div className="flex items-center gap-2">
-                <div className="flex-1 h-1.5 bg-bg rounded-full overflow-hidden">
-                  <div className="h-full rounded-full" style={{ width: `${r.supply}%`, background: '#74c0fc' }} />
+      <div className="p-5">
+        <div className="flex gap-4 text-[10px] text-muted mb-4">
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full" style={{ background: '#74c0fc' }} />
+            Supply (we have)
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full" style={{ background: '#ffa94d' }} />
+            Demand (we need)
+          </span>
+        </div>
+        <div className="space-y-2 mb-5">
+          {rows.map((r, i) => (
+            <div key={i} className="grid grid-cols-[64px_1fr_44px] items-center gap-2 text-[11px]">
+              <span className="text-muted font-medium">{r.label}</span>
+              <div className="flex flex-col gap-[3px]">
+                <div className="flex items-center gap-1.5">
+                  <div className="flex-1 h-2 bg-bg rounded-full overflow-hidden">
+                    <div className="h-full rounded-full" style={{ width: `${r.supply}%`, background: '#74c0fc' }} />
+                  </div>
+                  <span className="text-[10px] text-muted w-9 text-right flex-shrink-0">{r.supplyVal}</span>
                 </div>
-                <span className="text-[10px] text-muted w-10 text-right">{r.supplyVal}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="flex-1 h-1.5 bg-bg rounded-full overflow-hidden">
-                  <div className="h-full rounded-full" style={{ width: `${r.demand}%`, background: '#ffa94d' }} />
+                <div className="flex items-center gap-1.5">
+                  <div className="flex-1 h-2 bg-bg rounded-full overflow-hidden">
+                    <div className="h-full rounded-full" style={{ width: `${r.demand}%`, background: '#ffa94d' }} />
+                  </div>
+                  <span className="text-[10px] text-muted w-9 text-right flex-shrink-0">{r.demandVal}</span>
                 </div>
-                <span className="text-[10px] text-muted w-10 text-right">{r.demandVal}</span>
               </div>
+              <span className={`text-[10px] font-bold text-right ${r.color}`}>{r.delta}</span>
             </div>
-            <span className={`text-[10px] font-bold w-10 text-right ${r.color}`}>{r.delta}</span>
-          </div>
-        ))}
-      </div>
-      <div className="space-y-2">
-        {risks.map((r, i) => (
-          <div key={i} className="flex items-center gap-2 text-xs">
-            <span className={`w-2 h-2 rounded-full flex-shrink-0 ${r.dot}`} />
-            <span className="text-text flex-1">{r.label}</span>
-            <span className="text-muted">{r.val}</span>
-            <span className="text-muted">{r.trend}</span>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className="flex flex-col gap-2 pt-4 border-t border-border">
+          {risks.map((r, i) => (
+            <div key={i} className="flex items-center gap-2 text-xs">
+              <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${r.dot}`} />
+              <span className="text-text font-semibold flex-1">{r.label}</span>
+              <span className="text-text font-semibold">{r.val}</span>
+              <span className="text-muted text-[11px]">{r.trend}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -116,26 +118,32 @@ function MobilityVisual() {
     { name: 'Priya M.', from: 'Data Analyst, Operations', to: 'AI Solutions Lead', match: 74 },
   ]
   return (
-    <div className="bg-white rounded-2xl border border-border p-6">
-      <div className="font-sora font-bold text-sm text-text mb-1">Internal Mobility Matches</div>
-      <div className="text-xs text-muted mb-5">This week - 14 high-confidence matches found</div>
-      <div className="space-y-4 mb-5">
+    <div className="bg-bg border border-border rounded-[20px] shadow-card p-6">
+      <div className="font-sora font-bold text-[13px] text-text mb-1">Internal Mobility Matches</div>
+      <div className="text-[11px] text-muted mb-5">This week - 14 high-confidence matches found</div>
+      <div className="flex flex-col gap-2.5 mb-3.5">
         {matches.map((m, i) => (
-          <div key={i} className="flex items-center justify-between text-sm">
+          <div key={i} className="bg-white border border-border rounded-xl p-[12px_14px] grid grid-cols-[1fr_auto_auto] items-center gap-3">
             <div>
-              <div className="font-semibold text-text">{m.name}</div>
-              <div className="text-xs text-muted">{m.from}</div>
+              <div className="text-xs font-semibold text-text">{m.name}</div>
+              <div className="text-[11px] text-muted">{m.from}</div>
             </div>
-            <span className="text-muted">→</span>
+            <span className="text-sm text-muted">→</span>
             <div className="text-right">
-              <div className="font-semibold text-text">{m.to}</div>
-              <div className={`text-xs font-bold ${m.match >= 85 ? 'text-green' : 'text-amber-600'}`}>{m.match}% match</div>
+              <div className="text-[11px] font-semibold text-blue mb-1">{m.to}</div>
+              <span
+                className={`text-[10px] font-bold px-2 py-[3px] rounded-full ${
+                  m.match >= 85 ? 'bg-[#e3f9e5] text-[#2b7a3d]' : 'bg-[#fff8e1] text-[#854d0e]'
+                }`}
+              >
+                {m.match}% match
+              </span>
             </div>
           </div>
         ))}
       </div>
-      <div className="flex items-center gap-2 text-xs text-muted bg-bg rounded-lg p-3">
-        📄 Avg. external hire cost saved: <strong className="text-text">$38K per placement</strong>
+      <div className="flex items-center gap-1.5 text-[11px] text-muted mt-3.5">
+        📄 Avg. external hire cost saved: <strong className="text-blue">$38K per placement</strong>
       </div>
     </div>
   )
@@ -173,35 +181,43 @@ function SuccessionVisual() {
     },
   ]
   const styleMap: Record<string, string> = {
-    ready: 'bg-green-50 border-green-200',
+    ready: 'bg-[#f0fdf4] border-[#bbf7d0]',
     mid: 'bg-bg border-border',
-    gap: 'bg-amber-50 border-amber-200',
-    external: 'bg-red-50 border-red-200',
+    gap: 'bg-[#fff8e1] border-[#ffe08a]',
+    external: 'bg-[#fff5f5] border-[#ffc9c9]',
+  }
+  const nameStyleMap: Record<string, string> = {
+    ready: 'text-[#166534]',
+    mid: 'text-text',
+    gap: 'text-text',
+    external: 'text-red',
   }
   return (
-    <div className="bg-white rounded-2xl border border-border p-6">
-      <div className="flex items-center justify-between mb-5">
-        <span className="font-sora font-bold text-sm text-text">Succession Pipeline - Critical Roles</span>
-        <span className="text-xs text-muted">8 roles tracked</span>
+    <div className="bg-white border border-border rounded-[20px] shadow-card overflow-hidden">
+      <div className="bg-gradient-to-br from-[#f8f9ff] to-[#f3f0ff] border-b border-border px-5 py-3.5 flex items-center justify-between">
+        <span className="font-sora font-bold text-xs text-text">Succession Pipeline - Critical Roles</span>
+        <span className="text-[11px] text-muted bg-bg border border-border px-2.5 py-[3px] rounded-full">8 roles tracked</span>
       </div>
-      <div className="space-y-5">
-        {roles.map((r, i) => (
-          <div key={i}>
-            <div className="flex items-center justify-between mb-2">
-              <span className={`text-sm font-semibold ${r.risk ? 'text-red' : 'text-text'}`}>{r.name}</span>
-              <span className={`text-xs ${r.risk ? 'text-red font-semibold' : 'text-muted'}`}>{r.depth}</span>
+      <div className="p-5">
+        <div className="flex flex-col gap-3.5">
+          {roles.map((r, i) => (
+            <div key={i}>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className={`text-xs font-semibold ${r.risk ? 'text-red' : 'text-text'}`}>{r.name}</span>
+                <span className={`text-[10px] ${r.risk ? 'text-red font-semibold' : 'text-muted'}`}>{r.depth}</span>
+              </div>
+              <div className="flex gap-1.5">
+                {r.candidates.map((c, j) => (
+                  <div key={j} className={`flex-1 text-center rounded-lg border p-[6px_4px] ${styleMap[c.style]}`}>
+                    <div className="text-[9px] font-bold uppercase tracking-[.06em] text-muted mb-[3px]">{c.tier}</div>
+                    <div className={`text-[11px] font-semibold mb-0.5 ${nameStyleMap[c.style]}`}>{c.name}</div>
+                    <div className="text-[10px] text-muted">{c.match}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-3 gap-2">
-              {r.candidates.map((c, j) => (
-                <div key={j} className={`rounded-lg border p-2 text-center ${styleMap[c.style]}`}>
-                  <div className="text-[10px] text-muted mb-0.5">{c.tier}</div>
-                  <div className="text-xs font-semibold text-text">{c.name}</div>
-                  <div className="text-[10px] text-muted">{c.match}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -212,13 +228,13 @@ export default function CapabilityTabs() {
 
   return (
     <div>
-      <div className="flex gap-2 mb-10 flex-wrap">
+      <div className="flex gap-1.5 mb-12 flex-wrap">
         {tabs.map((t) => (
           <button
             key={t.key}
             onClick={() => setActive(t.key)}
-            className={`px-5 py-2.5 rounded-full text-sm font-semibold border transition-colors ${
-              active === t.key ? 'bg-text text-white border-text' : 'bg-white text-muted border-border hover:border-blue'
+            className={`px-[18px] py-[9px] rounded-full text-[13px] font-semibold border transition-colors ${
+              active === t.key ? 'bg-grad-primary text-white border-transparent' : 'bg-bg text-muted border-border hover:border-blue'
             }`}
           >
             {t.label}
@@ -227,10 +243,10 @@ export default function CapabilityTabs() {
       </div>
 
       {active === 'board' && (
-        <div className="grid grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <h3 className="font-sora text-2xl font-bold mb-4 text-text">One-click board reports that tell the real story</h3>
-            <p className="text-muted leading-relaxed mb-6">
+            <h3 className="font-sora text-xl sm:text-[24px] font-bold mb-3.5 text-text leading-[1.25]">One-click board reports that tell the real story</h3>
+            <p className="text-[15px] text-[#4a5180] leading-[1.65] mb-6">
               Stop building board packs manually. CoreCatalyst generates executive-ready workforce intelligence reports - readiness scores, gap analysis, skills risk heatmaps - at the click of a button, refreshed from live data.
             </p>
             <Points points={boardPoints} />
@@ -240,10 +256,10 @@ export default function CapabilityTabs() {
       )}
 
       {active === 'mobility' && (
-        <div className="grid grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <h3 className="font-sora text-2xl font-bold mb-4 text-text">Move talent before you lose it</h3>
-            <p className="text-muted leading-relaxed mb-6">
+            <h3 className="font-sora text-xl sm:text-[24px] font-bold mb-3.5 text-text leading-[1.25]">Move talent before you lose it</h3>
+            <p className="text-[15px] text-[#4a5180] leading-[1.65] mb-6">
               Internal mobility is 3x cheaper than external hiring and dramatically improves retention. But it only works when you can actually see who&apos;s ready for what. CoreCatalyst surfaces hidden talent matches across your entire workforce.
             </p>
             <Points points={mobilityPoints} />
@@ -253,10 +269,10 @@ export default function CapabilityTabs() {
       )}
 
       {active === 'succession' && (
-        <div className="grid grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <h3 className="font-sora text-2xl font-bold mb-4 text-text">Know your succession pipeline before the board asks</h3>
-            <p className="text-muted leading-relaxed mb-6">
+            <h3 className="font-sora text-xl sm:text-[24px] font-bold mb-3.5 text-text leading-[1.25]">Know your succession pipeline before the board asks</h3>
+            <p className="text-[15px] text-[#4a5180] leading-[1.65] mb-6">
               Succession planning built on job titles and gut instinct misses the people who are actually ready. CoreCatalyst builds succession slates from verified skills data - so the board sees real pipeline depth, not wishful thinking.
             </p>
             <Points points={successionPoints} />

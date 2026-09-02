@@ -130,16 +130,16 @@ export default function Pricing() {
   return (
     <div className="w-full">
       {/* HERO */}
-      <section className="bg-grad-hero py-20 text-center">
+      <section className="bg-gradient-to-br from-[#eef2ff] via-[#f5f3ff] to-[#faf5ff] pt-20 pb-[60px] text-center">
         <div className="max-w-site mx-auto px-6">
-          <div className="inline-flex items-center gap-2 bg-white border border-border rounded-full px-4 py-2 mb-6">
-            <span className="text-xs font-semibold text-violet">Pricing</span>
-          </div>
-          <h1 className="font-sora text-5xl font-bold leading-tight mb-6 text-text">
+          <span className="inline-block text-xs font-semibold uppercase tracking-[.08em] text-blue bg-[#e0e7ff] rounded-full px-3.5 py-1 mb-5">
+            Pricing
+          </span>
+          <h1 className="font-sora text-[clamp(32px,5vw,52px)] font-extrabold leading-[1.1] mb-5 text-text">
             Transparent pricing,<br />
             <span className="bg-grad-primary bg-clip-text text-transparent">built for scale</span>
           </h1>
-          <p className="text-lg text-muted max-w-xl mx-auto mb-10">
+          <p className="text-lg text-muted max-w-[560px] mx-auto mb-8">
             Start with a focused pilot and grow into enterprise-wide skills intelligence. No hidden fees.
           </p>
         </div>
@@ -154,19 +154,19 @@ export default function Pricing() {
 
       {/* ADD-ONS */}
       <RevealWrapper>
-        <section className="py-24 bg-bg">
+        <section className="py-[60px] bg-white border-y border-border">
           <div className="max-w-site mx-auto px-6">
-            <h2 className="font-sora text-4xl font-bold mb-3 text-text text-center">Optional add-ons</h2>
-            <p className="text-lg text-muted mb-12 text-center">Extend any plan with the capabilities your organization needs most.</p>
-            <div className="grid grid-cols-3 gap-6">
+            <h2 className="font-sora text-2xl sm:text-[28px] font-extrabold mb-2 text-text">Optional add-ons</h2>
+            <p className="text-[15px] text-muted mb-9">Extend any plan with the capabilities your organization needs most.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {addons.map((a, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-border p-6">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4" style={{ background: a.bg }}>
+                <div key={i} className="bg-white border-[1.5px] border-border rounded-[14px] p-6 hover:shadow-[0_4px_20px_rgba(59,91,219,.08)] hover:border-[#bfdbfe] transition-all">
+                  <div className="w-10 h-10 rounded-[10px] flex items-center justify-center text-lg mb-3.5" style={{ background: a.bg }}>
                     {a.icon}
                   </div>
-                  <h3 className="font-sora font-bold text-lg mb-2 text-text">{a.title}</h3>
-                  <p className="text-sm text-muted leading-relaxed mb-4">{a.body}</p>
-                  <div className="text-sm font-bold text-blue">{a.price}</div>
+                  <h3 className="font-sora font-bold text-base mb-1.5 text-text">{a.title}</h3>
+                  <p className="text-[13px] text-muted leading-[1.5] mb-3.5">{a.body}</p>
+                  <div className="font-sora text-[13px] font-bold text-blue">{a.price}</div>
                 </div>
               ))}
             </div>
@@ -176,10 +176,10 @@ export default function Pricing() {
 
       {/* COMPARISON TABLE */}
       <RevealWrapper>
-        <section className="py-24 bg-white">
+        <section className="py-14 lg:py-24 bg-white">
           <div className="max-w-site mx-auto px-6">
-            <h2 className="font-sora text-4xl font-bold mb-3 text-text text-center">Full feature comparison</h2>
-            <p className="text-lg text-muted mb-12 text-center">See exactly what&apos;s included at every tier.</p>
+            <h2 className="font-sora text-2xl sm:text-[28px] font-extrabold mb-2 text-text text-center">Full feature comparison</h2>
+            <p className="text-[15px] text-muted mb-9 text-center">See exactly what&apos;s included at every tier.</p>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse min-w-[640px]">
                 <thead>
@@ -220,19 +220,19 @@ export default function Pricing() {
 
       {/* SOCIAL PROOF */}
       <RevealWrapper>
-        <section className="py-24 bg-bg">
+        <section className="py-[60px] bg-gradient-to-br from-[#eef2ff] via-[#f5f3ff] to-[#faf5ff] text-center">
           <div className="max-w-site mx-auto px-6">
-            <h2 className="font-sora text-4xl font-bold mb-12 text-text text-center">Trusted by HR teams at scale</h2>
-            <div className="grid grid-cols-3 gap-6">
+            <h2 className="font-sora text-xl sm:text-[26px] font-extrabold mb-9 text-text">Trusted by HR teams at scale</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[900px] mx-auto">
               {proof.map((p, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-border p-6">
-                  <p className="text-text leading-relaxed mb-5">&ldquo;{p.quote}&rdquo;</p>
-                  <div className="flex items-center gap-3">
-                    <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${p.avatar} text-white text-xs font-bold flex items-center justify-center`}>
+                <div key={i} className="bg-white border-[1.5px] border-border rounded-2xl p-6 text-left">
+                  <p className="text-[15px] text-text italic leading-[1.6] mb-4">&ldquo;{p.quote}&rdquo;</p>
+                  <div className="flex items-center gap-2.5">
+                    <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${p.avatar} text-white text-sm font-bold flex items-center justify-center flex-shrink-0`}>
                       {p.initials}
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-text">{p.name}</div>
+                      <div className="text-[13px] font-semibold text-text">{p.name}</div>
                       <div className="text-xs text-muted">{p.role}</div>
                     </div>
                   </div>
@@ -245,9 +245,9 @@ export default function Pricing() {
 
       {/* FAQ */}
       <RevealWrapper>
-        <section className="py-24 bg-white">
-          <div className="max-w-site mx-auto px-6 max-w-3xl">
-            <h2 className="font-sora text-4xl font-bold mb-3 text-text text-center">Frequently asked questions</h2>
+        <section className="py-14 lg:py-24 bg-white">
+          <div className="max-w-site mx-auto px-4 sm:px-6 max-w-3xl">
+            <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 text-text text-center">Frequently asked questions</h2>
             <p className="text-lg text-muted mb-12 text-center">Everything you need to know before getting started.</p>
             <Faq />
           </div>
@@ -256,9 +256,9 @@ export default function Pricing() {
 
       {/* CTA */}
       <RevealWrapper>
-        <section className="py-24 bg-grad-hero text-center">
+        <section className="py-14 lg:py-24 bg-grad-hero text-center">
           <div className="max-w-site mx-auto px-6">
-            <h2 className="font-sora text-4xl font-bold mb-4 text-text">
+            <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-text">
               Ready to see what your<br />
               <span className="bg-grad-primary bg-clip-text text-transparent">skills data can do?</span>
             </h2>

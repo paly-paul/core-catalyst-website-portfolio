@@ -88,7 +88,7 @@ export default function DemoForm() {
         >
           ✓
         </motion.div>
-        <h2 className="font-sora text-3xl font-bold mb-4 text-text">
+        <h2 className="font-sora text-2xl sm:text-3xl font-bold mb-4 text-text">
           You&apos;re booked,<br />
           <span className="bg-grad-primary bg-clip-text text-transparent">{form.firstname}</span>.
         </h2>
@@ -134,15 +134,15 @@ export default function DemoForm() {
 
   return (
     <div>
-      <div className="font-sora text-2xl font-bold mb-2 text-text">Book your 30-minute session</div>
+      <div className="font-sora text-xl sm:text-2xl font-bold mb-2 text-text">Book your 30-minute session</div>
       <div className="text-muted mb-5">We&apos;ll confirm within one business day with a calendar invite.</div>
 
-      <div className="h-1.5 bg-bg rounded-full overflow-hidden mb-6">
+      <div className="h-[3px] bg-border rounded-full overflow-hidden mb-7">
         <div className="h-full bg-grad-primary transition-all duration-300" style={{ width: `${progress}%` }} />
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-semibold text-text mb-1.5">
               First name <span className="text-red">*</span>
@@ -192,7 +192,7 @@ export default function DemoForm() {
           )}
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-semibold text-text mb-1.5">
               Company <span className="text-red">*</span>
@@ -274,8 +274,8 @@ export default function DemoForm() {
                 key={c}
                 type="button"
                 onClick={() => toggleChip(c)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
-                  selectedChips.includes(c) ? 'bg-blue text-white border-blue' : 'bg-white text-muted border-border hover:border-blue'
+                className={`px-3.5 py-1.5 rounded-full text-[13px] font-medium border-[1.5px] transition-colors ${
+                  selectedChips.includes(c) ? 'bg-[#eef2ff] text-blue border-blue font-semibold' : 'bg-white text-muted border-border hover:border-blue hover:text-blue'
                 }`}
               >
                 {c}

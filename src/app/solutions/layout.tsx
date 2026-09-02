@@ -8,7 +8,7 @@ export default function SolutionsLayout({
   return (
     <>
       <PersonaSubNav />
-      <div style={{ paddingTop: 'calc(var(--nav-h) + var(--sub-nav-h))' }}>
+      <div style={{ paddingTop: 'var(--sub-nav-h)' }}>
         {children}
       </div>
     </>

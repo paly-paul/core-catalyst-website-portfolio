@@ -71,7 +71,7 @@ export default function Careers() {
   return (
     <div className="w-full">
       {/* HERO */}
-      <section className="relative overflow-hidden bg-grad-hero py-24">
+      <section className="relative overflow-hidden bg-grad-hero py-14 lg:py-24">
         <div
           className="absolute inset-0 opacity-30 pointer-events-none"
           style={{
@@ -79,12 +79,12 @@ export default function Careers() {
             backgroundSize: '28px 28px',
           }}
         />
-        <div className="relative max-w-site mx-auto px-6 grid grid-cols-2 gap-16 items-center">
+        <div className="relative max-w-site mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 bg-white border border-border rounded-full px-4 py-2 mb-6">
-              <span className="text-xs font-semibold text-violet">We&apos;re hiring</span>
-            </div>
-            <h1 className="font-sora text-6xl font-bold leading-tight mb-6 text-text">
+            <span className="inline-block text-[11px] font-bold uppercase tracking-[.09em] text-blue bg-[#e0e7ff] rounded-full px-3.5 py-1 mb-5">
+              We&apos;re hiring
+            </span>
+            <h1 className="font-sora text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-text">
               Hard problem.<br />
               Small team.<br />
               <span className="bg-grad-primary bg-clip-text text-transparent">Real impact.</span>
@@ -115,7 +115,7 @@ export default function Careers() {
 
       {/* NUMBERS */}
       <section className="py-12 bg-white border-y border-border">
-        <div className="max-w-site mx-auto px-6 grid grid-cols-4 gap-8 text-center">
+        <div className="max-w-site mx-auto px-4 sm:px-6 grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
           {numbers.map((n, i) => (
             <div key={i}>
               <div className="font-sora text-4xl font-bold text-blue mb-1">{n.val}</div>
@@ -127,11 +127,11 @@ export default function Careers() {
 
       {/* WHY */}
       <RevealWrapper>
-        <section className="py-24 bg-bg">
+        <section className="py-14 lg:py-24 bg-white">
           <div className="max-w-site mx-auto px-6">
             <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">Why CoreCatalyst</div>
-            <h2 className="font-sora text-4xl font-bold mb-12 text-text">What makes this different from other start-ups</h2>
-            <div className="grid grid-cols-2 gap-6">
+            <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-text">What makes this different from other start-ups</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {why.map((w, i) => (
                 <div key={i} className="flex gap-4 bg-white rounded-2xl border border-border p-6">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{ background: w.bg }}>
@@ -150,13 +150,13 @@ export default function Careers() {
 
       {/* BENEFITS */}
       <RevealWrapper>
-        <section className="py-24 bg-white">
+        <section className="py-14 lg:py-24 bg-bg border-y border-border">
           <div className="max-w-site mx-auto px-6">
             <div className="text-xs font-bold text-blue uppercase tracking-wider mb-3">Benefits</div>
-            <h2 className="font-sora text-4xl font-bold mb-12 text-text">What we offer</h2>
-            <div className="grid grid-cols-3 gap-6">
+            <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-text">What we offer</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {benefits.map((b, i) => (
-                <div key={i} className="p-6 rounded-2xl border border-border">
+                <div key={i} className="p-6 rounded-2xl border border-border bg-white">
                   <div className="text-3xl mb-4">{b.icon}</div>
                   <h3 className="font-sora font-bold text-lg mb-2 text-text">{b.title}</h3>
                   <p className="text-muted text-sm leading-relaxed">{b.body}</p>
@@ -168,7 +168,7 @@ export default function Careers() {
       </RevealWrapper>
 
       {/* OPEN ROLES */}
-      <section className="py-24 bg-bg" id="open-roles">
+      <section className="py-14 lg:py-24 bg-bg" id="open-roles">
         <div className="max-w-site mx-auto px-6">
           <RolesList />
         </div>
@@ -176,20 +176,21 @@ export default function Careers() {
 
       {/* PROCESS */}
       <RevealWrapper>
-        <section className="py-24 bg-white">
-          <div className="max-w-site mx-auto px-6">
-            <h2 className="font-sora text-4xl font-bold mb-3 text-text text-center">Our hiring process</h2>
-            <p className="text-lg text-muted mb-16 text-center max-w-xl mx-auto">
+        <section className="py-[72px] bg-gradient-to-br from-[#eef2ff] via-[#f5f3ff] to-[#faf5ff] border-t border-border">
+          <div className="max-w-[900px] mx-auto px-4 sm:px-6 text-center">
+            <h2 className="font-sora text-2xl sm:text-[28px] font-extrabold mb-2 text-text">Our hiring process</h2>
+            <p className="text-[15px] text-muted mb-12">
               Four steps, no surprises. We respect your time - if it&apos;s not working, we&apos;ll tell you quickly.
             </p>
-            <div className="grid grid-cols-4 gap-6">
+            <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-2">
+              <div className="hidden sm:block absolute top-[22px] left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-blue to-violet z-0" />
               {process.map((p, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-12 h-12 rounded-full bg-grad-primary text-white flex items-center justify-center font-sora font-bold text-lg mx-auto mb-4">
+                <div key={i} className="relative z-10 flex flex-col items-center gap-3">
+                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue to-violet text-white flex items-center justify-center font-sora font-extrabold text-base shadow-[0_0_0_4px_#fff,0_0_0_6px_#c7d2fe]">
                     {p.num}
                   </div>
-                  <div className="font-sora font-bold text-text mb-1">{p.label}</div>
-                  <div className="text-sm text-muted">{p.sub}</div>
+                  <div className="font-sora font-semibold text-sm text-text text-center">{p.label}</div>
+                  <div className="text-xs text-muted text-center">{p.sub}</div>
                 </div>
               ))}
             </div>
@@ -199,16 +200,16 @@ export default function Careers() {
 
       {/* CTA */}
       <RevealWrapper>
-        <section className="py-24 bg-grad-hero text-center">
+        <section className="py-[72px] bg-white text-center">
           <div className="max-w-site mx-auto px-6">
-            <h2 className="font-sora text-4xl font-bold mb-4 text-text">
+            <h2 className="font-sora text-2xl sm:text-[28px] font-extrabold mb-3 text-text">
               Don&apos;t see the right role?<br />
               <span className="bg-grad-primary bg-clip-text text-transparent">Reach out anyway.</span>
             </h2>
-            <p className="text-lg text-muted mb-8 max-w-xl mx-auto">
+            <p className="text-[15px] text-muted mb-6 max-w-[460px] mx-auto">
               If you think you&apos;d be a strong fit for what we&apos;re building, we&apos;d still like to hear from you. We keep speculative applications on file and reach out when something relevant opens.
             </p>
-            <a href="mailto:careers@corecatalyst.ai" className="inline-block px-8 py-4 rounded-btn bg-grad-primary text-white font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg">
+            <a href="mailto:careers@corecatalyst.ai" className="inline-block px-[26px] py-[11px] rounded-[10px] border-[1.5px] border-blue text-blue font-semibold text-[15px] hover:bg-[#eef2ff] transition-colors">
               Send a speculative application →
             </a>
           </div>

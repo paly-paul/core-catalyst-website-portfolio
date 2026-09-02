@@ -16,12 +16,12 @@ export default function PersonaSubNav() {
 
   return (
     <div className="fixed top-nav left-0 right-0 z-40 h-subnav bg-white/97 backdrop-blur-xl border-b border-border">
-      <div className="max-w-site mx-auto px-6 h-subnav flex items-center gap-1">
+      <div className="max-w-site mx-auto px-4 sm:px-6 h-subnav flex items-center gap-1 overflow-x-auto">
         {subNavLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className={`flex items-center gap-2 px-4 h-subnav text-sm font-medium border-b-2 transition-all ${
+            className={`flex items-center gap-2 px-3 sm:px-4 h-subnav text-sm font-medium border-b-2 whitespace-nowrap transition-all ${
               isActive(link.href)
                 ? 'text-blue border-blue font-semibold'
                 : 'text-muted border-transparent hover:text-text'

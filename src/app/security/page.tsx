@@ -45,27 +45,27 @@ export default function Security() {
   return (
     <div className="w-full">
       {/* HERO */}
-      <section className="bg-grad-hero py-20 text-center">
+      <section className="bg-gradient-to-br from-[#eef2ff] via-[#f5f3ff] to-[#faf5ff] pt-[72px] pb-16 text-center">
         <div className="max-w-site mx-auto px-6">
-          <div className="inline-flex items-center gap-2 bg-white border border-border rounded-full px-4 py-2 mb-6">
-            <span className="text-xs font-semibold text-violet">Security</span>
-          </div>
-          <h1 className="font-sora text-5xl font-bold leading-tight mb-6 text-text">
+          <span className="inline-block text-[11px] font-bold uppercase tracking-[.09em] text-blue bg-[#e0e7ff] rounded-full px-3.5 py-1 mb-5">
+            Security
+          </span>
+          <h1 className="font-sora text-[clamp(30px,4.5vw,50px)] font-extrabold leading-[1.12] mb-4 text-text">
             Enterprise-grade security,<br />
             <span className="bg-grad-primary bg-clip-text text-transparent">built in from day one</span>
           </h1>
-          <p className="text-lg text-muted max-w-xl mx-auto mb-10">
+          <p className="text-[17px] text-muted max-w-[560px] mx-auto mb-10 leading-[1.65]">
             Your employees&apos; skill data is some of the most sensitive information in your organization. We treat it that way.
           </p>
-          <div className="grid grid-cols-4 gap-4 max-w-3xl mx-auto">
+          <div className="flex items-center justify-center gap-4 flex-wrap">
             {certs.map((c, i) => (
-              <div key={i} className="flex items-center gap-3 bg-white rounded-2xl border border-border p-4 text-left">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-xl flex-shrink-0" style={{ background: c.bg }}>
+              <div key={i} className="flex items-center gap-2.5 bg-white border-[1.5px] border-border rounded-xl px-5 py-3 shadow-[0_2px_12px_rgba(59,91,219,.07)]">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-lg flex-shrink-0" style={{ background: c.bg }}>
                   {c.icon}
                 </div>
-                <div>
-                  <strong className="block text-sm text-text">{c.title}</strong>
-                  <span className="text-xs text-muted">{c.sub}</span>
+                <div className="text-left">
+                  <strong className="block text-[13px] font-bold text-text">{c.title}</strong>
+                  <span className="text-[11px] text-muted">{c.sub}</span>
                 </div>
               </div>
             ))}
@@ -75,14 +75,14 @@ export default function Security() {
 
       {/* BODY */}
       <section className="py-16 bg-white">
-        <div className="max-w-site mx-auto px-6 grid grid-cols-[220px_1fr] gap-16">
+        <div className="max-w-site mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-8 lg:gap-16">
           <SecuritySidenav items={navItems} />
 
           <div className="space-y-20">
             <RevealWrapper>
               <div id="data-isolation">
                 <div className="text-xs font-bold text-blue uppercase tracking-wider mb-2">Isolation</div>
-                <h2 className="font-sora text-3xl font-bold mb-4 text-text">Every customer is a separate tenant</h2>
+                <h2 className="font-sora text-xl sm:text-2xl font-extrabold leading-[1.2] mb-4 text-text">Every customer is a separate tenant</h2>
                 <p className="text-muted leading-relaxed mb-4">
                   CoreCatalyst uses <strong className="text-text">hard multi-tenancy</strong>: each customer&apos;s data lives in an isolated database schema with a dedicated encryption key. There is no shared data layer between tenants - a query from one customer&apos;s environment can never reach another&apos;s rows.
                 </p>
@@ -96,10 +96,10 @@ export default function Security() {
                     { icon: '🌐', title: 'Network isolation', body: 'Each tenant environment runs in a dedicated VPC subnet. Lateral movement between tenant networks is blocked at the security group level.' },
                     { icon: '📊', title: 'Separate audit logs', body: 'Audit trails are tenant-scoped and write-only for the customer. CoreCatalyst support staff cannot modify or delete them.' },
                   ].map((f, i) => (
-                    <div key={i} className="p-5 rounded-2xl border border-border bg-bg">
-                      <div className="text-2xl mb-3">{f.icon}</div>
-                      <h4 className="font-sora font-bold text-sm mb-2 text-text">{f.title}</h4>
-                      <p className="text-sm text-muted leading-relaxed">{f.body}</p>
+                    <div key={i} className="p-[20px_22px] rounded-xl border-[1.5px] border-border bg-white">
+                      <div className="text-[22px] mb-2.5">{f.icon}</div>
+                      <h4 className="font-sora font-bold text-sm mb-1.5 text-text">{f.title}</h4>
+                      <p className="text-[13px] text-muted leading-[1.6] m-0">{f.body}</p>
                     </div>
                   ))}
                 </div>
@@ -109,19 +109,19 @@ export default function Security() {
             <RevealWrapper>
               <div id="encryption">
                 <div className="text-xs font-bold text-blue uppercase tracking-wider mb-2">Encryption</div>
-                <h2 className="font-sora text-3xl font-bold mb-4 text-text">Encrypted everywhere, always</h2>
+                <h2 className="font-sora text-xl sm:text-2xl font-extrabold leading-[1.2] mb-4 text-text">Encrypted everywhere, always</h2>
                 <p className="text-muted leading-relaxed mb-8">
                   All data is encrypted at rest using <strong className="text-text">AES-256</strong> and in transit using <strong className="text-text">TLS 1.3</strong>. We do not support TLS 1.1 or 1.2. Internal service-to-service communication is mutually authenticated with short-lived certificates issued by our internal CA.
                 </p>
-                <div className="rounded-2xl border border-border bg-bg p-6">
-                  <div className="text-xs font-bold text-muted uppercase tracking-wider mb-4">Data flow encryption summary</div>
-                  <div className="space-y-3">
+                <div className="rounded-2xl border-[1.5px] border-border bg-white p-7">
+                  <div className="text-xs font-bold text-muted uppercase tracking-[.07em] mb-5">Data flow encryption summary</div>
+                  <div className="space-y-3.5">
                     {dataFlows.map((f, i) => (
                       <div key={i} className="flex items-center gap-3 flex-wrap text-sm">
-                        <span className="px-3 py-1.5 rounded-lg bg-white border border-border text-text">{f.from}</span>
-                        <span className="text-muted">→</span>
-                        <span className="px-3 py-1.5 rounded-lg bg-white border border-border text-text">{f.to}</span>
-                        <span className="ml-auto text-xs font-bold px-2.5 py-1 rounded-full bg-green-50 text-green">{f.badge}</span>
+                        <span className="flex-1 px-3.5 py-2.5 rounded-[9px] bg-white border-[1.5px] border-border text-[13px] font-semibold text-text min-w-[160px]">{f.from}</span>
+                        <span className="text-muted text-base">→</span>
+                        <span className="flex-1 px-3.5 py-2.5 rounded-[9px] bg-white border-[1.5px] border-border text-[13px] font-semibold text-text min-w-[160px]">{f.to}</span>
+                        <span className="text-[11px] font-bold px-2 py-[3px] rounded-md bg-[#dcfce7] text-[#166534]">{f.badge}</span>
                       </div>
                     ))}
                   </div>
@@ -132,7 +132,7 @@ export default function Security() {
             <RevealWrapper>
               <div id="access-control">
                 <div className="text-xs font-bold text-blue uppercase tracking-wider mb-2">Access control</div>
-                <h2 className="font-sora text-3xl font-bold mb-4 text-text">Least privilege, everywhere</h2>
+                <h2 className="font-sora text-xl sm:text-2xl font-extrabold leading-[1.2] mb-4 text-text">Least privilege, everywhere</h2>
                 <p className="text-muted leading-relaxed mb-4">
                   Access to CoreCatalyst is governed by <strong className="text-text">role-based access control (RBAC)</strong> with four roles: Viewer, Analyst, HR Admin, and Org Admin. Permissions are additive and explicit - no role inherits access it wasn&apos;t granted.
                 </p>
@@ -146,10 +146,10 @@ export default function Security() {
                     { icon: '⏱', title: 'Session management', body: 'Sessions expire after 8 hours of inactivity. All active sessions are visible and revocable from the admin console.' },
                     { icon: '📄', title: 'API key scoping', body: 'API keys are scoped to specific resources and operations. Keys are never logged in plaintext and can be rotated instantly.' },
                   ].map((f, i) => (
-                    <div key={i} className="p-5 rounded-2xl border border-border bg-bg">
-                      <div className="text-2xl mb-3">{f.icon}</div>
-                      <h4 className="font-sora font-bold text-sm mb-2 text-text">{f.title}</h4>
-                      <p className="text-sm text-muted leading-relaxed">{f.body}</p>
+                    <div key={i} className="p-[20px_22px] rounded-xl border-[1.5px] border-border bg-white">
+                      <div className="text-[22px] mb-2.5">{f.icon}</div>
+                      <h4 className="font-sora font-bold text-sm mb-1.5 text-text">{f.title}</h4>
+                      <p className="text-[13px] text-muted leading-[1.6] m-0">{f.body}</p>
                     </div>
                   ))}
                 </div>
@@ -159,7 +159,7 @@ export default function Security() {
             <RevealWrapper>
               <div id="compliance">
                 <div className="text-xs font-bold text-blue uppercase tracking-wider mb-2">Compliance</div>
-                <h2 className="font-sora text-3xl font-bold mb-4 text-text">Frameworks and certifications</h2>
+                <h2 className="font-sora text-xl sm:text-2xl font-extrabold leading-[1.2] mb-4 text-text">Frameworks and certifications</h2>
                 <p className="text-muted leading-relaxed mb-6">
                   We maintain certifications and controls that enterprise procurement teams require. Our SOC 2 Type II report is available to customers and prospects under NDA.
                 </p>
@@ -179,7 +179,7 @@ export default function Security() {
                           <td className="py-3">
                             <span
                               className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                                r.ok ? 'bg-green-50 text-green' : 'bg-amber-50 text-amber-700'
+                                r.ok ? 'bg-[#dcfce7] text-green' : 'bg-[#dbeafe] text-blue'
                               }`}
                             >
                               {r.ok ? '✓ ' : '▶ '}
@@ -198,7 +198,7 @@ export default function Security() {
             <RevealWrapper>
               <div id="infrastructure">
                 <div className="text-xs font-bold text-blue uppercase tracking-wider mb-2">Infrastructure</div>
-                <h2 className="font-sora text-3xl font-bold mb-4 text-text">Built on hardened cloud infrastructure</h2>
+                <h2 className="font-sora text-xl sm:text-2xl font-extrabold leading-[1.2] mb-4 text-text">Built on hardened cloud infrastructure</h2>
                 <p className="text-muted leading-relaxed mb-4">
                   CoreCatalyst runs on <strong className="text-text">AWS</strong> in a multi-region active-passive configuration. Primary region is eu-west-1 (Ireland) with a failover region in us-east-1. Enterprise customers can request single-region deployment within a specific geography or private cloud / on-premises deployment.
                 </p>
@@ -212,10 +212,10 @@ export default function Security() {
                     { icon: '🔍', title: 'Continuous vulnerability scanning', body: 'Container images scanned on every build. SAST and dependency scanning in CI. Critical CVEs patched within 48 hours.' },
                     { icon: '📱', title: 'Penetration testing', body: 'Annual third-party penetration test by a CREST-certified firm. Results reviewed by our security team and tracked to remediation.' },
                   ].map((f, i) => (
-                    <div key={i} className="p-5 rounded-2xl border border-border bg-bg">
-                      <div className="text-2xl mb-3">{f.icon}</div>
-                      <h4 className="font-sora font-bold text-sm mb-2 text-text">{f.title}</h4>
-                      <p className="text-sm text-muted leading-relaxed">{f.body}</p>
+                    <div key={i} className="p-[20px_22px] rounded-xl border-[1.5px] border-border bg-white">
+                      <div className="text-[22px] mb-2.5">{f.icon}</div>
+                      <h4 className="font-sora font-bold text-sm mb-1.5 text-text">{f.title}</h4>
+                      <p className="text-[13px] text-muted leading-[1.6] m-0">{f.body}</p>
                     </div>
                   ))}
                 </div>
@@ -225,7 +225,7 @@ export default function Security() {
             <RevealWrapper>
               <div id="data-ownership">
                 <div className="text-xs font-bold text-blue uppercase tracking-wider mb-2">Data ownership</div>
-                <h2 className="font-sora text-3xl font-bold mb-4 text-text">Your data is yours - unconditionally</h2>
+                <h2 className="font-sora text-xl sm:text-2xl font-extrabold leading-[1.2] mb-4 text-text">Your data is yours - unconditionally</h2>
                 <p className="text-muted leading-relaxed mb-4">
                   CoreCatalyst is a <strong className="text-text">data processor</strong>, not a data controller. Your organization retains full ownership of all employee skill data. We process it on your behalf, under your instructions, and we return or delete it on request.
                 </p>
@@ -241,7 +241,7 @@ export default function Security() {
             <RevealWrapper>
               <div id="incident">
                 <div className="text-xs font-bold text-blue uppercase tracking-wider mb-2">Incident response</div>
-                <h2 className="font-sora text-3xl font-bold mb-4 text-text">When something goes wrong, we move fast</h2>
+                <h2 className="font-sora text-xl sm:text-2xl font-extrabold leading-[1.2] mb-4 text-text">When something goes wrong, we move fast</h2>
                 <p className="text-muted leading-relaxed mb-4">
                   We maintain a documented incident response plan with defined severity levels, escalation paths, and notification SLAs. Our security team is on call 24/7.
                 </p>
@@ -253,10 +253,10 @@ export default function Security() {
                     { icon: '⚠', title: 'Severity-based response', body: 'P0 (data breach) - 1hr response, immediate exec escalation. P1 (service impact) - 4hr response. P2/P3 - next business day.' },
                     { icon: '🔔', title: 'Customer notification', body: 'Affected customers notified within 72 hours of a confirmed breach. Status page updated in real time for service incidents.' },
                   ].map((f, i) => (
-                    <div key={i} className="p-5 rounded-2xl border border-border bg-bg">
-                      <div className="text-2xl mb-3">{f.icon}</div>
-                      <h4 className="font-sora font-bold text-sm mb-2 text-text">{f.title}</h4>
-                      <p className="text-sm text-muted leading-relaxed">{f.body}</p>
+                    <div key={i} className="p-[20px_22px] rounded-xl border-[1.5px] border-border bg-white">
+                      <div className="text-[22px] mb-2.5">{f.icon}</div>
+                      <h4 className="font-sora font-bold text-sm mb-1.5 text-text">{f.title}</h4>
+                      <p className="text-[13px] text-muted leading-[1.6] m-0">{f.body}</p>
                     </div>
                   ))}
                 </div>
@@ -266,24 +266,24 @@ export default function Security() {
             <RevealWrapper>
               <div id="disclosure">
                 <div className="text-xs font-bold text-blue uppercase tracking-wider mb-2">Vulnerability disclosure</div>
-                <h2 className="font-sora text-3xl font-bold mb-4 text-text">We welcome responsible disclosure</h2>
+                <h2 className="font-sora text-xl sm:text-2xl font-extrabold leading-[1.2] mb-4 text-text">We welcome responsible disclosure</h2>
                 <p className="text-muted leading-relaxed mb-6">
                   If you discover a security vulnerability in CoreCatalyst, please report it to us before disclosing it publicly. We commit to acknowledging your report within 2 business days and keeping you informed of progress.
                 </p>
-                <div className="rounded-2xl border border-border bg-bg p-6">
-                  <h4 className="font-sora font-bold text-text mb-3">📩 Contact our security team</h4>
-                  <p className="text-sm text-muted leading-relaxed mb-3">
+                <div className="rounded-[14px] border-[1.5px] border-[#fed7aa] bg-[#fff7ed] p-[24px_28px]">
+                  <h4 className="font-sora text-[15px] font-bold text-[#92400e] mb-2">📩 Contact our security team</h4>
+                  <p className="text-sm text-[#b45309] leading-[1.65] mb-3">
                     Send vulnerability reports to{' '}
-                    <a href="mailto:security@corecatalyst.ai" className="text-blue font-semibold">
+                    <a href="mailto:security@corecatalyst.ai" className="text-[#c2410c] font-semibold underline">
                       security@corecatalyst.ai
                     </a>
                     . Please encrypt sensitive details using our{' '}
-                    <a href="#" className="text-blue font-semibold">
+                    <a href="#" className="text-[#c2410c] font-semibold underline">
                       PGP public key
                     </a>
                     . We do not operate a paid bug bounty program at this time, but we will publicly acknowledge researchers who report valid issues if they wish.
                   </p>
-                  <p className="text-sm text-muted leading-relaxed">
+                  <p className="text-sm text-[#b45309] leading-[1.65]">
                     We ask that you do not access, modify, or delete customer data during testing; do not perform denial-of-service testing; and give us reasonable time to fix confirmed issues before public disclosure.
                   </p>
                 </div>
@@ -295,9 +295,9 @@ export default function Security() {
 
       {/* CTA */}
       <RevealWrapper>
-        <section className="py-24 bg-grad-hero text-center">
+        <section className="py-14 lg:py-24 bg-grad-hero text-center">
           <div className="max-w-site mx-auto px-6">
-            <h2 className="font-sora text-4xl font-bold mb-4 text-text">
+            <h2 className="font-sora text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-text">
               Questions about our<br />
               <span className="bg-grad-primary bg-clip-text text-transparent">security posture?</span>
             </h2>

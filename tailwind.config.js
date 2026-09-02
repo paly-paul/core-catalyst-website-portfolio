@@ -1,17 +1,22 @@
+const colors = require('tailwindcss/colors')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        blue:    '#3b5bdb',
-        indigo:  '#4c6ef5',
-        violet:  '#7950f2',
-        green:   '#40c057',
-        cyan:    '#22b8cf',
-        red:     '#fa5252',
-        yellow:  '#fab005',
-        orange:  '#fd7e14',
+        // Each brand color keeps its numeric shade scale (blue-50, red-400, etc.) from
+        // Tailwind's stock palette so existing bg-{color}-{shade} utilities keep working,
+        // while the bare bg-{color}/text-{color} utility resolves to our brand hex via DEFAULT.
+        blue:    { ...colors.blue,   DEFAULT: '#3b5bdb' },
+        indigo:  { ...colors.indigo, DEFAULT: '#4c6ef5' },
+        violet:  { ...colors.violet, DEFAULT: '#7950f2' },
+        green:   { ...colors.green,  DEFAULT: '#40c057' },
+        cyan:    { ...colors.cyan,   DEFAULT: '#22b8cf' },
+        red:     { ...colors.red,    DEFAULT: '#fa5252' },
+        yellow:  { ...colors.yellow, DEFAULT: '#fab005' },
+        orange:  { ...colors.orange, DEFAULT: '#fd7e14' },
         bg:      '#f2f4fb',
         surface: '#ffffff',
         border:  '#e4e9f4',
