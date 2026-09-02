@@ -11,6 +11,7 @@ module.exports = {
         cyan:    '#22b8cf',
         red:     '#fa5252',
         yellow:  '#fab005',
+        orange:  '#fd7e14',
         bg:      '#f2f4fb',
         surface: '#ffffff',
         border:  '#e4e9f4',
